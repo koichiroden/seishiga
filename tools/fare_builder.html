@@ -1,0 +1,1004 @@
+<title>運賃くらべビルダー</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* layout: 左=入力(区間→時刻/運賃の表)、右=動画の中身を先取りするプレビューとJSON。スマホでは1列 */
+:root {
+  --paper: #f3f1ec;
+  --surface: #ffffff;
+  --surface-2: #f8f7f3;
+  --ink: #1d1f24;
+  --muted: #646a75;
+  --faint: #9298a3;
+  --line: #dcdad3;
+  --line-strong: #c4c1b8;
+  --accent: #1a56c9;
+  --accent-soft: #e3ecfa;
+  --good: #21785a;
+  --good-soft: #e2f2ea;
+  --warn: #a3690a;
+  --warn-soft: #f8ecd6;
+  --danger: #b23b3b;
+  --danger-soft: #f9e6e3;
+  --chart-grid: #e6e4de;
+  --chart-ink: #4b505a;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(29,31,36,0.06), 0 8px 24px -14px rgba(29,31,36,0.2);
+  --f-body: "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14161a; --surface: #1d2026; --surface-2: #22262d; --ink: #eceef2; --muted: #a2a8b3; --faint: #737a86;
+    --line: #333841; --line-strong: #444a55; --accent: #7aa8ff; --accent-soft: #22324f;
+    --good: #6ecda0; --good-soft: #1c3329; --warn: #e0ac53; --warn-soft: #3d2f16; --danger: #ec8f8f; --danger-soft: #3d2323;
+    --chart-grid: #2c3038; --chart-ink: #b9bfca;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -14px rgba(0,0,0,0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14161a; --surface: #1d2026; --surface-2: #22262d; --ink: #eceef2; --muted: #a2a8b3; --faint: #737a86;
+  --line: #333841; --line-strong: #444a55; --accent: #7aa8ff; --accent-soft: #22324f;
+  --good: #6ecda0; --good-soft: #1c3329; --warn: #e0ac53; --warn-soft: #3d2f16; --danger: #ec8f8f; --danger-soft: #3d2323;
+  --chart-grid: #2c3038; --chart-ink: #b9bfca;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -14px rgba(0,0,0,0.6);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 80px;
+}
+.mono, .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+header.top { max-width: 1240px; margin: 0 auto; padding-block: 28px 18px; display: grid; gap: 6px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--muted); margin: 0; }
+header.top h1 { font-size: clamp(24px, 4vw, 32px); font-weight: 900; margin: 0; line-height: 1.25; text-wrap: balance; }
+header.top p.lead { margin: 0; color: var(--muted); max-width: 68ch; }
+.layout { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 920px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.col { display: grid; gap: 16px; min-width: 0; }
+.sticky { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); }
+@media (max-width: 920px) { .sticky { position: static; } }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.panel h2 { font-size: 16px; font-weight: 900; margin: 0; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.panel h2 .step { font-family: var(--f-mono); font-size: 11px; color: var(--muted); border: 1px solid var(--line-strong); border-radius: 999px; padding: 1px 8px; font-weight: 500; }
+.panel .hint { margin: 0; font-size: 13px; color: var(--muted); }
+
+.field-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px; }
+.field { display: grid; gap: 4px; min-width: 0; }
+.field label { font-size: 12px; color: var(--muted); font-weight: 700; }
+input[type=text], input[type=number], select, textarea {
+  font: inherit; font-size: 14px; color: var(--ink); background: var(--surface-2);
+  border: 1px solid var(--line-strong); border-radius: 8px; padding: 7px 9px; width: 100%; min-width: 0;
+}
+input[type=color] { width: 44px; height: 34px; padding: 2px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface-2); }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input.bad { border-color: var(--danger); background: var(--danger-soft); }
+textarea.json { font-family: var(--f-mono); font-size: 12px; min-height: 200px; resize: vertical; white-space: pre; }
+
+button { font: inherit; font-size: 14px; font-weight: 700; border-radius: 8px; padding: 7px 14px; cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); }
+button { white-space: nowrap; }
+button.ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+button.small { font-size: 12px; padding: 4px 10px; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.status { font-size: 13px; color: var(--muted); }
+.status.ok { color: var(--good); } .status.err { color: var(--danger); }
+
+.seg { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr) auto; gap: 8px; align-items: end; padding: 10px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; }
+.seg .preset { grid-column: 1 / -1; }
+@media (max-width: 560px) { .seg { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .seg .line-f { grid-column: 1 / -1; } }
+.seg-list { display: grid; gap: 8px; }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table.st { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.st th, table.st td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+table.st th { font-size: 12px; color: var(--muted); background: var(--surface-2); position: sticky; top: 0; font-weight: 700; }
+table.st tr:last-child td { border-bottom: 0; }
+table.st td.name { font-weight: 700; }
+table.st td.km { color: var(--faint); font-size: 12px; }
+table.st input[type=text] { width: 7.2em; padding: 4px 6px; font-family: var(--f-mono); font-size: 13px; }
+table.st input.wide { width: 9.5em; }
+table.st tr.term td.name::after { content: "必須"; font-size: 10px; font-weight: 700; color: var(--warn); background: var(--warn-soft); border-radius: 4px; padding: 0 5px; margin-left: 6px; vertical-align: 2px; }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: 0; margin-right: 4px; }
+.badge-dot { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: #fff; font-size: 12px; font-weight: 900; vertical-align: -5px; margin-right: 4px; }
+
+.problems { margin: 0; padding: 10px 12px 10px 28px; border-radius: 8px; font-size: 13px; background: var(--warn-soft); color: var(--warn); display: grid; gap: 2px; }
+.problems.clear { background: var(--good-soft); color: var(--good); list-style: none; padding-left: 12px; }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
+.stat { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; display: grid; gap: 0; min-width: 0; }
+.stat .k { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
+.stat .v { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 20px; font-weight: 700; }
+.stat .v small { font-size: 12px; color: var(--muted); font-weight: 500; }
+.chart { width: 100%; height: auto; display: block; }
+.chart text { fill: var(--chart-ink); font-family: var(--f-body); }
+.chart .mono-t { font-family: var(--f-mono); }
+.chart .grid { stroke: var(--chart-grid); }
+.chart .axis { stroke: var(--line-strong); }
+.card-list { display: grid; gap: 10px; }
+.subcard { border: 1px solid var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 8px; background: var(--surface-2); }
+.subcard-head { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; }
+.subcard-head .field { flex: 1 1 120px; }
+.subcard-head .field.tiny { flex: 0 0 70px; }
+.del-st { padding: 2px 8px; font-size: 12px; color: var(--muted); }
+.del-st:hover { color: var(--danger); border-color: var(--danger); }
+.removed-bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 8px 10px; border: 1px dashed var(--line-strong); border-radius: 8px; font-size: 13px; }
+.removed-bar .k { color: var(--muted); font-weight: 700; font-size: 12px; }
+button.chip { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 500; }
+button.chip:hover { border-color: var(--accent); color: var(--accent); }
+details.imp summary { cursor: pointer; font-size: 13px; color: var(--muted); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+.route-card { border-left: 4px solid var(--rc, var(--accent)); }
+table.st input.fare { width: 6.5em; text-align: right; }
+.yen-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.yen-tiles .stat .v { font-size: 24px; }
+.yen-tiles .stat.win { border-color: var(--good); background: var(--good-soft); }
+.mode-switch { display: flex; gap: 6px; flex-wrap: wrap; }
+.mode-switch label { display: flex; gap: 6px; align-items: center; border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.mode-switch label:has(input:checked) { border-color: var(--rc, var(--accent)); background: var(--surface-2); }
+.fare-tables { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.fare-tables textarea { font-family: var(--f-mono); font-size: 13px; min-height: 150px; resize: vertical; }
+.fare-tables .subcard .status { font-size: 12px; }
+table.st input.fare.calc::placeholder { color: var(--ink, inherit); opacity: 0.55; }
+table.st select.co { font-size: 12px; padding: 3px 4px; max-width: 8em; }
+</style>
+
+<header class="top">
+  <p class="eyebrow">GEOGRAM_JP · VIDEO CONFIG · video_type: fare</p>
+  <h1>同じ発着駅、運賃が安いのはどの路線?</h1>
+  <p class="lead">競合する2〜4本のルートについて、各駅までの運賃(または、各駅までの距離と会社ごとの距離運賃表)を入れると、鳥瞰図の地図の上に「高さ＝運賃」の壁が伸び、最後に壁をたたんで距離×運賃の重ね合わせグラフにし、終着駅までの運賃をカウントアップで見せる動画のconfigを作ります。運賃の入れ方はルートごとに「駅ごとの運賃」か「距離と運賃表から計算」を選べます。</p>
+</header>
+
+<div class="layout">
+  <div class="col">
+    <section class="panel">
+      <h2><span class="step">1</span>動画のタイトル</h2>
+      <div class="field-grid">
+        <div class="field"><label for="f-title1">タイトル1行目</label><input type="text" id="f-title1"></div>
+        <div class="field"><label for="f-title2">タイトル2行目</label><input type="text" id="f-title2"></div>
+        <div class="field"><label for="f-slug">ファイル名(slug・英数字)</label><input type="text" id="f-slug" class="mono"></div>
+        <div class="field"><label for="f-label">運賃の種類</label><input type="text" id="f-label" placeholder="IC運賃 / きっぷ運賃"></div>
+        <div class="field"><label for="f-axis">最後のグラフの横軸</label><select id="f-axis"><option value="percent">全行程の何%まで乗ったか(0〜100%)</option><option value="km">乗った距離(km)</option></select></div>
+        <div class="field"><label for="f-km" id="f-km-label">グラフに引く目印(カンマ区切り)</label><input type="text" id="f-km" class="mono"></div>
+      </div>
+    </section>
+
+    <div class="card-list" id="routes"></div>
+    <div class="btn-row"><button type="button" class="ghost" id="add-route">+ ルートを追加(最大4本)</button></div>
+  </div>
+
+  <div class="col sticky">
+    <section class="panel">
+      <h2>プレビュー</h2>
+      <div class="yen-tiles" id="tiles"></div>
+      <svg class="chart" id="chart" viewBox="0 0 520 320" role="img" aria-label="距離と運賃の階段グラフ"></svg>
+      <p class="hint">動画の最後のグラフと同じ形です。横軸は「全行程の何%まで乗ったか」(長さの違うルートでも始点と終点がそろう)か「乗った距離(km)」を選べます。黄色の点線は目印です。距離は手入力した値を使い、空欄の駅は駅データからの目安です。</p>
+      <div id="problems"></div>
+    </section>
+    <section class="panel" id="out"><h2>config JSON</h2></section>
+  </div>
+</div>
+
+<script id="station-data" type="application/json">{"山手線":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"神田","seq":2,"cum_km":1.012},{"name":"秋葉原","seq":3,"cum_km":1.981},{"name":"御徒町","seq":4,"cum_km":2.768},{"name":"上野","seq":5,"cum_km":3.465},{"name":"鶯谷","seq":6,"cum_km":4.705},{"name":"日暮里","seq":7,"cum_km":5.47},{"name":"西日暮里","seq":8,"cum_km":6.289},{"name":"田端","seq":9,"cum_km":7.072},{"name":"駒込","seq":10,"cum_km":8.527},{"name":"巣鴨","seq":11,"cum_km":9.082},{"name":"大塚","seq":12,"cum_km":10.309},{"name":"池袋","seq":13,"cum_km":12.074},{"name":"目白","seq":14,"cum_km":13.284},{"name":"高田馬場","seq":15,"cum_km":14.129},{"name":"新大久保","seq":16,"cum_km":15.549},{"name":"新宿","seq":17,"cum_km":16.681},{"name":"代々木","seq":18,"cum_km":17.498},{"name":"原宿","seq":19,"cum_km":19.109},{"name":"渋谷","seq":20,"cum_km":20.601},{"name":"恵比寿","seq":21,"cum_km":22.073},{"name":"目黒","seq":22,"cum_km":23.794},{"name":"五反田","seq":23,"cum_km":24.81},{"name":"大崎","seq":24,"cum_km":25.605},{"name":"品川","seq":25,"cum_km":27.454}]},"中央線快速":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"神田","seq":2,"cum_km":1.012},{"name":"御茶ノ水","seq":3,"cum_km":2.434},{"name":"水道橋","seq":4,"cum_km":3.499},{"name":"飯田橋","seq":5,"cum_km":4.52},{"name":"市ヶ谷","seq":6,"cum_km":5.616},{"name":"四ツ谷","seq":7,"cum_km":6.36},{"name":"信濃町","seq":8,"cum_km":7.49},{"name":"千駄ヶ谷","seq":9,"cum_km":8.369},{"name":"代々木","seq":10,"cum_km":9.546},{"name":"新宿","seq":11,"cum_km":10.098},{"name":"大久保","seq":12,"cum_km":11.299},{"name":"東中野","seq":13,"cum_km":12.665},{"name":"中野","seq":14,"cum_km":14.373},{"name":"高円寺","seq":15,"cum_km":15.872},{"name":"阿佐ヶ谷","seq":16,"cum_km":17.098},{"name":"荻窪","seq":17,"cum_km":18.746},{"name":"西荻窪","seq":18,"cum_km":20.612},{"name":"吉祥寺","seq":19,"cum_km":22.394},{"name":"三鷹","seq":20,"cum_km":24.113},{"name":"武蔵境","seq":21,"cum_km":25.678},{"name":"東小金井","seq":22,"cum_km":27.467},{"name":"武蔵小金井","seq":23,"cum_km":29.064},{"name":"国分寺","seq":24,"cum_km":31.094},{"name":"西国分寺","seq":25,"cum_km":32.472},{"name":"国立","seq":26,"cum_km":34.223},{"name":"立川","seq":27,"cum_km":37.167},{"name":"日野","seq":28,"cum_km":40.348},{"name":"豊田","seq":29,"cum_km":43.026},{"name":"八王子","seq":30,"cum_km":47.104},{"name":"西八王子","seq":31,"cum_km":49.687},{"name":"高尾","seq":32,"cum_km":52.746}]},"京浜東北線":{"scrambled":false,"stations":[{"name":"大宮","seq":1,"cum_km":0.0},{"name":"さいたま新都心","seq":2,"cum_km":1.673},{"name":"与野","seq":3,"cum_km":2.738},{"name":"北浦和","seq":4,"cum_km":4.254},{"name":"浦和","seq":5,"cum_km":6.093},{"name":"南浦和","seq":6,"cum_km":7.409},{"name":"蕨","seq":7,"cum_km":10.651},{"name":"西川口","seq":8,"cum_km":12.506},{"name":"川口","seq":9,"cum_km":14.457},{"name":"赤羽","seq":10,"cum_km":17.217},{"name":"東十条","seq":11,"cum_km":18.906},{"name":"王子","seq":12,"cum_km":20.339},{"name":"上中里","seq":13,"cum_km":21.229},{"name":"田端","seq":14,"cum_km":23.018},{"name":"西日暮里","seq":15,"cum_km":23.802},{"name":"日暮里","seq":16,"cum_km":24.452},{"name":"鶯谷","seq":17,"cum_km":25.385},{"name":"上野","seq":18,"cum_km":26.182},{"name":"御徒町","seq":19,"cum_km":27.322},{"name":"秋葉原","seq":20,"cum_km":28.109},{"name":"神田","seq":21,"cum_km":29.078},{"name":"東京","seq":22,"cum_km":29.999},{"name":"有楽町","seq":23,"cum_km":31.076},{"name":"新橋","seq":24,"cum_km":32.003},{"name":"浜松町","seq":25,"cum_km":33.246},{"name":"田町","seq":26,"cum_km":34.718},{"name":"高輪ゲートウェイ","seq":27,"cum_km":36.281},{"name":"品川","seq":28,"cum_km":37.042},{"name":"大井町","seq":29,"cum_km":39.492},{"name":"大森","seq":30,"cum_km":41.596},{"name":"蒲田","seq":31,"cum_km":44.55},{"name":"川崎","seq":32,"cum_km":48.495},{"name":"鶴見","seq":33,"cum_km":51.689},{"name":"新子安","seq":34,"cum_km":55.177},{"name":"東神奈川","seq":35,"cum_km":57.189},{"name":"横浜","seq":36,"cum_km":59.098},{"name":"保土ヶ谷","seq":37,"cum_km":62.045},{"name":"東戸塚","seq":38,"cum_km":66.977},{"name":"戸塚","seq":39,"cum_km":70.912},{"name":"大船","seq":40,"cum_km":76.219}]},"上野東京ライン":{"scrambled":true,"stations":[{"name":"熱海","seq":1,"cum_km":0.0},{"name":"土呂","seq":2,"cum_km":4.193},{"name":"湯河原","seq":3,"cum_km":5.542},{"name":"東大宮","seq":4,"cum_km":6.173},{"name":"真鶴","seq":5,"cum_km":8.498},{"name":"蓮田","seq":6,"cum_km":10.037},{"name":"白岡","seq":7,"cum_km":14.065},{"name":"根府川","seq":8,"cum_km":14.286},{"name":"新白岡","seq":9,"cum_km":16.407},{"name":"早川","seq":10,"cum_km":18.579},{"name":"久喜","seq":11,"cum_km":19.525},{"name":"小田原","seq":12,"cum_km":20.432},{"name":"東鷲宮","seq":13,"cum_km":22.493},{"name":"鴨宮","seq":14,"cum_km":23.627},{"name":"国府津","seq":15,"cum_km":26.828},{"name":"栗橋","seq":16,"cum_km":28.01},{"name":"二宮","seq":17,"cum_km":31.439},{"name":"古河","seq":18,"cum_km":35.528},{"name":"大磯","seq":19,"cum_km":36.866},{"name":"野木","seq":20,"cum_km":40.288},{"name":"平塚","seq":21,"cum_km":40.618},{"name":"間々田","seq":22,"cum_km":44.196},{"name":"茅ヶ崎","seq":23,"cum_km":46.158},{"name":"辻堂","seq":24,"cum_km":49.384},{"name":"小山","seq":25,"cum_km":51.691},{"name":"藤沢","seq":26,"cum_km":53.085},{"name":"大船","seq":27,"cum_km":58.271},{"name":"小金井","seq":28,"cum_km":58.779},{"name":"自治医大","seq":29,"cum_km":61.357},{"name":"戸塚","seq":30,"cum_km":63.606},{"name":"石橋","seq":31,"cum_km":66.09},{"name":"東戸塚","seq":32,"cum_km":67.541},{"name":"保土ヶ谷","seq":33,"cum_km":72.473},{"name":"雀宮","seq":34,"cum_km":72.531},{"name":"横浜","seq":35,"cum_km":75.402},{"name":"東神奈川","seq":36,"cum_km":77.328},{"name":"新子安","seq":37,"cum_km":79.341},{"name":"宇都宮","seq":38,"cum_km":80.203},{"name":"鶴見","seq":39,"cum_km":82.829},{"name":"川崎","seq":40,"cum_km":86.023},{"name":"蒲田","seq":41,"cum_km":89.967},{"name":"大森","seq":42,"cum_km":92.922},{"name":"大井町","seq":43,"cum_km":95.026},{"name":"品川","seq":44,"cum_km":97.4},{"name":"高輪ゲートウェイ","seq":45,"cum_km":98.236},{"name":"田町","seq":46,"cum_km":99.799},{"name":"浜松町","seq":47,"cum_km":101.272},{"name":"新橋","seq":48,"cum_km":102.306},{"name":"有楽町","seq":49,"cum_km":103.442},{"name":"東京","seq":50,"cum_km":104.123},{"name":"神田","seq":51,"cum_km":105.44},{"name":"秋葉原","seq":52,"cum_km":106.409},{"name":"御徒町","seq":53,"cum_km":107.196},{"name":"上野","seq":54,"cum_km":107.892},{"name":"鶯谷","seq":55,"cum_km":109.132},{"name":"日暮里","seq":56,"cum_km":109.898},{"name":"西日暮里","seq":57,"cum_km":110.716},{"name":"田端","seq":58,"cum_km":111.5},{"name":"上中里","seq":59,"cum_km":113.289},{"name":"王子","seq":60,"cum_km":114.178},{"name":"東十条","seq":61,"cum_km":115.611},{"name":"赤羽","seq":62,"cum_km":117.241},{"name":"川口","seq":63,"cum_km":120.061},{"name":"西川口","seq":64,"cum_km":122.012},{"name":"蕨","seq":65,"cum_km":123.867},{"name":"南浦和","seq":66,"cum_km":127.109},{"name":"浦和","seq":67,"cum_km":128.425},{"name":"北浦和","seq":68,"cum_km":130.264},{"name":"与野","seq":69,"cum_km":131.78},{"name":"さいたま新都心","seq":70,"cum_km":132.845},{"name":"大宮","seq":71,"cum_km":134.491},{"name":"宮原","seq":72,"cum_km":138.863},{"name":"上尾","seq":73,"cum_km":143.0},{"name":"北上尾","seq":74,"cum_km":144.683},{"name":"桶川","seq":75,"cum_km":146.56},{"name":"北本","seq":76,"cum_km":151.302},{"name":"鴻巣","seq":77,"cum_km":154.608},{"name":"北鴻巣","seq":78,"cum_km":159.154},{"name":"吹上","seq":79,"cum_km":161.776},{"name":"行田","seq":80,"cum_km":164.183},{"name":"熊谷","seq":81,"cum_km":169.082},{"name":"籠原","seq":82,"cum_km":175.63},{"name":"深谷","seq":83,"cum_km":180.457},{"name":"岡部","seq":84,"cum_km":184.711},{"name":"本庄","seq":85,"cum_km":190.383},{"name":"神保原","seq":86,"cum_km":194.693},{"name":"新町","seq":87,"cum_km":198.861},{"name":"倉賀野","seq":88,"cum_km":204.945},{"name":"高崎","seq":89,"cum_km":209.334},{"name":"尾久","seq":90,"cum_km":0.0}]},"湘南新宿ライン":{"scrambled":true,"stations":[{"name":"小田原","seq":1,"cum_km":0.0},{"name":"北鎌倉","seq":2,"cum_km":2.661},{"name":"鴨宮","seq":3,"cum_km":3.195},{"name":"土呂","seq":4,"cum_km":4.193},{"name":"鎌倉","seq":5,"cum_km":4.919},{"name":"東大宮","seq":6,"cum_km":6.173},{"name":"国府津","seq":7,"cum_km":6.396},{"name":"逗子","seq":8,"cum_km":8.779},{"name":"蓮田","seq":9,"cum_km":10.037},{"name":"二宮","seq":10,"cum_km":11.007},{"name":"白岡","seq":11,"cum_km":14.065},{"name":"新白岡","seq":12,"cum_km":16.407},{"name":"大磯","seq":13,"cum_km":16.434},{"name":"久喜","seq":14,"cum_km":19.525},{"name":"平塚","seq":15,"cum_km":20.186},{"name":"東鷲宮","seq":16,"cum_km":22.493},{"name":"茅ヶ崎","seq":17,"cum_km":25.726},{"name":"栗橋","seq":18,"cum_km":28.01},{"name":"辻堂","seq":19,"cum_km":28.952},{"name":"藤沢","seq":20,"cum_km":32.653},{"name":"古河","seq":21,"cum_km":35.528},{"name":"大船","seq":22,"cum_km":37.519},{"name":"野木","seq":23,"cum_km":40.288},{"name":"戸塚","seq":24,"cum_km":43.173},{"name":"間々田","seq":25,"cum_km":44.196},{"name":"東戸塚","seq":26,"cum_km":47.108},{"name":"小山","seq":27,"cum_km":51.691},{"name":"保土ヶ谷","seq":28,"cum_km":52.041},{"name":"横浜","seq":29,"cum_km":54.97},{"name":"小金井","seq":30,"cum_km":58.779},{"name":"東神奈川","seq":31,"cum_km":59.555},{"name":"自治医大","seq":32,"cum_km":61.357},{"name":"横浜","seq":33,"cum_km":61.469},{"name":"新子安","seq":34,"cum_km":65.386},{"name":"石橋","seq":35,"cum_km":66.09},{"name":"鶴見","seq":36,"cum_km":68.873},{"name":"雀宮","seq":37,"cum_km":72.531},{"name":"新川崎","seq":38,"cum_km":73.941},{"name":"武蔵小杉","seq":39,"cum_km":76.587},{"name":"宇都宮","seq":40,"cum_km":80.203},{"name":"西大井","seq":41,"cum_km":82.751},{"name":"大崎","seq":42,"cum_km":85.328},{"name":"五反田","seq":43,"cum_km":86.124},{"name":"目黒","seq":44,"cum_km":87.14},{"name":"恵比寿","seq":45,"cum_km":88.861},{"name":"渋谷","seq":46,"cum_km":90.333},{"name":"原宿","seq":47,"cum_km":91.825},{"name":"代々木","seq":48,"cum_km":93.436},{"name":"新宿","seq":49,"cum_km":93.819},{"name":"新大久保","seq":50,"cum_km":95.385},{"name":"高田馬場","seq":51,"cum_km":96.805},{"name":"目白","seq":52,"cum_km":97.65},{"name":"池袋","seq":53,"cum_km":98.564},{"name":"板橋","seq":54,"cum_km":100.403},{"name":"十条","seq":55,"cum_km":102.188},{"name":"赤羽","seq":56,"cum_km":104.057},{"name":"川口","seq":57,"cum_km":106.893},{"name":"西川口","seq":58,"cum_km":108.844},{"name":"蕨","seq":59,"cum_km":110.699},{"name":"南浦和","seq":60,"cum_km":113.941},{"name":"浦和","seq":61,"cum_km":115.257},{"name":"北浦和","seq":62,"cum_km":117.096},{"name":"与野","seq":63,"cum_km":118.612},{"name":"さいたま新都心","seq":64,"cum_km":119.677},{"name":"大宮","seq":65,"cum_km":121.323},{"name":"宮原","seq":66,"cum_km":125.696},{"name":"上尾","seq":67,"cum_km":129.833},{"name":"北上尾","seq":68,"cum_km":131.516},{"name":"桶川","seq":69,"cum_km":133.393},{"name":"北本","seq":70,"cum_km":138.135},{"name":"鴻巣","seq":71,"cum_km":141.441},{"name":"北鴻巣","seq":72,"cum_km":145.987},{"name":"吹上","seq":73,"cum_km":148.608},{"name":"行田","seq":74,"cum_km":151.015},{"name":"熊谷","seq":75,"cum_km":155.914},{"name":"籠原","seq":76,"cum_km":162.462},{"name":"深谷","seq":77,"cum_km":167.29},{"name":"岡部","seq":78,"cum_km":171.543},{"name":"本庄","seq":79,"cum_km":177.215},{"name":"神保原","seq":80,"cum_km":181.525},{"name":"新町","seq":81,"cum_km":185.693},{"name":"倉賀野","seq":82,"cum_km":191.777},{"name":"高崎","seq":83,"cum_km":196.166}]},"中央総武線各停":{"scrambled":false,"stations":[{"name":"三鷹","seq":1,"cum_km":0.0},{"name":"吉祥寺","seq":2,"cum_km":1.718},{"name":"西荻窪","seq":3,"cum_km":3.501},{"name":"荻窪","seq":4,"cum_km":5.367},{"name":"阿佐ヶ谷","seq":5,"cum_km":7.015},{"name":"高円寺","seq":6,"cum_km":8.24},{"name":"中野","seq":7,"cum_km":9.695},{"name":"東中野","seq":8,"cum_km":11.447},{"name":"大久保","seq":9,"cum_km":12.813},{"name":"新宿","seq":10,"cum_km":14.015},{"name":"代々木","seq":11,"cum_km":14.567},{"name":"千駄ヶ谷","seq":12,"cum_km":15.743},{"name":"信濃町","seq":13,"cum_km":16.622},{"name":"四ツ谷","seq":14,"cum_km":17.752},{"name":"市ヶ谷","seq":15,"cum_km":18.497},{"name":"飯田橋","seq":16,"cum_km":19.593},{"name":"水道橋","seq":17,"cum_km":20.614},{"name":"御茶ノ水","seq":18,"cum_km":21.679},{"name":"神田","seq":19,"cum_km":23.1},{"name":"秋葉原","seq":20,"cum_km":24.655},{"name":"浅草橋","seq":21,"cum_km":25.566},{"name":"両国","seq":22,"cum_km":26.416},{"name":"錦糸町","seq":23,"cum_km":28.294},{"name":"亀戸","seq":24,"cum_km":29.416},{"name":"平井","seq":25,"cum_km":31.341},{"name":"新小岩","seq":26,"cum_km":33.066},{"name":"小岩","seq":27,"cum_km":36.177},{"name":"市川","seq":28,"cum_km":38.866},{"name":"本八幡","seq":29,"cum_km":40.775},{"name":"下総中山","seq":30,"cum_km":42.368},{"name":"西船橋","seq":31,"cum_km":43.807},{"name":"船橋","seq":32,"cum_km":46.523},{"name":"東船橋","seq":33,"cum_km":48.023},{"name":"津田沼","seq":34,"cum_km":49.819},{"name":"幕張本郷","seq":35,"cum_km":52.94},{"name":"幕張","seq":36,"cum_km":54.944},{"name":"新検見川","seq":37,"cum_km":56.64},{"name":"稲毛","seq":38,"cum_km":59.246},{"name":"西千葉","seq":39,"cum_km":61.088},{"name":"千葉","seq":40,"cum_km":62.511}]},"横須賀線総武快速線":{"scrambled":false,"stations":[{"name":"久里浜","seq":1,"cum_km":0.0},{"name":"衣笠","seq":2,"cum_km":4.857},{"name":"横須賀","seq":3,"cum_km":8.325},{"name":"田浦","seq":4,"cum_km":10.05},{"name":"東逗子","seq":5,"cum_km":13.449},{"name":"逗子","seq":6,"cum_km":15.549},{"name":"鎌倉","seq":7,"cum_km":19.409},{"name":"北鎌倉","seq":8,"cum_km":21.667},{"name":"大船","seq":9,"cum_km":24.009},{"name":"戸塚","seq":10,"cum_km":29.663},{"name":"東戸塚","seq":11,"cum_km":33.598},{"name":"保土ヶ谷","seq":12,"cum_km":38.53},{"name":"横浜","seq":13,"cum_km":41.459},{"name":"東神奈川","seq":14,"cum_km":46.045},{"name":"横浜","seq":15,"cum_km":47.958},{"name":"新子安","seq":16,"cum_km":51.875},{"name":"鶴見","seq":17,"cum_km":55.363},{"name":"新川崎","seq":18,"cum_km":60.43},{"name":"武蔵小杉","seq":19,"cum_km":63.076},{"name":"西大井","seq":20,"cum_km":69.241},{"name":"品川","seq":21,"cum_km":72.739},{"name":"高輪ゲートウェイ","seq":22,"cum_km":73.591},{"name":"田町","seq":23,"cum_km":75.144},{"name":"浜松町","seq":24,"cum_km":76.616},{"name":"新橋","seq":25,"cum_km":77.859},{"name":"有楽町","seq":26,"cum_km":78.786},{"name":"東京","seq":27,"cum_km":79.467},{"name":"品川","seq":28,"cum_km":86.779},{"name":"新橋","seq":29,"cum_km":91.853},{"name":"東京","seq":30,"cum_km":93.709},{"name":"神田","seq":31,"cum_km":94.78},{"name":"新日本橋","seq":32,"cum_km":94.941},{"name":"馬喰町","seq":33,"cum_km":95.818},{"name":"浅草橋","seq":34,"cum_km":96.225},{"name":"両国","seq":35,"cum_km":96.919},{"name":"錦糸町","seq":36,"cum_km":98.796},{"name":"亀戸","seq":37,"cum_km":99.918},{"name":"平井","seq":38,"cum_km":101.843},{"name":"新小岩","seq":39,"cum_km":103.568},{"name":"小岩","seq":40,"cum_km":106.679},{"name":"市川","seq":41,"cum_km":109.368},{"name":"本八幡","seq":42,"cum_km":111.278},{"name":"下総中山","seq":43,"cum_km":112.87},{"name":"西船橋","seq":44,"cum_km":114.309},{"name":"船橋","seq":45,"cum_km":117.026},{"name":"東船橋","seq":46,"cum_km":118.525},{"name":"津田沼","seq":47,"cum_km":120.321},{"name":"幕張本郷","seq":48,"cum_km":123.442},{"name":"幕張","seq":49,"cum_km":125.446},{"name":"新検見川","seq":50,"cum_km":127.142},{"name":"稲毛","seq":51,"cum_km":129.748},{"name":"西千葉","seq":52,"cum_km":131.59},{"name":"千葉","seq":53,"cum_km":133.013}]},"京葉線":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"八丁堀","seq":2,"cum_km":1.403},{"name":"越中島","seq":3,"cum_km":2.984},{"name":"潮見","seq":4,"cum_km":5.406},{"name":"新木場","seq":5,"cum_km":7.356},{"name":"葛西臨海公園","seq":6,"cum_km":10.717},{"name":"舞浜","seq":7,"cum_km":12.921},{"name":"新浦安","seq":8,"cum_km":16.234},{"name":"市川塩浜","seq":9,"cum_km":18.403},{"name":"二俣新町","seq":10,"cum_km":22.726},{"name":"南船橋","seq":11,"cum_km":26.203},{"name":"新習志野","seq":12,"cum_km":28.527},{"name":"幕張豊砂","seq":13,"cum_km":29.953},{"name":"海浜幕張","seq":14,"cum_km":31.893},{"name":"検見川浜","seq":15,"cum_km":33.891},{"name":"稲毛海岸","seq":16,"cum_km":35.505},{"name":"千葉みなと","seq":17,"cum_km":39.236},{"name":"蘇我","seq":18,"cum_km":43.142}]},"常磐線":{"scrambled":false,"stations":[{"name":"上野","seq":1,"cum_km":0.0},{"name":"鶯谷","seq":2,"cum_km":1.003},{"name":"日暮里","seq":3,"cum_km":1.796},{"name":"西日暮里","seq":4,"cum_km":2.385},{"name":"三河島","seq":5,"cum_km":3.059},{"name":"南千住","seq":6,"cum_km":5.32},{"name":"北千住","seq":7,"cum_km":7.024},{"name":"綾瀬","seq":8,"cum_km":9.839},{"name":"亀有","seq":9,"cum_km":11.961},{"name":"金町","seq":10,"cum_km":14.053},{"name":"松戸","seq":11,"cum_km":17.648},{"name":"北松戸","seq":12,"cum_km":19.712},{"name":"馬橋","seq":13,"cum_km":21.075},{"name":"新松戸","seq":14,"cum_km":22.63},{"name":"北小金","seq":15,"cum_km":24.119},{"name":"南柏","seq":16,"cum_km":26.583},{"name":"柏","seq":17,"cum_km":28.817},{"name":"北柏","seq":18,"cum_km":31.261},{"name":"我孫子","seq":19,"cum_km":33.436},{"name":"天王台","seq":20,"cum_km":36.132},{"name":"取手","seq":21,"cum_km":39.346},{"name":"藤代","seq":22,"cum_km":45.169},{"name":"龍ケ崎市","seq":23,"cum_km":47.227},{"name":"牛久","seq":24,"cum_km":52.299},{"name":"ひたち野うしく","seq":25,"cum_km":56.173},{"name":"荒川沖","seq":26,"cum_km":58.859},{"name":"土浦","seq":27,"cum_km":65.307},{"name":"神立","seq":28,"cum_km":71.318},{"name":"高浜","seq":29,"cum_km":77.669},{"name":"石岡","seq":30,"cum_km":80.992},{"name":"羽鳥","seq":31,"cum_km":87.286},{"name":"岩間","seq":32,"cum_km":92.691},{"name":"友部","seq":33,"cum_km":99.357},{"name":"内原","seq":34,"cum_km":104.064},{"name":"赤塚","seq":35,"cum_km":109.812},{"name":"偕楽園","seq":36,"cum_km":113.624},{"name":"水戸","seq":37,"cum_km":115.539}]},"総武本線":{"scrambled":false,"stations":[{"name":"千葉","seq":1,"cum_km":0.0},{"name":"東千葉","seq":2,"cum_km":0.929},{"name":"都賀","seq":3,"cum_km":4.185},{"name":"四街道","seq":4,"cum_km":7.66},{"name":"物井","seq":5,"cum_km":11.8},{"name":"佐倉","seq":6,"cum_km":15.437},{"name":"南酒々井","seq":7,"cum_km":19.378},{"name":"榎戸","seq":8,"cum_km":22.329},{"name":"八街","seq":9,"cum_km":26.1},{"name":"日向","seq":10,"cum_km":31.893},{"name":"成東","seq":11,"cum_km":37.176},{"name":"松尾","seq":12,"cum_km":42.865},{"name":"横芝","seq":13,"cum_km":47.018},{"name":"飯倉","seq":14,"cum_km":50.838},{"name":"八日市場","seq":15,"cum_km":54.04},{"name":"干潟","seq":16,"cum_km":58.974},{"name":"旭","seq":17,"cum_km":63.847},{"name":"飯岡","seq":18,"cum_km":66.582},{"name":"倉橋","seq":19,"cum_km":69.457},{"name":"猿田","seq":20,"cum_km":72.068},{"name":"松岸","seq":21,"cum_km":77.561},{"name":"銚子","seq":22,"cum_km":80.767}]},"外房線":{"scrambled":false,"stations":[{"name":"蘇我","seq":1,"cum_km":0.0},{"name":"鎌取","seq":2,"cum_km":5.026},{"name":"誉田","seq":3,"cum_km":8.639},{"name":"土気","seq":4,"cum_km":14.29},{"name":"大網","seq":5,"cum_km":18.423},{"name":"永田","seq":6,"cum_km":20.387},{"name":"本納","seq":7,"cum_km":22.981},{"name":"新茂原","seq":8,"cum_km":26.689},{"name":"茂原","seq":9,"cum_km":29.663},{"name":"八積","seq":10,"cum_km":34.141},{"name":"上総一ノ宮","seq":11,"cum_km":38.199},{"name":"東浪見","seq":12,"cum_km":41.515},{"name":"太東","seq":13,"cum_km":44.402},{"name":"長者町","seq":14,"cum_km":47.267},{"name":"三門","seq":15,"cum_km":48.826},{"name":"大原","seq":16,"cum_km":52.263},{"name":"浪花","seq":17,"cum_km":55.825},{"name":"御宿","seq":18,"cum_km":60.806},{"name":"勝浦","seq":19,"cum_km":66.046},{"name":"鵜原","seq":20,"cum_km":69.577},{"name":"上総興津","seq":21,"cum_km":72.376},{"name":"行川アイランド","seq":22,"cum_km":75.708},{"name":"安房小湊","seq":23,"cum_km":79.363},{"name":"安房天津","seq":24,"cum_km":82.973},{"name":"安房鴨川","seq":25,"cum_km":88.54}]},"成田線":{"scrambled":false,"stations":[{"name":"佐倉","seq":1,"cum_km":0.0},{"name":"酒々井","seq":2,"cum_km":6.335},{"name":"成田","seq":3,"cum_km":12.86},{"name":"空港第2ビル","seq":4,"cum_km":23.207},{"name":"成田空港","seq":5,"cum_km":24.098}]},"成田線我孫子支線":{"scrambled":false,"stations":[{"name":"我孫子","seq":1,"cum_km":0.0},{"name":"東我孫子","seq":2,"cum_km":3.436},{"name":"湖北","seq":3,"cum_km":6.207},{"name":"新木","seq":4,"cum_km":8.955},{"name":"布佐","seq":5,"cum_km":12.005},{"name":"木下","seq":6,"cum_km":13.958},{"name":"小林","seq":7,"cum_km":18.257},{"name":"安食","seq":8,"cum_km":23.214},{"name":"下総松崎","seq":9,"cum_km":27.76},{"name":"成田","seq":10,"cum_km":33.006}]},"南武線":{"scrambled":false,"stations":[{"name":"立川","seq":1,"cum_km":0.0},{"name":"西国立","seq":2,"cum_km":1.277},{"name":"矢川","seq":3,"cum_km":2.583},{"name":"谷保","seq":4,"cum_km":4.043},{"name":"西府","seq":5,"cum_km":5.624},{"name":"分倍河原","seq":6,"cum_km":6.816},{"name":"府中本町","seq":7,"cum_km":7.612},{"name":"南多摩","seq":8,"cum_km":9.985},{"name":"稲城長沼","seq":9,"cum_km":11.439},{"name":"矢野口","seq":10,"cum_km":13.095},{"name":"稲田堤","seq":11,"cum_km":14.793},{"name":"中野島","seq":12,"cum_km":16.195},{"name":"登戸","seq":13,"cum_km":18.317},{"name":"宿河原","seq":14,"cum_km":19.342},{"name":"久地","seq":15,"cum_km":20.744},{"name":"津田山","seq":16,"cum_km":21.754},{"name":"武蔵溝ノ口","seq":17,"cum_km":22.91},{"name":"武蔵新城","seq":18,"cum_km":24.993},{"name":"武蔵中原","seq":19,"cum_km":26.194},{"name":"武蔵小杉","seq":20,"cum_km":27.932},{"name":"向河原","seq":21,"cum_km":28.885},{"name":"平間","seq":22,"cum_km":30.235},{"name":"鹿島田","seq":23,"cum_km":31.311},{"name":"矢向","seq":24,"cum_km":32.718},{"name":"尻手","seq":25,"cum_km":33.713},{"name":"八丁畷","seq":26,"cum_km":34.873},{"name":"川崎新町","seq":27,"cum_km":35.755},{"name":"小田栄","seq":28,"cum_km":36.407},{"name":"浜川崎","seq":29,"cum_km":37.368}]},"横浜線":{"scrambled":false,"stations":[{"name":"東神奈川","seq":1,"cum_km":0.0},{"name":"大口","seq":2,"cum_km":2.34},{"name":"菊名","seq":3,"cum_km":5.153},{"name":"新横浜","seq":4,"cum_km":6.159},{"name":"小机","seq":5,"cum_km":7.861},{"name":"鴨居","seq":6,"cum_km":10.934},{"name":"中山","seq":7,"cum_km":13.57},{"name":"十日市場","seq":8,"cum_km":16.008},{"name":"長津田","seq":9,"cum_km":18.202},{"name":"成瀬","seq":10,"cum_km":20.385},{"name":"町田","seq":11,"cum_km":22.967},{"name":"古淵","seq":12,"cum_km":25.838},{"name":"淵野辺","seq":13,"cum_km":28.49},{"name":"矢部","seq":14,"cum_km":29.418},{"name":"相模原","seq":15,"cum_km":30.944},{"name":"橋本","seq":16,"cum_km":33.894},{"name":"相原","seq":17,"cum_km":35.807},{"name":"八王子みなみ野","seq":18,"cum_km":38.729},{"name":"片倉","seq":19,"cum_km":40.085},{"name":"八王子","seq":20,"cum_km":42.507}]},"相模線":{"scrambled":false,"stations":[{"name":"茅ヶ崎","seq":1,"cum_km":0.0},{"name":"北茅ヶ崎","seq":2,"cum_km":1.319},{"name":"香川","seq":3,"cum_km":3.35},{"name":"寒川","seq":4,"cum_km":5.057},{"name":"宮山","seq":5,"cum_km":7.172},{"name":"倉見","seq":6,"cum_km":8.612},{"name":"門沢橋","seq":7,"cum_km":9.995},{"name":"社家","seq":8,"cum_km":11.638},{"name":"厚木","seq":9,"cum_km":14.37},{"name":"海老名","seq":10,"cum_km":16.029},{"name":"入谷","seq":11,"cum_km":18.933},{"name":"相武台下","seq":12,"cum_km":20.644},{"name":"下溝","seq":13,"cum_km":23.588},{"name":"原当麻","seq":14,"cum_km":24.856},{"name":"番田","seq":15,"cum_km":26.921},{"name":"上溝","seq":16,"cum_km":28.395},{"name":"南橋本","seq":17,"cum_km":31.285},{"name":"橋本","seq":18,"cum_km":33.406}]},"青梅線":{"scrambled":false,"stations":[{"name":"立川","seq":1,"cum_km":0.0},{"name":"西立川","seq":2,"cum_km":2.139},{"name":"東中神","seq":3,"cum_km":3.038},{"name":"中神","seq":4,"cum_km":3.84},{"name":"昭島","seq":5,"cum_km":5.423},{"name":"拝島","seq":6,"cum_km":7.33},{"name":"牛浜","seq":7,"cum_km":9.014},{"name":"福生","seq":8,"cum_km":10.115},{"name":"羽村","seq":9,"cum_km":11.912},{"name":"小作","seq":10,"cum_km":14.327},{"name":"河辺","seq":11,"cum_km":16.195},{"name":"東青梅","seq":12,"cum_km":17.378},{"name":"青梅","seq":13,"cum_km":18.769},{"name":"宮ノ平","seq":14,"cum_km":20.804},{"name":"日向和田","seq":15,"cum_km":21.653},{"name":"石神前","seq":16,"cum_km":22.664},{"name":"二俣尾","seq":17,"cum_km":23.8},{"name":"軍畑","seq":18,"cum_km":24.803},{"name":"沢井","seq":19,"cum_km":26.162},{"name":"御嶽","seq":20,"cum_km":27.454},{"name":"川井","seq":21,"cum_km":30.247},{"name":"古里","seq":22,"cum_km":31.952},{"name":"鳩ノ巣","seq":23,"cum_km":34.082},{"name":"白丸","seq":24,"cum_km":35.539},{"name":"奥多摩","seq":25,"cum_km":37.335}]},"五日市線":{"scrambled":false,"stations":[{"name":"拝島","seq":1,"cum_km":0.215},{"name":"熊川","seq":2,"cum_km":1.134},{"name":"東秋留","seq":3,"cum_km":3.327},{"name":"秋川","seq":4,"cum_km":5.598},{"name":"武蔵引田","seq":5,"cum_km":7.12},{"name":"武蔵増戸","seq":6,"cum_km":8.363},{"name":"武蔵五日市","seq":7,"cum_km":11.073}]},"武蔵野線":{"scrambled":false,"stations":[{"name":"新浦安","seq":1,"cum_km":0.0},{"name":"西船橋","seq":2,"cum_km":8.185},{"name":"船橋法典","seq":3,"cum_km":10.962},{"name":"市川大野","seq":4,"cum_km":14.073},{"name":"東松戸","seq":5,"cum_km":15.894},{"name":"新八柱","seq":6,"cum_km":18.281},{"name":"新松戸","seq":7,"cum_km":22.535},{"name":"南流山","seq":8,"cum_km":24.605},{"name":"三郷","seq":9,"cum_km":26.447},{"name":"新三郷","seq":10,"cum_km":28.827},{"name":"吉川美南","seq":11,"cum_km":30.319},{"name":"吉川","seq":12,"cum_km":31.968},{"name":"越谷レイクタウン","seq":13,"cum_km":33.885},{"name":"南越谷","seq":14,"cum_km":36.658},{"name":"東川口","seq":15,"cum_km":40.804},{"name":"東浦和","seq":16,"cum_km":44.602},{"name":"南浦和","seq":17,"cum_km":48.292},{"name":"武蔵浦和","seq":18,"cum_km":50.24},{"name":"西浦和","seq":19,"cum_km":52.237},{"name":"北朝霞","seq":20,"cum_km":57.299},{"name":"新座","seq":21,"cum_km":60.479},{"name":"東所沢","seq":22,"cum_km":64.41},{"name":"新秋津","seq":23,"cum_km":67.03},{"name":"新小平","seq":24,"cum_km":72.664},{"name":"西国分寺","seq":25,"cum_km":76.134},{"name":"北府中","seq":26,"cum_km":78.478},{"name":"府中本町","seq":27,"cum_km":80.207}]},"京急本線":{"scrambled":false,"stations":[{"name":"泉岳寺","seq":1,"cum_km":0.162},{"name":"品川","seq":2,"cum_km":1.359},{"name":"北品川","seq":3,"cum_km":1.919},{"name":"新馬場","seq":4,"cum_km":2.643},{"name":"青物横丁","seq":5,"cum_km":3.459},{"name":"鮫洲","seq":6,"cum_km":3.933},{"name":"立会川","seq":7,"cum_km":4.72},{"name":"大森海岸","seq":8,"cum_km":6.006},{"name":"平和島","seq":9,"cum_km":6.851},{"name":"大森町","seq":10,"cum_km":7.647},{"name":"梅屋敷","seq":11,"cum_km":8.37},{"name":"京急蒲田","seq":12,"cum_km":8.922},{"name":"雑色","seq":13,"cum_km":10.609},{"name":"六郷土手","seq":14,"cum_km":11.837},{"name":"京急川崎","seq":15,"cum_km":12.851},{"name":"八丁畷","seq":16,"cum_km":14.268},{"name":"鶴見市場","seq":17,"cum_km":15.009},{"name":"京急鶴見","seq":18,"cum_km":16.45},{"name":"花月総持寺","seq":19,"cum_km":17.404},{"name":"生麦","seq":20,"cum_km":18.139},{"name":"京急新子安","seq":21,"cum_km":19.537},{"name":"子安","seq":22,"cum_km":20.588},{"name":"神奈川新町","seq":23,"cum_km":21.156},{"name":"京急東神奈川","seq":24,"cum_km":21.788},{"name":"神奈川","seq":25,"cum_km":22.744},{"name":"横浜","seq":26,"cum_km":23.515},{"name":"戸部","seq":27,"cum_km":24.65},{"name":"日ノ出町","seq":28,"cum_km":25.978},{"name":"黄金町","seq":29,"cum_km":26.782},{"name":"南太田","seq":30,"cum_km":27.652},{"name":"井土ヶ谷","seq":31,"cum_km":28.888},{"name":"弘明寺","seq":32,"cum_km":30.244},{"name":"上大岡","seq":33,"cum_km":31.845},{"name":"屏風浦","seq":34,"cum_km":34.158},{"name":"杉田","seq":35,"cum_km":35.425},{"name":"京急富岡","seq":36,"cum_km":37.982},{"name":"能見台","seq":37,"cum_km":38.54},{"name":"金沢文庫","seq":38,"cum_km":40.659},{"name":"金沢八景","seq":39,"cum_km":42.149},{"name":"追浜","seq":40,"cum_km":43.914},{"name":"京急田浦","seq":41,"cum_km":45.618},{"name":"安針塚","seq":42,"cum_km":48.274},{"name":"逸見","seq":43,"cum_km":49.377},{"name":"汐入","seq":44,"cum_km":50.288},{"name":"横須賀中央","seq":45,"cum_km":50.997},{"name":"県立大学","seq":46,"cum_km":52.195},{"name":"堀ノ内","seq":47,"cum_km":53.408},{"name":"京急大津","seq":48,"cum_km":54.212},{"name":"馬堀海岸","seq":49,"cum_km":55.397},{"name":"浦賀","seq":50,"cum_km":56.752}]},"京急空港線":{"scrambled":false,"stations":[{"name":"羽田空港第1・第2ターミナル","seq":1,"cum_km":0.291},{"name":"羽田空港第3ターミナル","seq":2,"cum_km":2.094},{"name":"天空橋","seq":3,"cum_km":3.291},{"name":"穴守稲荷","seq":4,"cum_km":3.938},{"name":"大鳥居","seq":5,"cum_km":4.523},{"name":"糀谷","seq":6,"cum_km":5.588},{"name":"京急蒲田","seq":7,"cum_km":6.801}]},"京急大師線":{"scrambled":false,"stations":[{"name":"小島新田","seq":1,"cum_km":0.0},{"name":"大師橋","seq":2,"cum_km":0.686},{"name":"東門前","seq":3,"cum_km":1.243},{"name":"川崎大師","seq":4,"cum_km":2.007},{"name":"鈴木町","seq":5,"cum_km":2.492},{"name":"港町","seq":6,"cum_km":3.213},{"name":"京急川崎","seq":7,"cum_km":4.356}]},"京急逗子線":{"scrambled":false,"stations":[{"name":"逗子・葉山","seq":1,"cum_km":0.0},{"name":"神武寺","seq":2,"cum_km":1.837},{"name":"六浦","seq":3,"cum_km":4.633},{"name":"金沢八景","seq":4,"cum_km":5.936}]},"京急久里浜線":{"scrambled":false,"stations":[{"name":"堀ノ内","seq":1,"cum_km":0.0},{"name":"新大津","seq":2,"cum_km":0.823},{"name":"北久里浜","seq":3,"cum_km":1.926},{"name":"京急久里浜","seq":4,"cum_km":4.648},{"name":"YRP野比","seq":5,"cum_km":7.348},{"name":"京急長沢","seq":6,"cum_km":8.654},{"name":"津久井浜","seq":7,"cum_km":9.848},{"name":"三浦海岸","seq":8,"cum_km":11.37},{"name":"三崎口","seq":9,"cum_km":13.526}]},"京成本線":{"scrambled":false,"stations":[{"name":"成田空港","seq":1,"cum_km":0.0},{"name":"空港第2ビル","seq":2,"cum_km":0.89},{"name":"京成成田","seq":3,"cum_km":8.154},{"name":"公津の杜","seq":4,"cum_km":10.937},{"name":"宗吾参道","seq":5,"cum_km":12.529},{"name":"京成酒々井","seq":6,"cum_km":14.534},{"name":"大佐倉","seq":7,"cum_km":16.455},{"name":"京成佐倉","seq":8,"cum_km":18.374},{"name":"京成臼井","seq":9,"cum_km":23.703},{"name":"ユーカリが丘","seq":10,"cum_km":26.163},{"name":"志津","seq":11,"cum_km":27.421},{"name":"勝田台","seq":12,"cum_km":29.031},{"name":"京成大和田","seq":13,"cum_km":30.667},{"name":"八千代台","seq":14,"cum_km":32.699},{"name":"実籾","seq":15,"cum_km":35.446},{"name":"京成大久保","seq":16,"cum_km":37.227},{"name":"京成津田沼","seq":17,"cum_km":39.585},{"name":"谷津","seq":18,"cum_km":41.312},{"name":"船橋競馬場","seq":19,"cum_km":42.306},{"name":"大神宮下","seq":20,"cum_km":42.979},{"name":"京成船橋","seq":21,"cum_km":44.245},{"name":"海神","seq":22,"cum_km":45.735},{"name":"京成西船","seq":23,"cum_km":47.099},{"name":"東中山","seq":24,"cum_km":47.745},{"name":"京成中山","seq":25,"cum_km":48.532},{"name":"鬼越","seq":26,"cum_km":49.208},{"name":"京成八幡","seq":27,"cum_km":50.212},{"name":"菅野","seq":28,"cum_km":51.131},{"name":"市川真間","seq":29,"cum_km":51.892},{"name":"国府台","seq":30,"cum_km":52.857},{"name":"江戸川","seq":31,"cum_km":53.581},{"name":"京成小岩","seq":32,"cum_km":54.798},{"name":"京成高砂","seq":33,"cum_km":56.673},{"name":"青砥","seq":34,"cum_km":57.952},{"name":"お花茶屋","seq":35,"cum_km":59.532},{"name":"堀切菖蒲園","seq":36,"cum_km":60.651},{"name":"京成関屋","seq":37,"cum_km":62.138},{"name":"千住大橋","seq":38,"cum_km":63.524},{"name":"町屋","seq":39,"cum_km":65.061},{"name":"新三河島","seq":40,"cum_km":65.949},{"name":"日暮里","seq":41,"cum_km":67.299},{"name":"京成上野","seq":42,"cum_km":69.367}]},"東急東横線":{"scrambled":false,"stations":[{"name":"渋谷","seq":1,"cum_km":0.197},{"name":"代官山","seq":2,"cum_km":1.579},{"name":"中目黒","seq":3,"cum_km":2.261},{"name":"祐天寺","seq":4,"cum_km":3.31},{"name":"学芸大学","seq":5,"cum_km":4.38},{"name":"都立大学","seq":6,"cum_km":5.833},{"name":"自由が丘","seq":7,"cum_km":7.213},{"name":"田園調布","seq":8,"cum_km":8.188},{"name":"多摩川","seq":9,"cum_km":9.042},{"name":"新丸子","seq":10,"cum_km":10.305},{"name":"武蔵小杉","seq":11,"cum_km":10.828},{"name":"元住吉","seq":12,"cum_km":12.064},{"name":"日吉","seq":13,"cum_km":13.499},{"name":"綱島","seq":14,"cum_km":15.813},{"name":"大倉山","seq":15,"cum_km":17.491},{"name":"菊名","seq":16,"cum_km":18.792},{"name":"妙蓮寺","seq":17,"cum_km":20.346},{"name":"白楽","seq":18,"cum_km":21.548},{"name":"東白楽","seq":19,"cum_km":22.244},{"name":"反町","seq":20,"cum_km":23.296},{"name":"横浜","seq":21,"cum_km":24.263}]},"東急田園都市線":{"scrambled":false,"stations":[{"name":"渋谷","seq":1,"cum_km":0.0},{"name":"池尻大橋","seq":2,"cum_km":1.865},{"name":"三軒茶屋","seq":3,"cum_km":3.533},{"name":"駒沢大学","seq":4,"cum_km":4.829},{"name":"桜新町","seq":5,"cum_km":6.324},{"name":"用賀","seq":6,"cum_km":7.511},{"name":"二子玉川","seq":7,"cum_km":9.62},{"name":"二子新地","seq":8,"cum_km":10.129},{"name":"高津","seq":9,"cum_km":10.77},{"name":"溝の口","seq":10,"cum_km":11.53},{"name":"梶が谷","seq":11,"cum_km":12.334},{"name":"宮崎台","seq":12,"cum_km":13.896},{"name":"宮前平","seq":13,"cum_km":14.514},{"name":"鷺沼","seq":14,"cum_km":15.739},{"name":"たまプラーザ","seq":15,"cum_km":16.953},{"name":"あざみ野","seq":16,"cum_km":18.135},{"name":"江田","seq":17,"cum_km":19.297},{"name":"市が尾","seq":18,"cum_km":20.521},{"name":"藤が丘","seq":19,"cum_km":22.112},{"name":"青葉台","seq":20,"cum_km":23.029},{"name":"田奈","seq":21,"cum_km":24.473},{"name":"長津田","seq":22,"cum_km":25.752},{"name":"つくし野","seq":23,"cum_km":26.923},{"name":"すずかけ台","seq":24,"cum_km":28.054},{"name":"南町田グランベリーパーク","seq":25,"cum_km":29.31},{"name":"つきみ野","seq":26,"cum_km":30.362},{"name":"中央林間","seq":27,"cum_km":31.631}]},"東急池上線":{"scrambled":false,"stations":[{"name":"蒲田","seq":1,"cum_km":0.0},{"name":"蓮沼","seq":2,"cum_km":0.672},{"name":"池上","seq":3,"cum_km":1.754},{"name":"千鳥町","seq":4,"cum_km":2.825},{"name":"久が原","seq":5,"cum_km":3.71},{"name":"御嶽山","seq":6,"cum_km":4.419},{"name":"雪が谷大塚","seq":7,"cum_km":5.21},{"name":"石川台","seq":8,"cum_km":5.873},{"name":"洗足池","seq":9,"cum_km":6.493},{"name":"長原","seq":10,"cum_km":7.2},{"name":"旗の台","seq":11,"cum_km":7.782},{"name":"荏原中延","seq":12,"cum_km":8.752},{"name":"戸越銀座","seq":13,"cum_km":9.463},{"name":"大崎広小路","seq":14,"cum_km":10.462},{"name":"五反田","seq":15,"cum_km":10.794}]},"東急多摩川線":{"scrambled":false,"stations":[{"name":"蒲田","seq":1,"cum_km":0.075},{"name":"矢口渡","seq":2,"cum_km":1.403},{"name":"武蔵新田","seq":3,"cum_km":2.33},{"name":"下丸子","seq":4,"cum_km":3.074},{"name":"鵜の木","seq":5,"cum_km":3.713},{"name":"沼部","seq":6,"cum_km":4.751},{"name":"多摩川","seq":7,"cum_km":5.706}]},"小田急小田原線":{"scrambled":false,"stations":[{"name":"新宿","seq":1,"cum_km":0.0},{"name":"南新宿","seq":2,"cum_km":1.076},{"name":"参宮橋","seq":3,"cum_km":1.795},{"name":"代々木八幡","seq":4,"cum_km":2.886},{"name":"代々木上原","seq":5,"cum_km":3.816},{"name":"東北沢","seq":6,"cum_km":4.496},{"name":"下北沢","seq":7,"cum_km":5.198},{"name":"世田谷代田","seq":8,"cum_km":5.826},{"name":"梅ヶ丘","seq":9,"cum_km":6.443},{"name":"豪徳寺","seq":10,"cum_km":7.057},{"name":"経堂","seq":11,"cum_km":8.035},{"name":"千歳船橋","seq":12,"cum_km":9.229},{"name":"祖師ヶ谷大蔵","seq":13,"cum_km":10.806},{"name":"成城学園前","seq":14,"cum_km":11.861},{"name":"喜多見","seq":15,"cum_km":13.056},{"name":"狛江","seq":16,"cum_km":14.018},{"name":"和泉多摩川","seq":17,"cum_km":14.635},{"name":"登戸","seq":18,"cum_km":15.488},{"name":"向ヶ丘遊園","seq":19,"cum_km":16.096},{"name":"生田","seq":20,"cum_km":18.2},{"name":"読売ランド前","seq":21,"cum_km":19.432},{"name":"百合ヶ丘","seq":22,"cum_km":20.765},{"name":"新百合ヶ丘","seq":23,"cum_km":21.765},{"name":"柿生","seq":24,"cum_km":23.603},{"name":"鶴川","seq":25,"cum_km":25.079},{"name":"玉川学園前","seq":26,"cum_km":27.918},{"name":"町田","seq":27,"cum_km":30.909},{"name":"相模大野","seq":28,"cum_km":32.348},{"name":"小田急相模原","seq":29,"cum_km":34.688},{"name":"相武台前","seq":30,"cum_km":36.928},{"name":"座間","seq":31,"cum_km":39.203},{"name":"海老名","seq":32,"cum_km":42.536},{"name":"厚木","seq":33,"cum_km":44.301},{"name":"本厚木","seq":34,"cum_km":45.686},{"name":"愛甲石田","seq":35,"cum_km":48.552},{"name":"伊勢原","seq":36,"cum_km":52.235},{"name":"鶴巻温泉","seq":37,"cum_km":55.966},{"name":"東海大学前","seq":38,"cum_km":57.035},{"name":"秦野","seq":39,"cum_km":61.637},{"name":"渋沢","seq":40,"cum_km":65.572},{"name":"新松田","seq":41,"cum_km":71.984},{"name":"開成","seq":42,"cum_km":74.37},{"name":"栢山","seq":43,"cum_km":76.242},{"name":"富水","seq":44,"cum_km":77.766},{"name":"螢田","seq":45,"cum_km":79.241},{"name":"足柄","seq":46,"cum_km":80.846},{"name":"小田原","seq":47,"cum_km":82.571}]},"小田急江ノ島線":{"scrambled":false,"stations":[{"name":"片瀬江ノ島","seq":1,"cum_km":0.0},{"name":"鵠沼海岸","seq":2,"cum_km":1.699},{"name":"本鵠沼","seq":3,"cum_km":3.113},{"name":"藤沢","seq":4,"cum_km":4.12},{"name":"藤沢本町","seq":5,"cum_km":5.573},{"name":"善行","seq":6,"cum_km":7.201},{"name":"六会日大前","seq":7,"cum_km":9.584},{"name":"湘南台","seq":8,"cum_km":11.069},{"name":"長後","seq":9,"cum_km":12.847},{"name":"高座渋谷","seq":10,"cum_km":14.94},{"name":"桜ヶ丘","seq":11,"cum_km":16.989},{"name":"大和","seq":12,"cum_km":19.172},{"name":"鶴間","seq":13,"cum_km":21.705},{"name":"南林間","seq":14,"cum_km":22.319},{"name":"中央林間","seq":15,"cum_km":23.769},{"name":"東林間","seq":16,"cum_km":25.186},{"name":"相模大野","seq":17,"cum_km":26.665}]},"小田急多摩線":{"scrambled":false,"stations":[{"name":"唐木田","seq":1,"cum_km":0.191},{"name":"小田急多摩センター","seq":2,"cum_km":1.714},{"name":"小田急永山","seq":3,"cum_km":4.006},{"name":"はるひ野","seq":4,"cum_km":5.834},{"name":"黒川","seq":5,"cum_km":6.779},{"name":"栗平","seq":6,"cum_km":8.045},{"name":"五月台","seq":7,"cum_km":9.31},{"name":"新百合ヶ丘","seq":8,"cum_km":10.64}]},"京王線":{"scrambled":false,"stations":[{"name":"新宿","seq":1,"cum_km":0.0},{"name":"初台","seq":2,"cum_km":1.466},{"name":"幡ヶ谷","seq":3,"cum_km":2.55},{"name":"笹塚","seq":4,"cum_km":3.544},{"name":"代田橋","seq":5,"cum_km":4.308},{"name":"明大前","seq":6,"cum_km":5.173},{"name":"下高井戸","seq":7,"cum_km":6.138},{"name":"桜上水","seq":8,"cum_km":6.935},{"name":"上北沢","seq":9,"cum_km":7.824},{"name":"八幡山","seq":10,"cum_km":8.517},{"name":"芦花公園","seq":11,"cum_km":9.076},{"name":"千歳烏山","seq":12,"cum_km":10.003},{"name":"仙川","seq":13,"cum_km":11.466},{"name":"つつじヶ丘","seq":14,"cum_km":12.53},{"name":"柴崎","seq":15,"cum_km":13.411},{"name":"国領","seq":16,"cum_km":14.253},{"name":"布田","seq":17,"cum_km":14.869},{"name":"調布","seq":18,"cum_km":15.591},{"name":"西調布","seq":19,"cum_km":17.08},{"name":"飛田給","seq":20,"cum_km":17.678},{"name":"武蔵野台","seq":21,"cum_km":18.89},{"name":"多磨霊園","seq":22,"cum_km":19.778},{"name":"東府中","seq":23,"cum_km":20.287},{"name":"府中","seq":24,"cum_km":21.721},{"name":"分倍河原","seq":25,"cum_km":23.244},{"name":"中河原","seq":26,"cum_km":24.777},{"name":"聖蹟桜ヶ丘","seq":27,"cum_km":26.333},{"name":"百草園","seq":28,"cum_km":27.991},{"name":"高幡不動","seq":29,"cum_km":29.592},{"name":"南平","seq":30,"cum_km":31.879},{"name":"平山城址公園","seq":31,"cum_km":33.299},{"name":"長沼","seq":32,"cum_km":34.944},{"name":"北野","seq":33,"cum_km":36.077},{"name":"京王八王子","seq":34,"cum_km":37.948}]},"京王井の頭線":{"scrambled":false,"stations":[{"name":"渋谷","seq":1,"cum_km":0.155},{"name":"神泉","seq":2,"cum_km":0.656},{"name":"駒場東大前","seq":3,"cum_km":1.635},{"name":"池ノ上","seq":4,"cum_km":2.485},{"name":"下北沢","seq":5,"cum_km":3.111},{"name":"新代田","seq":6,"cum_km":3.691},{"name":"東松原","seq":7,"cum_km":4.112},{"name":"明大前","seq":8,"cum_km":5.029},{"name":"永福町","seq":9,"cum_km":6.131},{"name":"西永福","seq":10,"cum_km":6.88},{"name":"浜田山","seq":11,"cum_km":7.627},{"name":"高井戸","seq":12,"cum_km":8.871},{"name":"富士見ヶ丘","seq":13,"cum_km":9.634},{"name":"久我山","seq":14,"cum_km":10.427},{"name":"三鷹台","seq":15,"cum_km":11.441},{"name":"井の頭公園","seq":16,"cum_km":12.252},{"name":"吉祥寺","seq":17,"cum_km":12.8}]},"京王相模原線":{"scrambled":false,"stations":[{"name":"調布","seq":1,"cum_km":0.225},{"name":"京王多摩川","seq":2,"cum_km":1.538},{"name":"京王稲田堤","seq":3,"cum_km":2.77},{"name":"京王よみうりランド","seq":4,"cum_km":3.88},{"name":"稲城","seq":5,"cum_km":5.739},{"name":"若葉台","seq":6,"cum_km":8.872},{"name":"京王永山","seq":7,"cum_km":11.439},{"name":"京王多摩センター","seq":8,"cum_km":13.752},{"name":"京王堀之内","seq":9,"cum_km":16.059},{"name":"南大沢","seq":10,"cum_km":18.235},{"name":"多摩境","seq":11,"cum_km":20.111},{"name":"橋本","seq":12,"cum_km":22.584}]},"東武伊勢崎線":{"scrambled":false,"stations":[{"name":"伊勢崎","seq":1,"cum_km":0.156},{"name":"新伊勢崎","seq":2,"cum_km":1.206},{"name":"剛志","seq":3,"cum_km":4.657},{"name":"境町","seq":4,"cum_km":8.32},{"name":"世良田","seq":5,"cum_km":10.598},{"name":"木崎","seq":6,"cum_km":13.434},{"name":"細谷","seq":7,"cum_km":16.918},{"name":"太田","seq":8,"cum_km":20.032},{"name":"韮川","seq":9,"cum_km":22.774},{"name":"野州山辺","seq":10,"cum_km":26.101},{"name":"足利市","seq":11,"cum_km":27.785},{"name":"東武和泉","seq":12,"cum_km":29.381},{"name":"福居","seq":13,"cum_km":30.583},{"name":"県","seq":14,"cum_km":32.819},{"name":"多々良","seq":15,"cum_km":35.95},{"name":"館林","seq":16,"cum_km":39.93},{"name":"茂林寺前","seq":17,"cum_km":42.171},{"name":"川俣","seq":18,"cum_km":44.116},{"name":"羽生","seq":19,"cum_km":48.319},{"name":"南羽生","seq":20,"cum_km":51.515},{"name":"加須","seq":21,"cum_km":56.208},{"name":"花崎","seq":22,"cum_km":59.939},{"name":"鷲宮","seq":23,"cum_km":62.589},{"name":"久喜","seq":24,"cum_km":66.993},{"name":"和戸","seq":25,"cum_km":70.884},{"name":"東武動物公園","seq":26,"cum_km":73.775},{"name":"姫宮","seq":27,"cum_km":76.316},{"name":"北春日部","seq":28,"cum_km":77.858},{"name":"春日部","seq":29,"cum_km":79.449},{"name":"一ノ割","seq":30,"cum_km":81.688},{"name":"武里","seq":31,"cum_km":83.504},{"name":"せんげん台","seq":32,"cum_km":84.997},{"name":"大袋","seq":33,"cum_km":86.297},{"name":"北越谷","seq":34,"cum_km":88.698},{"name":"越谷","seq":35,"cum_km":90.368},{"name":"新越谷","seq":36,"cum_km":91.908},{"name":"蒲生","seq":37,"cum_km":92.744},{"name":"新田","seq":38,"cum_km":94.217},{"name":"獨協大学前","seq":39,"cum_km":95.489},{"name":"草加","seq":40,"cum_km":97.366},{"name":"谷塚","seq":41,"cum_km":98.894},{"name":"竹ノ塚","seq":42,"cum_km":101.386},{"name":"西新井","seq":43,"cum_km":103.452},{"name":"梅島","seq":44,"cum_km":104.442},{"name":"五反野","seq":45,"cum_km":105.634},{"name":"小菅","seq":46,"cum_km":106.566},{"name":"北千住","seq":47,"cum_km":107.829},{"name":"牛田","seq":48,"cum_km":108.856},{"name":"堀切","seq":49,"cum_km":109.417},{"name":"鐘ヶ淵","seq":50,"cum_km":110.6},{"name":"東向島","seq":51,"cum_km":111.694},{"name":"曳舟","seq":52,"cum_km":112.486},{"name":"とうきょうスカイツリー","seq":53,"cum_km":113.714},{"name":"浅草","seq":54,"cum_km":114.798}]},"東武東上線":{"scrambled":false,"stations":[{"name":"池袋","seq":1,"cum_km":0.047},{"name":"北池袋","seq":2,"cum_km":1.233},{"name":"下板橋","seq":3,"cum_km":1.812},{"name":"大山","seq":4,"cum_km":3.027},{"name":"中板橋","seq":5,"cum_km":4.08},{"name":"ときわ台","seq":6,"cum_km":4.671},{"name":"上板橋","seq":7,"cum_km":5.932},{"name":"東武練馬","seq":8,"cum_km":7.287},{"name":"下赤塚","seq":9,"cum_km":8.933},{"name":"成増","seq":10,"cum_km":10.225},{"name":"和光市","seq":11,"cum_km":12.612},{"name":"朝霞","seq":12,"cum_km":14.149},{"name":"朝霞台","seq":13,"cum_km":16.497},{"name":"志木","seq":14,"cum_km":17.89},{"name":"柳瀬川","seq":15,"cum_km":19.376},{"name":"みずほ台","seq":16,"cum_km":20.53},{"name":"鶴瀬","seq":17,"cum_km":21.831},{"name":"ふじみ野","seq":18,"cum_km":24.098},{"name":"上福岡","seq":19,"cum_km":25.897},{"name":"新河岸","seq":20,"cum_km":28.24},{"name":"川越","seq":21,"cum_km":30.637},{"name":"川越市","seq":22,"cum_km":31.555},{"name":"霞ヶ関","seq":23,"cum_km":34.665},{"name":"鶴ヶ島","seq":24,"cum_km":36.869},{"name":"若葉","seq":25,"cum_km":39.004},{"name":"坂戸","seq":26,"cum_km":40.48},{"name":"北坂戸","seq":27,"cum_km":42.856},{"name":"高坂","seq":28,"cum_km":46.181},{"name":"東松山","seq":29,"cum_km":49.861},{"name":"森林公園","seq":30,"cum_km":52.611},{"name":"つきのわ","seq":31,"cum_km":55.535},{"name":"武蔵嵐山","seq":32,"cum_km":57.145},{"name":"小川町","seq":33,"cum_km":64.225},{"name":"東武竹沢","seq":34,"cum_km":67.267},{"name":"みなみ寄居","seq":35,"cum_km":68.982},{"name":"男衾","seq":36,"cum_km":70.892},{"name":"鉢形","seq":37,"cum_km":73.519},{"name":"玉淀","seq":38,"cum_km":74.423},{"name":"寄居","seq":39,"cum_km":75.028}]},"西武池袋線":{"scrambled":false,"stations":[{"name":"池袋","seq":1,"cum_km":0.0},{"name":"椎名町","seq":2,"cum_km":1.755},{"name":"東長崎","seq":3,"cum_km":2.828},{"name":"江古田","seq":4,"cum_km":4.099},{"name":"桜台","seq":5,"cum_km":5.046},{"name":"練馬","seq":6,"cum_km":5.755},{"name":"中村橋","seq":7,"cum_km":7.348},{"name":"富士見台","seq":8,"cum_km":8.021},{"name":"練馬高野台","seq":9,"cum_km":9.508},{"name":"石神井公園","seq":10,"cum_km":10.51},{"name":"大泉学園","seq":11,"cum_km":12.393},{"name":"保谷","seq":12,"cum_km":14.108},{"name":"ひばりヶ丘","seq":13,"cum_km":16.251},{"name":"東久留米","seq":14,"cum_km":17.586},{"name":"清瀬","seq":15,"cum_km":19.374},{"name":"秋津","seq":16,"cum_km":21.585},{"name":"所沢","seq":17,"cum_km":24.532},{"name":"西所沢","seq":18,"cum_km":26.934},{"name":"小手指","seq":19,"cum_km":29.045},{"name":"狭山ヶ丘","seq":20,"cum_km":31.257},{"name":"武蔵藤沢","seq":21,"cum_km":32.493},{"name":"稲荷山公園","seq":22,"cum_km":35.518},{"name":"入間市","seq":23,"cum_km":36.43},{"name":"仏子","seq":24,"cum_km":39.427},{"name":"元加治","seq":25,"cum_km":40.808},{"name":"飯能","seq":26,"cum_km":43.325},{"name":"東飯能","seq":27,"cum_km":43.892},{"name":"高麗","seq":28,"cum_km":47.855},{"name":"武蔵横手","seq":29,"cum_km":50.671},{"name":"東吾野","seq":30,"cum_km":53.185},{"name":"吾野","seq":31,"cum_km":57.219}]},"西武新宿線":{"scrambled":false,"stations":[{"name":"本川越","seq":1,"cum_km":0.0},{"name":"南大塚","seq":2,"cum_km":3.789},{"name":"新狭山","seq":3,"cum_km":6.3},{"name":"狭山市","seq":4,"cum_km":8.932},{"name":"入曽","seq":5,"cum_km":12.196},{"name":"新所沢","seq":6,"cum_km":16.244},{"name":"航空公園","seq":7,"cum_km":17.337},{"name":"所沢","seq":8,"cum_km":18.857},{"name":"東村山","seq":9,"cum_km":22.026},{"name":"久米川","seq":10,"cum_km":23.398},{"name":"小平","seq":11,"cum_km":25.427},{"name":"花小金井","seq":12,"cum_km":27.94},{"name":"田無","seq":13,"cum_km":30.313},{"name":"西武柳沢","seq":14,"cum_km":31.503},{"name":"東伏見","seq":15,"cum_km":32.539},{"name":"武蔵関","seq":16,"cum_km":33.707},{"name":"上石神井","seq":17,"cum_km":35.141},{"name":"上井草","seq":18,"cum_km":36.112},{"name":"井荻","seq":19,"cum_km":37.278},{"name":"下井草","seq":20,"cum_km":38.078},{"name":"鷺ノ宮","seq":21,"cum_km":39.464},{"name":"都立家政","seq":22,"cum_km":39.961},{"name":"野方","seq":23,"cum_km":40.749},{"name":"沼袋","seq":24,"cum_km":41.803},{"name":"新井薬師前","seq":25,"cum_km":42.617},{"name":"中井","seq":26,"cum_km":43.892},{"name":"下落合","seq":27,"cum_km":44.671},{"name":"高田馬場","seq":28,"cum_km":45.924},{"name":"西武新宿","seq":29,"cum_km":47.795}]},"相鉄本線":{"scrambled":false,"stations":[{"name":"羽沢横浜国大","seq":0,"cum_km":5.051},{"name":"横浜","seq":1,"cum_km":0.0},{"name":"平沼橋","seq":2,"cum_km":1.043},{"name":"西横浜","seq":3,"cum_km":2.045},{"name":"天王町","seq":4,"cum_km":2.673},{"name":"星川","seq":5,"cum_km":3.521},{"name":"和田町","seq":6,"cum_km":4.52},{"name":"上星川","seq":7,"cum_km":5.268},{"name":"西谷","seq":8,"cum_km":7.151},{"name":"鶴ヶ峰","seq":9,"cum_km":8.6},{"name":"二俣川","seq":10,"cum_km":10.719},{"name":"希望ヶ丘","seq":11,"cum_km":12.541},{"name":"三ツ境","seq":12,"cum_km":13.872},{"name":"瀬谷","seq":13,"cum_km":15.685},{"name":"大和","seq":14,"cum_km":17.493},{"name":"相模大塚","seq":15,"cum_km":19.487},{"name":"さがみ野","seq":16,"cum_km":20.64},{"name":"かしわ台","seq":17,"cum_km":21.985},{"name":"海老名","seq":18,"cum_km":24.677}]},"相鉄いずみ野線":{"scrambled":false,"stations":[{"name":"二俣川","seq":1,"cum_km":0.2},{"name":"南万騎が原","seq":2,"cum_km":1.704},{"name":"緑園都市","seq":3,"cum_km":3.264},{"name":"弥生台","seq":4,"cum_km":5.092},{"name":"いずみ野","seq":5,"cum_km":6.19},{"name":"いずみ中央","seq":6,"cum_km":8.367},{"name":"ゆめが丘","seq":7,"cum_km":9.527},{"name":"湘南台","seq":8,"cum_km":11.49}]},"北総線":{"scrambled":false,"stations":[{"name":"印旛日本医大","seq":1,"cum_km":0.0},{"name":"印西牧の原","seq":2,"cum_km":3.656},{"name":"千葉ニュータウン中央","seq":3,"cum_km":8.501},{"name":"小室","seq":4,"cum_km":12.486},{"name":"白井","seq":5,"cum_km":14.514},{"name":"西白井","seq":6,"cum_km":16.497},{"name":"新鎌ヶ谷","seq":7,"cum_km":19.605},{"name":"大町","seq":8,"cum_km":21.767},{"name":"松飛台","seq":9,"cum_km":23.201},{"name":"東松戸","seq":10,"cum_km":24.654},{"name":"秋山","seq":11,"cum_km":25.84},{"name":"北国分","seq":12,"cum_km":27.408},{"name":"矢切","seq":13,"cum_km":28.791},{"name":"新柴又","seq":14,"cum_km":30.811},{"name":"京成高砂","seq":15,"cum_km":32.128}]},"成田スカイアクセス線":{"scrambled":false,"stations":[{"name":"京成高砂","seq":1,"cum_km":0.0},{"name":"新柴又","seq":2,"cum_km":1.317},{"name":"矢切","seq":3,"cum_km":3.337},{"name":"北国分","seq":4,"cum_km":4.72},{"name":"秋山","seq":5,"cum_km":6.287},{"name":"東松戸","seq":6,"cum_km":7.474},{"name":"松飛台","seq":7,"cum_km":8.926},{"name":"大町","seq":8,"cum_km":10.361},{"name":"新鎌ヶ谷","seq":9,"cum_km":12.522},{"name":"西白井","seq":10,"cum_km":15.63},{"name":"白井","seq":11,"cum_km":17.613},{"name":"小室","seq":12,"cum_km":19.641},{"name":"千葉ニュータウン中央","seq":13,"cum_km":23.627},{"name":"印西牧の原","seq":14,"cum_km":28.471},{"name":"印旛日本医大","seq":15,"cum_km":32.128},{"name":"成田湯川","seq":16,"cum_km":40.642},{"name":"空港第2ビル","seq":17,"cum_km":50.519},{"name":"成田空港","seq":18,"cum_km":51.409}]},"銀座線":{"scrambled":false,"stations":[{"name":"浅草","seq":1,"cum_km":0.0},{"name":"田原町","seq":2,"cum_km":0.771},{"name":"稲荷町","seq":3,"cum_km":1.503},{"name":"上野","seq":4,"cum_km":2.282},{"name":"上野広小路","seq":5,"cum_km":2.666},{"name":"末広町","seq":6,"cum_km":3.261},{"name":"神田","seq":7,"cum_km":4.387},{"name":"三越前","seq":8,"cum_km":5.159},{"name":"日本橋","seq":9,"cum_km":5.772},{"name":"京橋","seq":10,"cum_km":6.44},{"name":"銀座","seq":11,"cum_km":7.035},{"name":"新橋","seq":12,"cum_km":7.862},{"name":"虎ノ門","seq":13,"cum_km":8.72},{"name":"溜池山王","seq":14,"cum_km":9.606},{"name":"赤坂見附","seq":15,"cum_km":10.21},{"name":"青山一丁目","seq":16,"cum_km":11.792},{"name":"外苑前","seq":17,"cum_km":12.386},{"name":"表参道","seq":18,"cum_km":13.209},{"name":"渋谷","seq":19,"cum_km":14.303}]},"丸ノ内線":{"scrambled":false,"stations":[{"name":"荻窪","seq":1,"cum_km":0.182},{"name":"南阿佐ヶ谷","seq":2,"cum_km":1.728},{"name":"新高円寺","seq":3,"cum_km":2.931},{"name":"東高円寺","seq":4,"cum_km":3.813},{"name":"新中野","seq":5,"cum_km":4.836},{"name":"中野坂上","seq":6,"cum_km":5.974},{"name":"西新宿","seq":7,"cum_km":6.962},{"name":"新宿","seq":8,"cum_km":7.754},{"name":"新宿三丁目","seq":9,"cum_km":8.118},{"name":"新宿御苑前","seq":10,"cum_km":8.813},{"name":"四谷三丁目","seq":11,"cum_km":9.594},{"name":"四ツ谷","seq":12,"cum_km":10.763},{"name":"赤坂見附","seq":13,"cum_km":11.902},{"name":"国会議事堂前","seq":14,"cum_km":12.673},{"name":"霞ヶ関","seq":15,"cum_km":13.613},{"name":"銀座","seq":16,"cum_km":14.684},{"name":"東京","seq":17,"cum_km":15.778},{"name":"大手町","seq":18,"cum_km":16.307},{"name":"淡路町","seq":19,"cum_km":17.205},{"name":"御茶ノ水","seq":20,"cum_km":17.983},{"name":"本郷三丁目","seq":21,"cum_km":18.85},{"name":"後楽園","seq":22,"cum_km":19.563},{"name":"茗荷谷","seq":23,"cum_km":21.454},{"name":"新大塚","seq":24,"cum_km":22.696},{"name":"池袋","seq":25,"cum_km":24.579}]},"丸ノ内線分岐線":{"scrambled":false,"stations":[{"name":"中野坂上","seq":1,"cum_km":0.0},{"name":"中野新橋","seq":2,"cum_km":1.328},{"name":"中野富士見町","seq":3,"cum_km":1.866},{"name":"方南町","seq":4,"cum_km":3.225}]},"日比谷線":{"scrambled":false,"stations":[{"name":"北千住","seq":1,"cum_km":0.31},{"name":"南千住","seq":2,"cum_km":2.144},{"name":"三ノ輪","seq":3,"cum_km":2.952},{"name":"入谷","seq":4,"cum_km":4.09},{"name":"上野","seq":5,"cum_km":5.327},{"name":"仲御徒町","seq":6,"cum_km":5.876},{"name":"秋葉原","seq":7,"cum_km":7.014},{"name":"小伝馬町","seq":8,"cum_km":7.74},{"name":"人形町","seq":9,"cum_km":8.312},{"name":"茅場町","seq":10,"cum_km":9.216},{"name":"八丁堀","seq":11,"cum_km":9.677},{"name":"築地","seq":12,"cum_km":10.621},{"name":"東銀座","seq":13,"cum_km":11.388},{"name":"銀座","seq":14,"cum_km":11.674},{"name":"日比谷","seq":15,"cum_km":12.232},{"name":"霞ヶ関","seq":16,"cum_km":13.238},{"name":"虎ノ門ヒルズ","seq":17,"cum_km":14.044},{"name":"神谷町","seq":18,"cum_km":14.782},{"name":"六本木","seq":19,"cum_km":16.284},{"name":"広尾","seq":20,"cum_km":17.976},{"name":"恵比寿","seq":21,"cum_km":19.461},{"name":"中目黒","seq":22,"cum_km":20.508}]},"東西線":{"scrambled":false,"stations":[{"name":"西船橋","seq":1,"cum_km":0.0},{"name":"原木中山","seq":2,"cum_km":2.13},{"name":"妙典","seq":3,"cum_km":4.252},{"name":"行徳","seq":4,"cum_km":5.552},{"name":"南行徳","seq":5,"cum_km":6.882},{"name":"浦安","seq":6,"cum_km":7.994},{"name":"葛西","seq":7,"cum_km":9.905},{"name":"西葛西","seq":8,"cum_km":11.366},{"name":"南砂町","seq":9,"cum_km":13.897},{"name":"東陽町","seq":10,"cum_km":14.967},{"name":"木場","seq":11,"cum_km":16.144},{"name":"門前仲町","seq":12,"cum_km":16.989},{"name":"茅場町","seq":13,"cum_km":18.967},{"name":"日本橋","seq":14,"cum_km":19.518},{"name":"大手町","seq":15,"cum_km":20.315},{"name":"竹橋","seq":16,"cum_km":21.218},{"name":"九段下","seq":17,"cum_km":22.299},{"name":"飯田橋","seq":18,"cum_km":23.026},{"name":"神楽坂","seq":19,"cum_km":23.997},{"name":"早稲田","seq":20,"cum_km":25.144},{"name":"高田馬場","seq":21,"cum_km":26.987},{"name":"落合","seq":22,"cum_km":28.801},{"name":"中野","seq":23,"cum_km":30.773}]},"千代田線":{"scrambled":false,"stations":[{"name":"北綾瀬","seq":1,"cum_km":0.0},{"name":"綾瀬","seq":2,"cum_km":2.009},{"name":"北千住","seq":3,"cum_km":4.67},{"name":"町屋","seq":4,"cum_km":7.436},{"name":"西日暮里","seq":5,"cum_km":8.89},{"name":"千駄木","seq":6,"cum_km":9.756},{"name":"根津","seq":7,"cum_km":10.81},{"name":"湯島","seq":8,"cum_km":12.054},{"name":"新御茶ノ水","seq":9,"cum_km":13.288},{"name":"大手町","seq":10,"cum_km":14.589},{"name":"二重橋前","seq":11,"cum_km":15.125},{"name":"日比谷","seq":12,"cum_km":15.916},{"name":"霞ヶ関","seq":13,"cum_km":16.731},{"name":"国会議事堂前","seq":14,"cum_km":17.518},{"name":"赤坂","seq":15,"cum_km":18.218},{"name":"乃木坂","seq":16,"cum_km":19.342},{"name":"表参道","seq":17,"cum_km":21.082},{"name":"明治神宮前","seq":18,"cum_km":21.854},{"name":"代々木公園","seq":19,"cum_km":23.168},{"name":"代々木上原","seq":20,"cum_km":24.125}]},"有楽町線":{"scrambled":false,"stations":[{"name":"新木場","seq":1,"cum_km":0.229},{"name":"辰巳","seq":2,"cum_km":1.585},{"name":"豊洲","seq":3,"cum_km":3.242},{"name":"月島","seq":4,"cum_km":4.939},{"name":"新富町","seq":5,"cum_km":5.975},{"name":"銀座一丁目","seq":6,"cum_km":6.931},{"name":"有楽町","seq":7,"cum_km":7.387},{"name":"桜田門","seq":8,"cum_km":8.151},{"name":"永田町","seq":9,"cum_km":9.323},{"name":"麹町","seq":10,"cum_km":10.192},{"name":"市ヶ谷","seq":11,"cum_km":11.159},{"name":"飯田橋","seq":12,"cum_km":12.274},{"name":"江戸川橋","seq":13,"cum_km":13.783},{"name":"護国寺","seq":14,"cum_km":15.086},{"name":"東池袋","seq":15,"cum_km":16.195},{"name":"池袋","seq":16,"cum_km":17.011},{"name":"要町","seq":17,"cum_km":18.255},{"name":"千川","seq":18,"cum_km":19.27},{"name":"小竹向原","seq":19,"cum_km":20.336},{"name":"氷川台","seq":20,"cum_km":21.773},{"name":"平和台","seq":21,"cum_km":22.91},{"name":"地下鉄赤塚","seq":22,"cum_km":24.698},{"name":"地下鉄成増","seq":23,"cum_km":26.126},{"name":"和光市","seq":24,"cum_km":28.568}]},"南北線":{"scrambled":false,"stations":[{"name":"赤羽岩淵","seq":1,"cum_km":0.25},{"name":"志茂","seq":2,"cum_km":1.388},{"name":"王子神谷","seq":3,"cum_km":2.883},{"name":"王子","seq":4,"cum_km":4.102},{"name":"西ヶ原","seq":5,"cum_km":5.159},{"name":"駒込","seq":6,"cum_km":6.417},{"name":"本駒込","seq":7,"cum_km":7.841},{"name":"東大前","seq":8,"cum_km":8.626},{"name":"後楽園","seq":9,"cum_km":9.988},{"name":"飯田橋","seq":10,"cum_km":11.241},{"name":"市ヶ谷","seq":11,"cum_km":12.376},{"name":"四ツ谷","seq":12,"cum_km":13.447},{"name":"永田町","seq":13,"cum_km":14.884},{"name":"溜池山王","seq":14,"cum_km":15.51},{"name":"六本木一丁目","seq":15,"cum_km":16.534},{"name":"麻布十番","seq":16,"cum_km":17.728},{"name":"白金高輪","seq":17,"cum_km":19.064},{"name":"白金台","seq":18,"cum_km":20.096},{"name":"目黒","seq":19,"cum_km":21.359}]},"副都心線":{"scrambled":false,"stations":[{"name":"渋谷","seq":1,"cum_km":0.197},{"name":"明治神宮前","seq":2,"cum_km":1.304},{"name":"北参道","seq":3,"cum_km":2.589},{"name":"新宿三丁目","seq":4,"cum_km":4.309},{"name":"東新宿","seq":5,"cum_km":5.205},{"name":"西早稲田","seq":6,"cum_km":5.996},{"name":"雑司が谷","seq":7,"cum_km":7.502},{"name":"池袋","seq":8,"cum_km":9.272},{"name":"要町","seq":9,"cum_km":10.134},{"name":"千川","seq":10,"cum_km":11.149},{"name":"小竹向原","seq":11,"cum_km":12.215}]},"浅草線":{"scrambled":false,"stations":[{"name":"押上","seq":1,"cum_km":0.187},{"name":"本所吾妻橋","seq":2,"cum_km":0.928},{"name":"浅草","seq":3,"cum_km":1.549},{"name":"蔵前","seq":4,"cum_km":2.538},{"name":"浅草橋","seq":5,"cum_km":3.298},{"name":"東日本橋","seq":6,"cum_km":3.736},{"name":"人形町","seq":7,"cum_km":4.554},{"name":"日本橋","seq":8,"cum_km":5.358},{"name":"宝町","seq":9,"cum_km":6.094},{"name":"東銀座","seq":10,"cum_km":7.061},{"name":"新橋","seq":11,"cum_km":8.03},{"name":"大門","seq":12,"cum_km":8.894},{"name":"三田","seq":13,"cum_km":10.118},{"name":"泉岳寺","seq":14,"cum_km":11.721},{"name":"高輪台","seq":15,"cum_km":12.967},{"name":"五反田","seq":16,"cum_km":13.72},{"name":"戸越","seq":17,"cum_km":15.331},{"name":"中延","seq":18,"cum_km":16.397},{"name":"馬込","seq":19,"cum_km":17.374},{"name":"西馬込","seq":20,"cum_km":18.523}]},"三田線":{"scrambled":false,"stations":[{"name":"西高島平","seq":1,"cum_km":0.21},{"name":"新高島平","seq":2,"cum_km":0.995},{"name":"高島平","seq":3,"cum_km":1.639},{"name":"西台","seq":4,"cum_km":2.691},{"name":"蓮根","seq":5,"cum_km":3.473},{"name":"志村三丁目","seq":6,"cum_km":4.631},{"name":"志村坂上","seq":7,"cum_km":5.55},{"name":"本蓮沼","seq":8,"cum_km":6.606},{"name":"板橋本町","seq":9,"cum_km":7.506},{"name":"板橋区役所前","seq":10,"cum_km":8.563},{"name":"新板橋","seq":11,"cum_km":9.48},{"name":"西巣鴨","seq":12,"cum_km":10.546},{"name":"巣鴨","seq":13,"cum_km":11.919},{"name":"千石","seq":14,"cum_km":12.803},{"name":"白山","seq":15,"cum_km":13.903},{"name":"春日","seq":16,"cum_km":15.371},{"name":"水道橋","seq":17,"cum_km":16.108},{"name":"神保町","seq":18,"cum_km":17.1},{"name":"大手町","seq":19,"cum_km":18.589},{"name":"日比谷","seq":20,"cum_km":19.437},{"name":"内幸町","seq":21,"cum_km":20.22},{"name":"御成門","seq":22,"cum_km":21.189},{"name":"芝公園","seq":23,"cum_km":22.053},{"name":"三田","seq":24,"cum_km":22.666},{"name":"白金高輪","seq":25,"cum_km":24.276},{"name":"白金台","seq":26,"cum_km":25.309},{"name":"目黒","seq":27,"cum_km":26.572}]},"新宿線":{"scrambled":false,"stations":[{"name":"本八幡","seq":1,"cum_km":0.0},{"name":"篠崎","seq":2,"cum_km":2.874},{"name":"瑞江","seq":3,"cum_km":4.425},{"name":"一之江","seq":4,"cum_km":6.106},{"name":"船堀","seq":5,"cum_km":7.844},{"name":"東大島","seq":6,"cum_km":9.434},{"name":"大島","seq":7,"cum_km":10.7},{"name":"西大島","seq":8,"cum_km":11.421},{"name":"住吉","seq":9,"cum_km":12.381},{"name":"菊川","seq":10,"cum_km":13.249},{"name":"森下","seq":11,"cum_km":13.963},{"name":"浜町","seq":12,"cum_km":14.889},{"name":"馬喰横山","seq":13,"cum_km":15.482},{"name":"岩本町","seq":14,"cum_km":16.339},{"name":"小川町","seq":15,"cum_km":17.105},{"name":"神保町","seq":16,"cum_km":18.195},{"name":"九段下","seq":17,"cum_km":18.625},{"name":"市ヶ谷","seq":18,"cum_km":19.966},{"name":"曙橋","seq":19,"cum_km":21.349},{"name":"新宿三丁目","seq":20,"cum_km":22.837},{"name":"新宿","seq":21,"cum_km":23.626}]},"日暮里・舎人ライナー":{"scrambled":false,"stations":[{"name":"見沼代親水公園","seq":1,"cum_km":0.041},{"name":"舎人","seq":2,"cum_km":1.038},{"name":"舎人公園","seq":3,"cum_km":2.071},{"name":"谷在家","seq":4,"cum_km":2.936},{"name":"西新井大師西","seq":5,"cum_km":3.781},{"name":"江北","seq":6,"cum_km":4.61},{"name":"高野","seq":7,"cum_km":5.227},{"name":"扇大橋","seq":8,"cum_km":5.682},{"name":"足立小台","seq":9,"cum_km":6.729},{"name":"熊野前","seq":10,"cum_km":7.457},{"name":"赤土小学校前","seq":11,"cum_km":8.029},{"name":"西日暮里","seq":12,"cum_km":9.087},{"name":"日暮里","seq":13,"cum_km":9.793}]},"都電荒川線":{"scrambled":false,"stations":[{"name":"三ノ輪橋","seq":1,"cum_km":0.0},{"name":"荒川一中前","seq":2,"cum_km":0.333},{"name":"荒川区役所前","seq":3,"cum_km":0.62},{"name":"荒川二丁目","seq":4,"cum_km":1.014},{"name":"荒川七丁目","seq":5,"cum_km":1.452},{"name":"町屋駅前","seq":6,"cum_km":1.757},{"name":"町屋二丁目","seq":7,"cum_km":2.136},{"name":"東尾久三丁目","seq":8,"cum_km":2.44},{"name":"熊野前","seq":9,"cum_km":3.021},{"name":"宮ノ前","seq":10,"cum_km":3.385},{"name":"小台","seq":11,"cum_km":3.721},{"name":"荒川遊園地前","seq":12,"cum_km":4.105},{"name":"荒川車庫前","seq":13,"cum_km":4.574},{"name":"梶原","seq":14,"cum_km":5.024},{"name":"栄町","seq":15,"cum_km":5.535},{"name":"王子駅前","seq":16,"cum_km":5.933},{"name":"飛鳥山","seq":17,"cum_km":6.467},{"name":"滝野川一丁目","seq":18,"cum_km":6.782},{"name":"西ヶ原四丁目","seq":19,"cum_km":7.247},{"name":"新庚申塚","seq":20,"cum_km":7.652},{"name":"庚申塚","seq":21,"cum_km":7.885},{"name":"巣鴨新田","seq":22,"cum_km":8.395},{"name":"大塚駅前","seq":23,"cum_km":8.821},{"name":"向原","seq":24,"cum_km":9.381},{"name":"東池袋四丁目","seq":25,"cum_km":9.908},{"name":"都電雑司ヶ谷","seq":26,"cum_km":10.156},{"name":"鬼子母神前","seq":27,"cum_km":10.675},{"name":"学習院下","seq":28,"cum_km":11.273},{"name":"面影橋","seq":29,"cum_km":11.742},{"name":"早稲田","seq":30,"cum_km":12.153}]},"埼京線":{"scrambled":false,"stations":[{"name":"大宮","seq":1,"cum_km":0.0},{"name":"北与野","seq":2,"cum_km":1.631},{"name":"与野本町","seq":3,"cum_km":2.733},{"name":"南与野","seq":4,"cum_km":4.302},{"name":"中浦和","seq":5,"cum_km":5.929},{"name":"武蔵浦和","seq":6,"cum_km":7.181},{"name":"北戸田","seq":7,"cum_km":9.616},{"name":"戸田","seq":8,"cum_km":10.888},{"name":"戸田公園","seq":9,"cum_km":12.225},{"name":"浮間舟渡","seq":10,"cum_km":14.427},{"name":"北赤羽","seq":11,"cum_km":15.803},{"name":"赤羽","seq":12,"cum_km":17.614},{"name":"十条","seq":13,"cum_km":19.535},{"name":"板橋","seq":14,"cum_km":21.281},{"name":"池袋","seq":15,"cum_km":22.823},{"name":"目白","seq":16,"cum_km":24.033},{"name":"高田馬場","seq":17,"cum_km":24.878},{"name":"新大久保","seq":18,"cum_km":26.295},{"name":"新宿","seq":19,"cum_km":27.417},{"name":"代々木","seq":20,"cum_km":28.234},{"name":"原宿","seq":21,"cum_km":29.8},{"name":"渋谷","seq":22,"cum_km":31.267},{"name":"恵比寿","seq":23,"cum_km":32.732},{"name":"目黒","seq":24,"cum_km":34.435},{"name":"五反田","seq":25,"cum_km":35.426},{"name":"大崎","seq":26,"cum_km":36.222}]},"内房線":{"scrambled":false,"stations":[{"name":"千葉","seq":1,"cum_km":0.0},{"name":"蘇我","seq":2,"cum_km":3.854},{"name":"浜野","seq":3,"cum_km":7.281},{"name":"八幡宿","seq":4,"cum_km":9.406},{"name":"五井","seq":5,"cum_km":13.207},{"name":"姉ヶ崎","seq":6,"cum_km":19.062},{"name":"長浦","seq":7,"cum_km":24.074},{"name":"袖ヶ浦","seq":8,"cum_km":28.101},{"name":"巌根","seq":9,"cum_km":31.274},{"name":"木更津","seq":10,"cum_km":35.126},{"name":"君津","seq":11,"cum_km":41.996},{"name":"青堀","seq":12,"cum_km":45.544},{"name":"大貫","seq":13,"cum_km":50.417},{"name":"佐貫町","seq":14,"cum_km":54.594},{"name":"上総湊","seq":15,"cum_km":59.062},{"name":"竹岡","seq":16,"cum_km":63.859},{"name":"浜金谷","seq":17,"cum_km":67.916},{"name":"保田","seq":18,"cum_km":71.341},{"name":"安房勝山","seq":19,"cum_km":74.661},{"name":"岩井","seq":20,"cum_km":77.588},{"name":"富浦","seq":21,"cum_km":83.383},{"name":"那古船形","seq":22,"cum_km":85.702},{"name":"館山","seq":23,"cum_km":89.849},{"name":"九重","seq":24,"cum_km":95.447},{"name":"千倉","seq":25,"cum_km":100.232},{"name":"千歳","seq":26,"cum_km":102.281},{"name":"南三原","seq":27,"cum_km":106.166},{"name":"和田浦","seq":28,"cum_km":110.667},{"name":"江見","seq":29,"cum_km":115.35},{"name":"太海","seq":30,"cum_km":119.815},{"name":"安房鴨川","seq":31,"cum_km":123.059}]},"川越線":{"scrambled":false,"stations":[{"name":"川越","seq":1,"cum_km":0.0},{"name":"南古谷","seq":2,"cum_km":3.265},{"name":"指扇","seq":3,"cum_km":7.667},{"name":"西大宮","seq":4,"cum_km":9.126},{"name":"日進","seq":5,"cum_km":11.71},{"name":"大宮","seq":6,"cum_km":15.109}]},"りんかい線":{"scrambled":false,"stations":[{"name":"大崎","seq":1,"cum_km":0.0},{"name":"大井町","seq":2,"cum_km":1.403},{"name":"品川シーサイド","seq":3,"cum_km":2.72},{"name":"天王洲アイル","seq":4,"cum_km":4.064},{"name":"東京テレポート","seq":5,"cum_km":6.719},{"name":"国際展示場","seq":6,"cum_km":8.1},{"name":"東雲","seq":7,"cum_km":9.467},{"name":"新木場","seq":8,"cum_km":11.481}]},"相鉄・JR直通線":{"scrambled":false,"stations":[{"name":"大崎","seq":1,"cum_km":0.0},{"name":"西大井","seq":2,"cum_km":2.146},{"name":"武蔵小杉","seq":3,"cum_km":8.066},{"name":"羽沢横浜国大","seq":4,"cum_km":20.683}]},"半蔵門線":{"scrambled":false,"stations":[{"name":"曳舟","seq":1,"cum_km":0.0},{"name":"押上","seq":2,"cum_km":1.602},{"name":"錦糸町","seq":3,"cum_km":2.502},{"name":"住吉","seq":4,"cum_km":3.695},{"name":"清澄白河","seq":5,"cum_km":5.511},{"name":"水天宮前","seq":6,"cum_km":7.287},{"name":"三越前","seq":7,"cum_km":8.778},{"name":"大手町","seq":8,"cum_km":9.509},{"name":"神保町","seq":9,"cum_km":10.943},{"name":"九段下","seq":10,"cum_km":11.375},{"name":"半蔵門","seq":11,"cum_km":13.16},{"name":"永田町","seq":12,"cum_km":14.127},{"name":"青山一丁目","seq":13,"cum_km":15.608},{"name":"表参道","seq":14,"cum_km":17.03},{"name":"渋谷","seq":15,"cum_km":18.091}]},"京成押上線":{"scrambled":false,"stations":[{"name":"押上","seq":1,"cum_km":0.0},{"name":"京成曳舟","seq":2,"cum_km":1.411},{"name":"八広","seq":3,"cum_km":2.706},{"name":"四ツ木","seq":4,"cum_km":3.439},{"name":"京成立石","seq":5,"cum_km":4.856},{"name":"青砥","seq":6,"cum_km":5.879}]},"西武有楽町線":{"scrambled":false,"stations":[{"name":"小竹向原","seq":1,"cum_km":0.0},{"name":"新桜台","seq":2,"cum_km":0.983},{"name":"練馬","seq":3,"cum_km":2.172}]},"横浜市営地下鉄ブルーライン":{"scrambled":false,"stations":[{"name":"あざみ野","seq":1,"cum_km":0.0},{"name":"中川","seq":2,"cum_km":1.567},{"name":"センター北","seq":3,"cum_km":2.875},{"name":"センター南","seq":4,"cum_km":3.846},{"name":"仲町台","seq":5,"cum_km":5.646},{"name":"新羽","seq":6,"cum_km":7.836},{"name":"北新横浜","seq":7,"cum_km":8.776},{"name":"新横浜","seq":8,"cum_km":10.045},{"name":"岸根公園","seq":9,"cum_km":11.442},{"name":"片倉町","seq":10,"cum_km":12.596},{"name":"三ツ沢上町","seq":11,"cum_km":14.121},{"name":"三ツ沢下町","seq":12,"cum_km":14.973},{"name":"横浜","seq":13,"cum_km":16.248},{"name":"高島町","seq":14,"cum_km":17.096},{"name":"桜木町","seq":15,"cum_km":18.305},{"name":"関内","seq":16,"cum_km":18.932},{"name":"伊勢佐木長者町","seq":17,"cum_km":19.516},{"name":"阪東橋","seq":18,"cum_km":20.371},{"name":"吉野町","seq":19,"cum_km":20.989},{"name":"蒔田","seq":20,"cum_km":21.964},{"name":"弘明寺","seq":21,"cum_km":23.002},{"name":"上大岡","seq":22,"cum_km":24.714},{"name":"港南中央","seq":23,"cum_km":25.68},{"name":"上永谷","seq":24,"cum_km":27.334},{"name":"下永谷","seq":25,"cum_km":28.55},{"name":"舞岡","seq":26,"cum_km":29.264},{"name":"戸塚","seq":27,"cum_km":30.835},{"name":"踊場","seq":28,"cum_km":32.415},{"name":"中田","seq":29,"cum_km":33.26},{"name":"立場","seq":30,"cum_km":34.327},{"name":"下飯田","seq":31,"cum_km":36.279},{"name":"湘南台","seq":32,"cum_km":37.919}]},"根岸線":{"scrambled":false,"stations":[{"name":"横浜","seq":1,"cum_km":0.0},{"name":"桜木町","seq":2,"cum_km":1.833},{"name":"関内","seq":3,"cum_km":2.86},{"name":"石川町","seq":4,"cum_km":3.597},{"name":"山手","seq":5,"cum_km":4.96},{"name":"根岸","seq":6,"cum_km":6.504},{"name":"磯子","seq":7,"cum_km":8.925},{"name":"新杉田","seq":8,"cum_km":10.38},{"name":"洋光台","seq":9,"cum_km":12.619},{"name":"港南台","seq":10,"cum_km":14.53},{"name":"本郷台","seq":11,"cum_km":17.031},{"name":"大船","seq":12,"cum_km":19.386}]},"西武拝島線":{"scrambled":false,"stations":[{"name":"小平","seq":1,"cum_km":0.0},{"name":"萩山","seq":2,"cum_km":1.128},{"name":"小川","seq":3,"cum_km":2.389},{"name":"東大和市","seq":4,"cum_km":5.081},{"name":"玉川上水","seq":5,"cum_km":6.513},{"name":"武蔵砂川","seq":6,"cum_km":8.892},{"name":"西武立川","seq":7,"cum_km":10.918},{"name":"拝島","seq":8,"cum_km":13.385}]},"東京モノレール":{"scrambled":false,"stations":[{"name":"浜松町","seq":1,"cum_km":0.0},{"name":"天王洲アイル","seq":2,"cum_km":3.684},{"name":"大井競馬場前","seq":3,"cum_km":6.803},{"name":"流通センター","seq":4,"cum_km":8.275},{"name":"昭和島","seq":5,"cum_km":9.524},{"name":"整備場","seq":6,"cum_km":11.279},{"name":"天空橋","seq":7,"cum_km":11.974},{"name":"新整備場","seq":8,"cum_km":14.997},{"name":"羽田空港第1ターミナル","seq":9,"cum_km":15.733},{"name":"羽田空港第2ターミナル","seq":10,"cum_km":16.081}]},"東京モノレール(羽田空港第3ターミナル支線)":{"scrambled":false,"stations":[{"name":"天空橋","seq":1,"cum_km":0.0},{"name":"羽田空港第3ターミナル","seq":2,"cum_km":1.37}]},"京王高尾線":{"scrambled":false,"stations":[{"name":"北野","seq":1,"cum_km":0.0},{"name":"京王片倉","seq":2,"cum_km":1.451},{"name":"山田","seq":3,"cum_km":2.893},{"name":"めじろ台","seq":4,"cum_km":4.038},{"name":"狭間","seq":5,"cum_km":5.402},{"name":"高尾","seq":6,"cum_km":6.515},{"name":"高尾山口","seq":7,"cum_km":7.991}]},"東急新横浜線":{"scrambled":false,"stations":[{"name":"日吉","seq":0,"cum_km":0.0},{"name":"新綱島","seq":1,"cum_km":2.43},{"name":"新横浜","seq":2,"cum_km":5.984}]},"相鉄新横浜線":{"scrambled":false,"stations":[{"name":"新横浜","seq":0,"cum_km":0.0},{"name":"羽沢横浜国大","seq":1,"cum_km":4.059}]},"東葉高速線":{"scrambled":false,"stations":[{"name":"西船橋","seq":0,"cum_km":0.0},{"name":"東海神","seq":1,"cum_km":1.975},{"name":"飯山満","seq":2,"cum_km":5.848},{"name":"北習志野","seq":3,"cum_km":7.859},{"name":"船橋日大前","seq":4,"cum_km":9.565},{"name":"八千代緑が丘","seq":5,"cum_km":10.765},{"name":"八千代中央","seq":6,"cum_km":13.485},{"name":"村上","seq":7,"cum_km":14.942},{"name":"東葉勝田台","seq":8,"cum_km":15.988}]},"東武日光線":{"scrambled":false,"stations":[{"name":"東武動物公園","seq":1,"cum_km":0.0},{"name":"杉戸高野台","seq":2,"cum_km":3.164},{"name":"幸手","seq":3,"cum_km":5.691},{"name":"南栗橋","seq":4,"cum_km":10.039},{"name":"栗橋","seq":5,"cum_km":13.265},{"name":"新古河","seq":6,"cum_km":19.396},{"name":"柳生","seq":7,"cum_km":22.274},{"name":"板倉東洋大前","seq":8,"cum_km":24.286},{"name":"藤岡","seq":9,"cum_km":28.007},{"name":"静和","seq":10,"cum_km":35.646},{"name":"新大平下","seq":11,"cum_km":38.566},{"name":"栃木","seq":12,"cum_km":43.067},{"name":"新栃木","seq":13,"cum_km":45.331},{"name":"合戦場","seq":14,"cum_km":47.284},{"name":"家中","seq":15,"cum_km":49.819},{"name":"東武金崎","seq":16,"cum_km":53.883},{"name":"楡木","seq":17,"cum_km":58.411},{"name":"樅山","seq":18,"cum_km":61.369},{"name":"新鹿沼","seq":19,"cum_km":63.996},{"name":"北鹿沼","seq":20,"cum_km":66.722},{"name":"板荷","seq":21,"cum_km":71.791},{"name":"下小代","seq":22,"cum_km":75.36},{"name":"明神","seq":23,"cum_km":78.193},{"name":"下今市","seq":24,"cum_km":83.915},{"name":"上今市","seq":25,"cum_km":85.01},{"name":"東武日光","seq":26,"cum_km":90.857}]},"東海道新幹線(東京~熱海)":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"品川","seq":2,"cum_km":6.258},{"name":"新横浜","seq":3,"cum_km":23.845},{"name":"小田原","seq":4,"cum_km":74.194},{"name":"熱海","seq":5,"cum_km":92.529}]},"東北新幹線(東京~宇都宮)":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"上野","seq":2,"cum_km":3.791},{"name":"大宮","seq":3,"cum_km":29.255},{"name":"小山","seq":4,"cum_km":77.318},{"name":"宇都宮","seq":5,"cum_km":106.058}]},"北陸新幹線(東京~高崎)":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"上野","seq":2,"cum_km":3.791},{"name":"大宮","seq":3,"cum_km":29.255},{"name":"熊谷","seq":4,"cum_km":62.642},{"name":"本庄早稲田","seq":5,"cum_km":83.445},{"name":"高崎","seq":6,"cum_km":102.369}]},"大江戸線(光が丘~練馬)":{"scrambled":false,"stations":[{"name":"光が丘","seq":1,"cum_km":0.0},{"name":"練馬春日町","seq":2,"cum_km":1.312},{"name":"豊島園","seq":3,"cum_km":2.627},{"name":"練馬","seq":4,"cum_km":3.355}]},"大江戸線(都庁前~飯田橋~両国)":{"scrambled":false,"stations":[{"name":"都庁前","seq":1,"cum_km":0.0},{"name":"新宿西口","seq":2,"cum_km":0.669},{"name":"東新宿","seq":3,"cum_km":1.584},{"name":"若松河田","seq":4,"cum_km":2.555},{"name":"牛込柳町","seq":5,"cum_km":3.174},{"name":"牛込神楽坂","seq":6,"cum_km":4.158},{"name":"飯田橋","seq":7,"cum_km":5.02},{"name":"春日","seq":8,"cum_km":6.072},{"name":"本郷三丁目","seq":9,"cum_km":6.734},{"name":"上野御徒町","seq":10,"cum_km":8.02},{"name":"新御徒町","seq":11,"cum_km":8.715},{"name":"蔵前","seq":12,"cum_km":9.629},{"name":"両国","seq":13,"cum_km":10.547}]},"大江戸線(都庁前~六本木~両国)":{"scrambled":false,"stations":[{"name":"都庁前","seq":1,"cum_km":0.0},{"name":"新宿","seq":2,"cum_km":0.601},{"name":"代々木","seq":3,"cum_km":1.261},{"name":"国立競技場","seq":4,"cum_km":2.517},{"name":"青山一丁目","seq":5,"cum_km":3.637},{"name":"六本木","seq":6,"cum_km":4.852},{"name":"麻布十番","seq":7,"cum_km":5.773},{"name":"赤羽橋","seq":8,"cum_km":6.473},{"name":"大門","seq":9,"cum_km":7.488},{"name":"汐留","seq":10,"cum_km":8.428},{"name":"築地市場","seq":11,"cum_km":9.01},{"name":"勝どき","seq":12,"cum_km":10.126},{"name":"月島","seq":13,"cum_km":11.124},{"name":"門前仲町","seq":14,"cum_km":12.456},{"name":"清澄白河","seq":15,"cum_km":13.621},{"name":"森下","seq":16,"cum_km":14.292},{"name":"両国","seq":17,"cum_km":15.285}]},"つくばエクスプレス":{"scrambled":false,"stations":[{"name":"秋葉原","seq":1,"cum_km":0.0},{"name":"新御徒町","seq":2,"cum_km":1.141},{"name":"浅草","seq":3,"cum_km":2.345},{"name":"南千住","seq":4,"cum_km":4.543},{"name":"北千住","seq":5,"cum_km":6.503},{"name":"青井","seq":6,"cum_km":9.315},{"name":"六町","seq":7,"cum_km":10.743},{"name":"八潮","seq":8,"cum_km":14.03},{"name":"三郷中央","seq":9,"cum_km":17.588},{"name":"南流山","seq":10,"cum_km":20.281},{"name":"流山セントラルパーク","seq":11,"cum_km":22.396},{"name":"流山おおたかの森","seq":12,"cum_km":24.498},{"name":"柏の葉キャンパス","seq":13,"cum_km":27.95},{"name":"柏たなか","seq":14,"cum_km":29.952},{"name":"守谷","seq":15,"cum_km":35.301},{"name":"みらい平","seq":16,"cum_km":41.762},{"name":"みどりの","seq":17,"cum_km":46.025},{"name":"万博記念公園","seq":18,"cum_km":49.205},{"name":"研究学園","seq":19,"cum_km":52.555},{"name":"つくば","seq":20,"cum_km":55.095}]},"東急目黒線":{"scrambled":false,"stations":[{"name":"目黒","seq":1,"cum_km":0.0},{"name":"不動前","seq":2,"cum_km":0.817},{"name":"武蔵小山","seq":3,"cum_km":1.773},{"name":"西小山","seq":4,"cum_km":2.541},{"name":"洗足","seq":5,"cum_km":3.267},{"name":"大岡山","seq":6,"cum_km":4.165},{"name":"奥沢","seq":7,"cum_km":5.345},{"name":"田園調布","seq":8,"cum_km":6.218},{"name":"多摩川","seq":9,"cum_km":7.104},{"name":"新丸子","seq":10,"cum_km":8.275},{"name":"武蔵小杉","seq":11,"cum_km":8.815},{"name":"元住吉","seq":12,"cum_km":10.041},{"name":"日吉","seq":13,"cum_km":11.517}]},"東海道貨物線(羽沢横浜国大~東戸塚)":{"scrambled":false,"stations":[{"name":"羽沢横浜国大","seq":1,"cum_km":0.0},{"name":"東戸塚","seq":2,"cum_km":6.447}]},"東海道本線":{"scrambled":false,"stations":[{"name":"東京","seq":1,"cum_km":0.0},{"name":"新橋","seq":2,"cum_km":1.726},{"name":"品川","seq":3,"cum_km":6.368},{"name":"川崎","seq":4,"cum_km":17.565},{"name":"横浜","seq":5,"cum_km":27.741},{"name":"戸塚","seq":6,"cum_km":38.318},{"name":"大船","seq":7,"cum_km":43.468},{"name":"藤沢","seq":8,"cum_km":48.109},{"name":"辻堂","seq":9,"cum_km":51.809},{"name":"茅ヶ崎","seq":10,"cum_km":54.99},{"name":"平塚","seq":11,"cum_km":60.342},{"name":"大磯","seq":12,"cum_km":64.033},{"name":"二宮","seq":13,"cum_km":69.384},{"name":"国府津","seq":14,"cum_km":73.946},{"name":"鴨宮","seq":15,"cum_km":77.146},{"name":"小田原","seq":16,"cum_km":80.27},{"name":"早川","seq":17,"cum_km":82.121},{"name":"根府川","seq":18,"cum_km":86.184},{"name":"真鶴","seq":19,"cum_km":91.562},{"name":"湯河原","seq":20,"cum_km":94.23},{"name":"熱海","seq":21,"cum_km":99.459}]},"宇都宮線":{"scrambled":false,"stations":[{"name":"宇都宮","seq":1,"cum_km":0.0},{"name":"雀宮","seq":2,"cum_km":7.433},{"name":"石橋","seq":3,"cum_km":13.873},{"name":"自治医大","seq":4,"cum_km":18.57},{"name":"小金井","seq":5,"cum_km":21.147},{"name":"小山","seq":6,"cum_km":28.235},{"name":"間々田","seq":7,"cum_km":35.716},{"name":"野木","seq":8,"cum_km":39.618},{"name":"古河","seq":9,"cum_km":44.228},{"name":"栗橋","seq":10,"cum_km":50.856},{"name":"東鷲宮","seq":11,"cum_km":56.195},{"name":"久喜","seq":12,"cum_km":59.116},{"name":"新白岡","seq":13,"cum_km":62.228},{"name":"白岡","seq":14,"cum_km":64.549},{"name":"蓮田","seq":15,"cum_km":68.501},{"name":"東大宮","seq":16,"cum_km":72.315},{"name":"土呂","seq":17,"cum_km":74.292},{"name":"大宮","seq":18,"cum_km":77.537}]},"高崎線":{"scrambled":false,"stations":[{"name":"高崎","seq":1,"cum_km":0.0},{"name":"倉賀野","seq":2,"cum_km":4.193},{"name":"新町","seq":3,"cum_km":10.023},{"name":"神保原","seq":4,"cum_km":14.19},{"name":"本庄","seq":5,"cum_km":18.5},{"name":"岡部","seq":6,"cum_km":24.096},{"name":"深谷","seq":7,"cum_km":28.307},{"name":"籠原","seq":8,"cum_km":33.117},{"name":"熊谷","seq":9,"cum_km":39.599},{"name":"行田","seq":10,"cum_km":44.456},{"name":"吹上","seq":11,"cum_km":46.765},{"name":"北鴻巣","seq":12,"cum_km":49.323},{"name":"鴻巣","seq":13,"cum_km":53.791},{"name":"北本","seq":14,"cum_km":57.092},{"name":"桶川","seq":15,"cum_km":61.815},{"name":"北上尾","seq":16,"cum_km":63.692},{"name":"上尾","seq":17,"cum_km":65.374},{"name":"宮原","seq":18,"cum_km":69.474},{"name":"大宮","seq":19,"cum_km":73.813}]}}</script>
+<script>
+// ===== 3つのビルダー共通: 駅データ・区間エディタ・時刻/保存ユーティリティ =====
+const STATION_DATA = JSON.parse(document.getElementById("station-data").textContent);
+const LINE_NAMES = Object.keys(STATION_DATA).sort((a, b) => a.localeCompare(b, "ja"));
+const MANUAL_PRESETS = {
+    "湘南新宿ライン": [
+      {
+        label: "高崎線⇔東海道線系統(高崎→小田原)",
+        stations: ["高崎", "倉賀野", "新町", "神保原", "本庄", "岡部", "深谷", "籠原", "熊谷",
+          "吹上", "鴻巣", "北本", "桶川", "北上尾", "上尾", "宮原", "大宮", "浦和", "赤羽",
+          "池袋", "新宿", "渋谷", "恵比寿", "大崎", "武蔵小杉", "新川崎", "横浜", "保土ヶ谷",
+          "東戸塚", "戸塚", "大船", "藤沢", "辻堂", "茅ヶ崎", "平塚", "大磯", "二宮",
+          "国府津", "鴨宮", "小田原"],
+      },
+      {
+        label: "宇都宮線⇔横須賀線系統(宇都宮→逗子)",
+        stations: ["宇都宮", "雀宮", "石橋", "自治医大", "小金井", "小山", "間々田", "野木",
+          "古河", "栗橋", "東鷲宮", "久喜", "新白岡", "白岡", "蓮田", "東大宮", "土呂", "大宮",
+          "浦和", "赤羽", "池袋", "新宿", "渋谷", "恵比寿", "大崎", "西大井", "武蔵小杉",
+          "新川崎", "横浜", "保土ヶ谷", "東戸塚", "戸塚", "大船", "北鎌倉", "鎌倉", "逗子"],
+      },
+    ],
+    "上野東京ライン": [
+      {
+        label: "高崎線系統(高崎→熱海)",
+        stations: ["高崎", "倉賀野", "新町", "神保原", "本庄", "岡部", "深谷", "籠原", "熊谷",
+          "行田", "吹上", "北鴻巣", "鴻巣", "北本", "桶川", "北上尾", "上尾", "宮原", "大宮",
+          "さいたま新都心", "浦和", "赤羽", "尾久", "上野", "東京", "新橋", "品川", "川崎",
+          "横浜", "戸塚", "大船", "藤沢", "辻堂", "茅ヶ崎", "平塚", "大磯", "二宮", "国府津",
+          "鴨宮", "小田原", "早川", "根府川", "真鶴", "湯河原", "熱海"],
+      },
+      {
+        label: "宇都宮線系統(宇都宮→熱海)",
+        stations: ["宇都宮", "雀宮", "石橋", "自治医大", "小金井", "小山", "間々田", "野木",
+          "古河", "栗橋", "東鷲宮", "久喜", "新白岡", "白岡", "蓮田", "東大宮", "土呂", "大宮",
+          "さいたま新都心", "浦和", "赤羽", "尾久", "上野", "東京", "新橋", "品川", "川崎",
+          "横浜", "戸塚", "大船", "藤沢", "辻堂", "茅ヶ崎", "平塚", "大磯", "二宮", "国府津",
+          "鴨宮", "小田原", "早川", "根府川", "真鶴", "湯河原", "熱海"],
+      },
+      {
+        label: "常磐線系統(日暮里→品川、土浦〜取手間は座標データなしのため含まれません)",
+        stations: ["日暮里", "上野", "東京", "新橋", "品川"],
+      },
+    ],
+  };
+
+function el(tag, attrs, children) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v === undefined || v === null || v === false) continue;
+    if (k === "class") e.className = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (k === "value") e.value = v;
+    else if (k === "checked") e.checked = !!v;
+    else e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of [].concat(children || [])) {
+    if (c === null || c === undefined || c === false) continue;
+    e.appendChild(typeof c === "string" ? document.createTextNode(c) : c);
+  }
+  return e;
+}
+function svgEl(tag, attrs, text) {
+  const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+// ---- 路線・区間 ----
+function isScrambled(line) { return !!(STATION_DATA[line] && STATION_DATA[line].scrambled); }
+function lineStationList(line, presetIdx) {
+  const entry = STATION_DATA[line];
+  if (!entry) return [];
+  const byName = new Map(entry.stations.map(s => [s.name, s]));
+  if (entry.scrambled && MANUAL_PRESETS[line]) {
+    const p = MANUAL_PRESETS[line][presetIdx || 0] || MANUAL_PRESETS[line][0];
+    return p.stations.filter(n => byName.has(n)).map(n => ({ name: n, cum_km: byName.get(n).cum_km, approx: true }));
+  }
+  return entry.stations.map(s => ({ name: s.name, cum_km: s.cum_km }));
+}
+function resolveSegment(seg) {
+  const list = lineStationList(seg.line, seg.preset);
+  const a = list.findIndex(s => s.name === seg.from);
+  const b = list.findIndex(s => s.name === seg.to);
+  if (a < 0 || b < 0) return [];
+  const slice = a <= b ? list.slice(a, b + 1) : list.slice(b, a + 1).reverse();
+  return slice.map(s => ({ ...s, line: seg.line }));
+}
+// 区間の連結 → [{line, name, km(始発からの累積), approx}]
+function buildStationList(segments) {
+  const out = [];
+  let base = 0;
+  segments.forEach((seg, si) => {
+    const st = resolveSegment(seg);
+    if (!st.length) return;
+    const k0 = st[0].cum_km;
+    st.forEach((s, i) => {
+      const km = base + Math.abs(s.cum_km - k0);
+      if (si > 0 && i === 0 && out.length && out[out.length - 1].name === s.name) return; // 乗継駅は1回だけ
+      out.push({ line: s.line, name: s.name, km, approx: !!s.approx });
+    });
+    base = out.length ? out[out.length - 1].km : base;
+  });
+  // 駅データの都合で同じ駅が2回出てくる路線(横須賀線の横浜付近など)は、
+  // 1回目と2回目の間の寄り道を取り除く(ループを畳む)
+  for (let i = 0; i < out.length; i++) {
+    const j = out.findIndex((s, k) => k > i && s.name === out[i].name);
+    if (j > 0) {
+      const loopKm = out[j].km - out[i].km;
+      for (let k = j + 1; k < out.length; k++) out[k].km -= loopKm;
+      out.splice(i + 1, j - i);
+    }
+  }
+  return out;
+}
+
+// ---- 途中駅の削除(外す) ----
+// holder.removed に外した駅名を持たせる。始発駅・終着駅は外せない。
+function filterRemoved(st, removed) {
+  const set = new Set(removed || []);
+  return st.filter((s, i) => i === 0 || i === st.length - 1 || !set.has(s.name));
+}
+function removeStationButton(holder, name, onChange) {
+  return el("button", { type: "button", class: "ghost small del-st", title: `${name} を外す`, "aria-label": `${name} を外す`,
+    onclick: () => { holder.removed = (holder.removed || []).concat([name]); onChange(); } }, ["✕"]);
+}
+// 外した駅の一覧(「戻す」ボタン付き)。区間に含まれない駅名は自動で掃除する
+function removedBar(holder, fullSt, onChange) {
+  const inRange = new Set(fullSt.map(s => s.name));
+  holder.removed = (holder.removed || []).filter(n => inRange.has(n));
+  if (!holder.removed.length) return el("span");
+  const order = new Map(fullSt.map((s, i) => [s.name, i]));
+  const names = [...holder.removed].sort((a, b) => order.get(a) - order.get(b));
+  return el("div", { class: "removed-bar" }, [
+    el("span", { class: "k" }, [`外した駅(${names.length})`]),
+    ...names.map(n => el("button", { type: "button", class: "chip", title: `${n} を戻す`, onclick: () => { holder.removed = holder.removed.filter(x => x !== n); onChange(); } }, [n, el("span", { "aria-hidden": "true" }, [" ↺"])])),
+    el("button", { type: "button", class: "ghost small", onclick: () => { holder.removed = []; onChange(); } }, ["すべて戻す"]),
+  ]);
+}
+// 区間から作った駅一覧と config の駅一覧の差 = 外した駅(JSON読み込み時に復元する)
+function removedFrom(segments, cfgStations) {
+  const keep = new Set(cfgStations.map(s => s.name));
+  return buildStationList(segments).map(s => s.name).filter(n => !keep.has(n));
+}
+
+// 区間エディタ: segments 配列を直接書き換え、変更のたびに onChange()
+function renderSegmentEditor(container, segments, onChange) {
+  container.innerHTML = "";
+  const list = el("div", { class: "seg-list" });
+  segments.forEach((seg, idx) => {
+    const box = el("div", { class: "seg" });
+    const lineSel = el("select", { id: `${container.id}-line-${idx}`, "aria-label": "路線" });
+    LINE_NAMES.forEach(n => lineSel.appendChild(el("option", { value: n }, [n + (isScrambled(n) ? "(系統を選択)" : "")])));
+    lineSel.value = seg.line;
+    const stations = lineStationList(seg.line, seg.preset);
+    const mkSel = (key, label) => {
+      const s = el("select", { id: `${container.id}-${key}-${idx}`, "aria-label": label });
+      stations.forEach(st => s.appendChild(el("option", { value: st.name }, [st.name])));
+      if (!stations.some(x => x.name === seg[key])) seg[key] = key === "from" ? stations[0]?.name : stations[stations.length - 1]?.name;
+      s.value = seg[key];
+      s.addEventListener("change", () => { seg[key] = s.value; onChange(); });
+      return el("div", { class: "field" }, [el("label", { for: s.id }, [label]), s]);
+    };
+    lineSel.addEventListener("change", () => {
+      seg.line = lineSel.value; seg.preset = 0;
+      const st = lineStationList(seg.line, 0);
+      seg.from = st[0]?.name; seg.to = st[st.length - 1]?.name;
+      if (idx > 0) { const prev = resolveSegment(segments[idx - 1]); const last = prev[prev.length - 1]; if (last && st.some(x => x.name === last.name)) seg.from = last.name; }
+      renderSegmentEditor(container, segments, onChange); onChange();
+    });
+    // 区間が1つだけのときは消せないので、押せない「削除」ボタンは出さない(路線ごとの削除と紛らわしいため)
+    const del = segments.length > 1
+      ? el("button", { class: "ghost small", type: "button", onclick: () => { segments.splice(idx, 1); renderSegmentEditor(container, segments, onChange); onChange(); } }, ["区間を削除"])
+      : el("span");
+    box.appendChild(el("div", { class: "field line-f" }, [el("label", { for: lineSel.id }, [idx === 0 ? "路線" : `乗継・直通 ${idx}`]), lineSel]));
+    box.appendChild(mkSel("from", "から"));
+    box.appendChild(mkSel("to", "まで"));
+    box.appendChild(del);
+    if (isScrambled(seg.line) && MANUAL_PRESETS[seg.line]) {
+      const ps = el("select", { id: `${container.id}-preset-${idx}`, "aria-label": "系統" });
+      MANUAL_PRESETS[seg.line].forEach((p, i) => ps.appendChild(el("option", { value: String(i) }, [p.label])));
+      ps.value = String(seg.preset || 0);
+      ps.addEventListener("change", () => { seg.preset = Number(ps.value); renderSegmentEditor(container, segments, onChange); onChange(); });
+      box.appendChild(el("div", { class: "field preset" }, [el("label", { for: ps.id }, ["系統(この路線は複数系統が混ざっているため、停車順を系統で決めます)"]), ps]));
+    }
+    list.appendChild(box);
+  });
+  container.appendChild(list);
+  container.appendChild(el("div", { class: "btn-row" }, [
+    el("button", { class: "ghost small", type: "button", onclick: () => {
+      const prev = segments[segments.length - 1];
+      const prevSt = resolveSegment(prev);
+      const last = prevSt[prevSt.length - 1]?.name;
+      const line = LINE_NAMES.find(n => n !== prev.line && lineStationList(n).some(s => s.name === last)) || prev.line;
+      const st = lineStationList(line);
+      segments.push({ line, preset: 0, from: last && st.some(s => s.name === last) ? last : st[0].name, to: st[st.length - 1].name });
+      renderSegmentEditor(container, segments, onChange); onChange();
+    } }, ["+ 乗継・直通の区間を追加"]),
+  ]));
+}
+
+// ---- 時刻 ----
+// "730" "0730" "7:30" "7.30" "7時30分" "7:30:15" → "07:30" / "07:30:15"
+function normTime(raw) {
+  if (raw === undefined || raw === null) return "";
+  let s = String(raw).trim().replace(/[：．.]/g, ":").replace(/時/g, ":").replace(/分/g, ":").replace(/秒/g, "").replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0));
+  s = s.replace(/:+$/, "");
+  if (!s) return "";
+  let h, m, sec = 0;
+  if (/^\d{3,4}$/.test(s)) { h = Number(s.slice(0, -2)); m = Number(s.slice(-2)); }
+  else if (/^\d{5,6}$/.test(s)) { h = Number(s.slice(0, -4)); m = Number(s.slice(-4, -2)); sec = Number(s.slice(-2)); }
+  else {
+    const p = s.split(":");
+    if (p.length < 2 || p.length > 3 || p.some(x => !/^\d{1,2}$/.test(x))) return null;
+    h = Number(p[0]); m = Number(p[1]); sec = p[2] ? Number(p[2]) : 0;
+  }
+  if (h > 29 || m > 59 || sec > 59) return null;
+  const pad = n => String(n).padStart(2, "0");
+  return `${pad(h)}:${pad(m)}` + (sec ? `:${pad(sec)}` : "");
+}
+function toMin(s) { const n = normTime(s); if (!n) return null; const p = n.split(":").map(Number); return p[0] * 60 + p[1] + (p[2] || 0) / 60; }
+function fmtMin(m) { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mm = Math.floor(m % 60), s = Math.round((m * 60) % 60); return `${String(h).padStart(2, "0")}:${String(mm).padStart(2, "0")}` + (s && s !== 60 ? `:${String(s).padStart(2, "0")}` : ""); }
+// 日付またぎを考慮して単調増加に
+function monotonic(arr) { let add = 0, prev = null; return arr.map(v => { if (v === null) return null; if (prev !== null && v + add < prev - 720) add += 1440; prev = v + add; return prev; }); }
+// 時刻入力欄: フォーカスが外れたら正規化して色で知らせる
+function timeInput(id, value, onSet, cls) {
+  const inp = el("input", { type: "text", id, value: value || "", inputmode: "numeric", placeholder: "--:--", class: cls, autocomplete: "off" });
+  inp.addEventListener("change", () => {
+    const n = normTime(inp.value);
+    if (n === null) { inp.classList.add("bad"); onSet(inp.value.trim(), false); return; }
+    inp.classList.remove("bad"); inp.value = n; onSet(n, true);
+  });
+  if (value && normTime(value) === null) inp.classList.add("bad");
+  return inp;
+}
+
+// ---- 色 ----
+function hexToRgb(hex) { const h = hex.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); }
+function rgbToHex(rgb) { return "#" + rgb.map(v => Math.max(0, Math.min(255, v | 0)).toString(16).padStart(2, "0")).join(""); }
+
+// ---- 保存・コピー・下書き ----
+function draftLoad(key) { try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+function draftSave(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) { /* 保存できない環境では何もしない */ } }
+function draftClear(key) { try { localStorage.removeItem(key); } catch (e) {} }
+let _downloadsNs;
+async function getDownloads() {
+  if (_downloadsNs !== undefined) return _downloadsNs;
+  try { _downloadsNs = (window.claude && typeof window.claude.use === "function") ? await window.claude.use("downloads") : null; }
+  catch (e) { _downloadsNs = null; }
+  return _downloadsNs;
+}
+async function copyText(text, statusEl, textarea) {
+  try { await navigator.clipboard.writeText(text); setStatus(statusEl, "クリップボードにコピーしました。動画生成ページの「貼り付け」に使えます", "ok"); }
+  catch (e) { if (textarea) { textarea.focus(); textarea.select(); } setStatus(statusEl, "自動コピーできなかったので、JSON全体を選択しました。Ctrl+C / ⌘C でコピーしてください", "err"); }
+}
+async function saveJsonFile(filename, text, statusEl, textarea) {
+  const dl = await getDownloads();
+  if (!dl) return copyText(text, statusEl, textarea);
+  try { await dl.save({ filename, data: text }); setStatus(statusEl, `${filename} を保存しました。configs/ に置いて使えます`, "ok"); }
+  catch (e) {
+    if (e && e.code === "declined") setStatus(statusEl, "保存をキャンセルしました", "");
+    else return copyText(text, statusEl, textarea);
+  }
+}
+function setStatus(elm, msg, cls) { if (!elm) return; elm.textContent = msg; elm.className = "status " + (cls || ""); }
+function slugOk(s) { return /^[A-Za-z0-9_-]{1,64}$/.test(s || ""); }
+
+// 出力パネル(JSON表示+保存/コピー/読込)。getConfig() は {config, problems} を返す
+function renderOutput(container, filenameFn, getText, onImport) {
+  const ta = el("textarea", { class: "json", id: container.id + "-json", readonly: true, spellcheck: "false", "aria-label": "config JSON" });
+  const status = el("span", { class: "status", id: container.id + "-status" });
+  const imp = el("textarea", { class: "json", id: container.id + "-imp", placeholder: "以前このページで作ったJSONを貼り付け", spellcheck: "false", style: "min-height:90px" });
+  const impStatus = el("span", { class: "status" });
+  const serverBox = el("div", { id: container.id + "-server" });
+  detectServer().then(info => { if (info) renderServerPanel(serverBox, info, getText); });
+  container.append(
+    serverBox,
+    el("div", { class: "btn-row" }, [
+      el("button", { type: "button", onclick: () => saveJsonFile(filenameFn(), getText(), status, ta) }, ["JSONを保存"]),
+      el("button", { type: "button", class: "ghost", onclick: () => copyText(getText(), status, ta) }, ["コピー"]),
+      status,
+    ]),
+    ta,
+    el("details", { class: "imp" }, [
+      el("summary", {}, ["作成済みのJSONを読み込む"]),
+      el("div", { style: "display:grid;gap:8px;margin-top:8px" }, [imp, el("div", { class: "btn-row" }, [
+        el("button", { type: "button", class: "ghost small", onclick: () => {
+          try { onImport(JSON.parse(imp.value)); setStatus(impStatus, "読み込みました", "ok"); }
+          catch (e) { setStatus(impStatus, "読み込めませんでした: " + e.message, "err"); }
+        } }, ["読み込む"]), impStatus])]),
+    ]),
+  );
+  return ta;
+}
+// 車両アイコン欄: assets/ に置いたPNGのパスを config の icon_path に入れる。
+// 「PNGを選ぶ」はファイル名を拾ってプレビューを出すだけ(画像そのものはJSONに入らないので、
+// 同じファイルをリポジトリの assets/ に置いておく)。
+const _iconPreviews = {};
+function iconField(obj, id, onChange) {
+  const txt = el("input", { type: "text", id, value: obj.icon_path || "", placeholder: "assets/xxx.png(空欄=標準アイコン)", class: "mono", autocomplete: "off", list: "server-icons" });
+  const thumb = el("img", { alt: "", style: "height:28px;max-width:80px;object-fit:contain;display:none;border-radius:4px;background:var(--surface)" });
+  const showThumb = () => { const src = _iconPreviews[obj.icon_path]; if (src) { thumb.src = src; thumb.style.display = ""; } else { thumb.removeAttribute("src"); thumb.style.display = "none"; } };
+  const norm = (v) => { v = v.trim(); if (v && !v.includes("/")) v = "assets/" + v; return v; };
+  txt.addEventListener("change", () => { obj.icon_path = norm(txt.value); txt.value = obj.icon_path; showThumb(); onChange(); });
+  const file = el("input", { type: "file", accept: "image/png", id: id + "-file", style: "display:none" });
+  file.addEventListener("change", () => {
+    const f = file.files && file.files[0]; if (!f) return;
+    obj.icon_path = "assets/" + f.name; txt.value = obj.icon_path;
+    const rd = new FileReader(); rd.onload = () => { _iconPreviews[obj.icon_path] = rd.result; showThumb(); onChange(); }; rd.readAsDataURL(f);
+    onChange();
+  });
+  const pick = el("button", { type: "button", class: "ghost small", onclick: () => file.click() }, ["PNGを選ぶ"]);
+  const clear = el("button", { type: "button", class: "ghost small", onclick: () => { obj.icon_path = ""; txt.value = ""; showThumb(); onChange(); } }, ["標準に戻す"]);
+  showThumb();
+  return el("div", { class: "field", style: "flex:1 1 100%" }, [
+    el("label", { for: id }, ["車両アイコン(assets/ のPNG・右向き推奨)"]),
+    txt,
+    el("div", { class: "btn-row" }, [pick, clear, thumb, file]),
+  ]);
+}
+
+// ---- 動画生成サーバー(web/app.py)から開かれているときだけ出す機能 ----
+// アーティファクトとして開いたときは /api/server_info に届かないので何も出ない。
+async function detectServer() {
+  if (!/^https?:$/.test(location.protocol)) return null;
+  try {
+    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 2500);
+    const r = await fetch("/api/server_info", { signal: ctl.signal }); clearTimeout(tm);
+    if (!r.ok) return null;
+    const j = await r.json();
+    return j && j.ok ? j : null;
+  } catch (e) { return null; }
+}
+function renderServerPanel(container, info, getText) {
+  // アイコン候補(サーバーの assets/ にあるPNG)を入力欄の候補として出す
+  let dl = document.getElementById("server-icons");
+  if (!dl) { dl = el("datalist", { id: "server-icons" }); document.body.appendChild(dl); }
+  dl.innerHTML = ""; (info.icons || []).forEach(p => dl.appendChild(el("option", { value: p })));
+  const fast = el("input", { type: "checkbox", id: container.id + "-fast" });
+  const status = el("div", { class: "status" });
+  const post = async (url) => {
+    const body = new URLSearchParams(); body.set("json_text", getText()); if (fast.checked) body.set("fast", "1");
+    const r = await fetch(url, { method: "POST", body }); return r.json();
+  };
+  const poll = (jobId) => fetch("/status/" + jobId).then(r => r.json()).then(job => {
+    if (job.status === "running") { setStatus(status, "生成中…(数分かかることがあります)", ""); setTimeout(() => poll(jobId), 3000); }
+    else if (job.status === "done") {
+      const fname = job.file_name || "output.mp4";
+      const name = fname.replace(/\.(mp4|zip)$/, "");
+      status.className = "status ok"; status.textContent = "完成しました → ";
+      status.appendChild(el("a", { href: "/download/" + encodeURIComponent(name) }, [fname + " をダウンロード"]));
+    } else setStatus(status, "エラー: " + (job.error || "不明なエラー"), "err");
+  }).catch(() => setTimeout(() => poll(jobId), 4000));
+  const saveBtn = el("button", { type: "button", class: "ghost", onclick: async () => {
+    try { const j = await post("/save_config"); if (j.error) setStatus(status, j.error, "err"); else setStatus(status, `${j.path} に保存しました`, "ok"); }
+    catch (e) { setStatus(status, "保存できませんでした: " + e.message, "err"); }
+  } }, ["configsに保存"]);
+  const genBtn = el("button", { type: "button", onclick: async () => {
+    try { const j = await post("/generate_from_json"); if (j.job_id) { setStatus(status, "生成を開始しました…", ""); poll(j.job_id); } else setStatus(status, j.error || "開始できませんでした", "err"); }
+    catch (e) { setStatus(status, "開始できませんでした: " + e.message, "err"); }
+  } }, [document.title.includes("カルーセル") ? "保存して画像を生成" : "保存して動画を生成"]);
+  container.appendChild(el("div", { class: "subcard" }, [
+    el("strong", {}, ["このPCで使う(動画生成サーバーに接続中)"]),
+    el("div", { class: "btn-row" }, [saveBtn, genBtn, el("label", { for: fast.id, class: "status" }, [fast, " 低画質プレビュー(高速)"])]),
+    status,
+    el("p", { class: "hint" }, ["保存先は configs/<ファイル名>.json。生成した動画は ", el("a", { href: "/" }, ["動画生成ページ"]), " からも再生成・ダウンロードできます。"]),
+  ]));
+}
+
+function renderProblems(container, problems) {
+  container.innerHTML = "";
+  if (!problems.length) { container.appendChild(el("ul", { class: "problems clear" }, [el("li", {}, ["入力OK。このJSONで動画を生成できます。"])])); return; }
+  container.appendChild(el("ul", { class: "problems" }, problems.map(p => el("li", {}, [p]))));
+}
+
+</script>
+<script>
+const LS_KEY = "geogram-fare-builder-v1";
+const PALETTE = ["#006eeb", "#e84628", "#1f9e6b", "#8b5cf6"];
+const SAMPLE = {
+  slug: "fare_shinjuku_fujisawa", title_line1: "新宿 → 藤沢", title_line2: "運賃が安いのはどっち!?",
+  fare_label: "IC運賃", compare_km: "10,20,30",
+  routes: [
+    { key: "route_a", name: "小田急線", short_name: "小田急", badge: "急", color: "#006eeb",
+      segments: [{ line: "小田急小田原線", preset: 0, from: "新宿", to: "相模大野" }, { line: "小田急江ノ島線", preset: 0, from: "相模大野", to: "藤沢" }],
+      rows: { "下北沢": { fare: "168" }, "成城学園前": { fare: "199" }, "登戸": { fare: "262", popup: true }, "新百合ヶ丘": { fare: "314", popup: true }, "町田": { fare: "377", popup: true }, "中央林間": { fare: "440" }, "大和": { fare: "482", popup: true }, "藤沢": { fare: "545", popup: true } } },
+    { key: "route_b", name: "JR湘南新宿ライン", short_name: "JR", badge: "快", color: "#e84628",
+      segments: [{ line: "湘南新宿ライン", preset: 0, from: "新宿", to: "藤沢" }],
+      rows: { "渋谷": { fare: "178" }, "大崎": { fare: "208" }, "武蔵小杉": { fare: "318", popup: true }, "横浜": { fare: "571", popup: true }, "戸塚": { fare: "814", popup: true }, "藤沢": { fare: "990", popup: true } } },
+  ],
+};
+let state = draftLoad(LS_KEY) || structuredClone(SAMPLE);
+
+function rrow(r, name) { if (!r.rows[name]) r.rows[name] = { fare: "", popup: false, km: "" }; return r.rows[name]; }
+function fareNum(v) { if (v === "" || v === undefined || v === null) return null; const n = Number(String(v).replace(/[,円¥\s]/g, "")); return Number.isFinite(n) ? n : NaN; }
+function isPct() { return state.chart_x !== "km"; }
+// 目印: %表示なら compare_pct、km表示なら compare_km(別々に覚えておく)
+function markKey() { return isPct() ? "compare_pct" : "compare_km"; }
+function compareKms() { return String(state[markKey()] || "").split(/[,、\s]+/).map(Number).filter(n => n > 0 && (!isPct() || n < 100)).slice(0, 4); }
+
+// ---- 距離運賃表(「何kmまで 運賃」を1行ずつ。Web の運賃表をそのまま貼り付けてもよい)
+function parseTable(text) {
+  const rows = [], bad = [];
+  String(text || "").split(/\r?\n/).forEach(line => {
+    if (!line.trim()) return;
+    const t = line.replace(/(\d),(\d{3})(?!\d)/g, "$1$2");
+    const nums = (t.match(/\d+(?:\.\d+)?/g) || []).map(Number);
+    if (nums.length < 2) { bad.push(line.trim()); return; }
+    rows.push([nums[nums.length - 2], nums[nums.length - 1]]);
+  });
+  rows.sort((a, b) => a[0] - b[0]);
+  return { rows, bad };
+}
+function lookupFare(rows, km, roundUp) {
+  if (km <= 1e-9) return { fare: 0, over: false };
+  const k = roundUp ? Math.ceil(Number(km.toFixed(3)) - 1e-9) : km;
+  const row = rows.find(r => k <= r[0] + 1e-9);
+  if (row) return { fare: row[1], over: false };
+  return { fare: rows.length ? rows[rows.length - 1][1] : 0, over: true };
+}
+// data/fare_tables.json のプリセット(JR東日本 幹線など)。build_builders.py が埋め込む
+const FARE_PRESETS = {"jre_kansen_ic":{"name":"JR東日本","label":"JR東日本 幹線 IC運賃(2026年3月改定後)","fare_kind":"IC","source":"https://www.jreast.co.jp/2026unchin-kaitei/assets/pdf/kansen.pdf","note":"2026年3月の改定で山手線内・電車特定区間は幹線に統合。地方交通線を含む区間は運賃計算キロを使うこと","table":[[3,155],[6,199],[10,209],[15,253],[20,341],[25,440],[30,528],[35,616],[40,715],[45,803],[50,902],[60,1034],[70,1221],[80,1408],[90,1595],[100,1782],[120,2090],[140,2420],[160,2750],[180,3190],[200,3520],[220,3850],[240,4180],[260,4620],[280,5060],[300,5390],[320,5720],[340,5940],[360,6270],[380,6600],[400,6930],[420,7260],[440,7480],[460,7810],[480,8030],[500,8360],[520,8690],[540,9020],[560,9350],[580,9570],[600,9900],[640,10230],[680,10450],[720,10780],[760,11110],[800,11440],[840,11770],[880,11990],[920,12320],[960,12650],[1000,12980]]},"jre_kansen_ticket":{"name":"JR東日本","label":"JR東日本 幹線 きっぷ運賃(2026年3月改定後)","fare_kind":"きっぷ","source":"https://www.jreast.co.jp/2026unchin-kaitei/assets/pdf/kansen.pdf","note":"2026年3月の改定で山手線内・電車特定区間は幹線に統合。地方交通線を含む区間は運賃計算キロを使うこと","table":[[3,160],[6,200],[10,210],[15,260],[20,350],[25,440],[30,530],[35,620],[40,720],[45,810],[50,910],[60,1040],[70,1230],[80,1410],[90,1600],[100,1790],[120,2090],[140,2420],[160,2750],[180,3190],[200,3520],[220,3850],[240,4180],[260,4620],[280,5060],[300,5390],[320,5720],[340,5940],[360,6270],[380,6600],[400,6930],[420,7260],[440,7480],[460,7810],[480,8030],[500,8360],[520,8690],[540,9020],[560,9350],[580,9570],[600,9900],[640,10230],[680,10450],[720,10780],[760,11110],[800,11440],[840,11770],[880,11990],[920,12320],[960,12650],[1000,12980]]}};
+function presetText(key) { return (FARE_PRESETS[key]?.table || []).map(([k, f]) => `${k} ${f}`).join("\n"); }
+// JRのルートなら、運賃の種類(IC/きっぷ)に合わせて JR東日本 幹線の表を最初から入れる
+function defaultPresetFor(r) {
+  if (!/JR/i.test(`${r.name || ""} ${r.short_name || ""}`)) return null;
+  return /きっぷ|切符|磁気/.test(state.fare_label || "") ? "jre_kansen_ticket" : "jre_kansen_ic";
+}
+function applyPreset(t, key) { const pr = FARE_PRESETS[key]; if (!pr) return; t.preset = key; t.name = pr.name; t.text = presetText(key); }
+function isTable(r) { return r.fare_mode === "table"; }
+// 表モードの「上書き運賃」は駅ごとモードの運賃と別の欄(ofare)に持つ(モードを行き来しても混ざらない)
+function fk(r) { return isTable(r) ? "ofare" : "fare"; }
+function ensureTables(r) {
+  if (!r.tables || !r.tables.length) {
+    const t = { name: r.short_name || r.name || "会社1", text: "" };
+    const key = defaultPresetFor(r); if (key) applyPreset(t, key);
+    r.tables = [t];
+  }
+  return r.tables;
+}
+// 表モード: 各駅の計算運賃(会社が変わる駅で、それまでの会社の運賃を確定して足していく)
+function tableFares(r, st) {
+  const tbs = ensureTables(r).map(t => ({ name: t.name, ...parseTable(t.text) }));
+  const byName = Object.fromEntries(tbs.map(t => [t.name, t]));
+  const roundUp = !r.no_round;
+  let cur = tbs[0], start = 0, done = 0;
+  return st.map((s, i) => {
+    const c = i > 0 ? rrow(r, s.name).company : "";
+    let res;
+    if (c && byName[c] && byName[c] !== cur) {
+      res = lookupFare(cur.rows, s.dkm - start, roundUp); done += res.fare;
+      res = { fare: done, over: res.over }; cur = byName[c]; start = s.dkm;
+    } else {
+      const x = lookupFare(cur.rows, s.dkm - start, roundUp); res = { fare: done + x.fare, over: x.over };
+    }
+    return i === 0 ? { fare: 0, over: false } : res;
+  });
+}
+
+// 表モード: 会社ごとの区間 [{start, rows, done}](距離で運賃を出すのに使う)
+function tableSections(r, st) {
+  const tbs = ensureTables(r).map(t => ({ name: t.name, rows: parseTable(t.text).rows }));
+  const byName = Object.fromEntries(tbs.map(t => [t.name, t]));
+  const secs = []; let cur = tbs[0], start = 0, done = 0;
+  st.forEach((s, i) => {
+    const c = i > 0 ? rrow(r, s.name).company : "";
+    if (c && byName[c] && byName[c] !== cur) {
+      secs.push({ start, rows: cur.rows, done });
+      done += lookupFare(cur.rows, s.dkm - start, !r.no_round).fare; cur = byName[c]; start = s.dkm;
+    }
+  });
+  secs.push({ start, rows: cur.rows, done });
+  return secs;
+}
+function fareAtDkm(r, secs, d) {
+  let sec = secs[0]; secs.forEach(x => { if (d >= x.start - 1e-9) sec = x; });
+  return sec.done + lookupFare(sec.rows, Math.max(0, d - sec.start), !r.no_round).fare;
+}
+// 距離で決まる運賃の階段: [[距離, 運賃], ...](境目の距離で段が上がる)
+function distanceSteps(r, st) {
+  const secs = tableSections(r, st), end = st[st.length - 1].dkm;
+  const br = new Set([0, end]);
+  secs.forEach(x => x.rows.forEach(([u]) => { const e = x.start + u; if (e > 0 && e < end) br.add(e); }));
+  st.forEach(s => br.add(s.dkm));
+  const xs = [...br].sort((a, b) => a - b), out = [];
+  for (let i = 0; i < xs.length - 1; i++) { if (xs[i + 1] - xs[i] < 1e-6) continue; out.push([xs[i], xs[i + 1], fareAtDkm(r, secs, (xs[i] + xs[i + 1]) / 2)]); }
+  return out;
+}
+
+// 駅ごとの運賃: 隣の運賃駅とのあいだで運賃が上がる距離を推定(Python の fare_video.estimate_edge と同じ)
+function edgeScore(u) {
+  if (u > 100) return u % 20 === 0 ? 4 : u % 10 === 0 ? 2 : 0;
+  if (u >= 50) return u % 10 === 0 ? 4 : u % 5 === 0 ? 2 : 0;
+  if (u > 10) return u % 5 === 0 ? 4 : 0;
+  return [3, 6, 10].includes(u) ? 4 : [1, 2, 4, 5, 7, 8].includes(u) ? 2 : 1;
+}
+function estimateEdge(da, db) {
+  const lo = Math.ceil(da - 1e-9), hi = Math.ceil(db - 1e-9) - 1, mid = (da + db) / 2;
+  if (hi < lo || db - da < 1e-6) return mid;
+  let best = lo;
+  for (let u = lo; u <= hi; u++) { const a = [edgeScore(u), -Math.abs(u - mid)], b = [edgeScore(best), -Math.abs(best - mid)]; if (a[0] > b[0] || (a[0] === b[0] && a[1] > b[1])) best = u; }
+  return Math.max(best, da);
+}
+function stationSteps(pts) {
+  const out = [];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i], b = pts[i + 1];
+    if (i === 0) { out.push([a.km, b.km, b.fare]); continue; }
+    const e = b.fare > a.fare ? estimateEdge(a.km, b.km) : b.km;
+    out.push([a.km, e, a.fare], [e, b.km, b.fare]);
+  }
+  return out;
+}
+
+function routeStations(r) { return filterRemoved(buildStationList(r.segments), r.removed); }
+// 表示用の距離(dkm): 手入力のkmがあればそれ、無い駅は前後の手入力値の間を
+// 駅データの距離の比で補う(Python側 fare_video.py と同じ考え方)
+function applyDisplayKm(r, st) {
+  const man = st.map((s, i) => { const v = fareNum(rrow(r, s.name).km); return v === null || Number.isNaN(v) ? (i === 0 ? 0 : null) : v; });
+  const known = man.map((v, i) => v === null ? -1 : i).filter(i => i >= 0);
+  st.forEach((s, i) => {
+    if (man[i] !== null) { s.dkm = man[i]; s.manual = i > 0; return; }
+    const a = [...known].reverse().find(k => k < i), b = known.find(k => k > i);
+    if (a !== undefined && b !== undefined && st[b].km > st[a].km) s.dkm = man[a] + (man[b] - man[a]) * (s.km - st[a].km) / (st[b].km - st[a].km);
+    else if (a !== undefined) { const ratio = st[a].km > 0 && man[a] > 0 ? man[a] / st[a].km : 1; s.dkm = man[a] + (s.km - st[a].km) * ratio; }
+    else s.dkm = s.km;
+  });
+  return st;
+}
+function routeData(r) {
+  const st = applyDisplayKm(r, routeStations(r));
+  const calc = isTable(r) ? tableFares(r, st) : null;
+  const pts = [];
+  st.forEach((s, i) => {
+    let f = i === 0 ? 0 : fareNum(rrow(r, s.name)[fk(r)]);
+    if (calc) { s.calc = calc[i]; if (f === null || Number.isNaN(f)) f = calc[i].fare; }
+    if (f !== null && !Number.isNaN(f)) pts.push({ km: s.dkm, fare: f, name: s.name });
+  });
+  return { st, pts, calc, steps: calc && st.length > 1 ? distanceSteps(r, st) : (pts.length > 1 ? stationSteps(pts) : null) };
+}
+
+function buildConfig() {
+  const problems = [];
+  if (!slugOk(state.slug)) problems.push("ファイル名(slug)は英数字・ハイフン・アンダースコアで入れてください。");
+  const datas = state.routes.map(routeData);
+  const routes = state.routes.map((r, ri) => {
+    const { st, calc } = datas[ri];
+    if (st.length < 2) problems.push(`${r.name}: 区間を選んでください。`);
+    const last = st[st.length - 1];
+    if (calc) {
+      ensureTables(r).forEach(t => {
+        const p = parseTable(t.text);
+        if (!p.rows.length) problems.push(`${r.name}: 「${t.name}」の距離運賃表を入れてください(1行に「何kmまで 運賃」)。`);
+        p.bad.forEach(b => problems.push(`${r.name}: 「${t.name}」の表の行「${b}」が読めません(kmと運賃の2つの数字が必要です)。`));
+      });
+      const names = ensureTables(r).map(t => t.name);
+      if (new Set(names).size !== names.length) problems.push(`${r.name}: 会社名が重複しています。`);
+      const over = st.filter((s, i) => calc[i].over && fareNum(rrow(r, s.name)[fk(r)]) === null).map(s => s.name);
+      if (over.length) problems.push(`${r.name}: ${over.join("・")} は距離運賃表の範囲外です(表の行を増やしてください)。`);
+      if (last && fareNum(rrow(r, last.name).km) === null) problems.push(`${r.name}: 終着駅 ${last.name} の距離(営業キロ)を入れてください。空欄の駅は線路データからの目安なので運賃がずれることがあります。`);
+    } else if (last && fareNum(rrow(r, last.name)[fk(r)]) === null) problems.push(`${r.name}: 終着駅 ${last.name} の運賃を入れてください。`);
+    let prev = -1;
+    st.forEach((s, i) => {
+      let f = fareNum(rrow(r, s.name)[fk(r)]);
+      if (calc && f === null) f = calc[i].fare;
+      if (Number.isNaN(f)) problems.push(`${r.name}: ${s.name} の運賃「${rrow(r, s.name)[fk(r)]}」が数字ではありません。`);
+      if (Number.isNaN(fareNum(rrow(r, s.name).km))) problems.push(`${r.name}: ${s.name} の距離「${rrow(r, s.name).km}」が数字ではありません。`);
+      else if (f !== null && i > 0) { if (f < prev) problems.push(`${r.name}: ${s.name} の運賃が手前の駅より安くなっています(確認してください)。`); prev = f; }
+    });
+    return {
+      key: r.key, name: r.name, short_name: r.short_name || r.name, color: hexToRgb(r.color), ...(r.badge ? { badge: r.badge.slice(0, 1) } : {}), ...(r.icon_path ? { icon_path: r.icon_path } : {}),
+      ...(calc ? { fare_tables: ensureTables(r).map(t => ({ name: t.name, ...(t.preset ? { preset: t.preset } : {}), table: parseTable(t.text).rows })), ...(r.no_round ? { km_round: "none" } : {}) } : {}),
+      stations: st.map((s, i) => {
+        const rw = rrow(r, s.name), f = fareNum(rw[fk(r)]);
+        const o = { line: s.line, name: s.name };
+        if (calc && i > 0 && rw.company && ensureTables(r).length > 1 && ensureTables(r).some(t => t.name === rw.company)) o.company = rw.company;
+        if (i === 0) o.fare = 0; else if (f !== null && !Number.isNaN(f)) o.fare = f;
+        if (rw.popup && i > 0) o.popup = true;
+        const km = fareNum(rw.km);
+        if (i > 0 && km !== null && !Number.isNaN(km)) o.km = km;
+        return o;
+      }),
+    };
+  });
+  const starts = new Set(datas.map(d => d.st[0]?.name)), ends = new Set(datas.map(d => d.st[d.st.length - 1]?.name));
+  if (starts.size > 1) problems.push("ルートごとに始発駅が違います(同じ駅名にすると比較が分かりやすくなります)。");
+  if (ends.size > 1) problems.push("ルートごとに終着駅が違います(競合区間なら同じ駅名にそろえてください)。");
+  const st0 = datas[0].st;
+  const config = {
+    video_type: "fare", slug: state.slug, title_line1: state.title_line1, title_line2: state.title_line2,
+    start_name: st0[0]?.name, end_label: st0[st0.length - 1]?.name, fare_label: state.fare_label || "運賃",
+    ...(isPct() ? {} : { chart_x: "km" }),
+    ...(compareKms().length ? { [markKey()]: compareKms() } : {}),
+    routes, _builder: { segments: state.routes.map(r => r.segments) },
+  };
+  return { config, problems, datas };
+}
+
+function renderRoutes() {
+  const box = document.getElementById("routes"); box.innerHTML = "";
+  state.routes.forEach((r, ri) => {
+    const card = el("section", { class: "panel route-card", style: `--rc:${r.color}` });
+    const inp = (key, label, cls, attrs) => {
+      const e = el("input", { type: key === "color" ? "color" : "text", id: `r${ri}-${key}`, value: r[key] || "", ...(attrs || {}) });
+      e.addEventListener("input", () => { r[key] = e.value; if (key === "color") card.style.setProperty("--rc", e.value); update(); if (key === "name") renderHeads(); });
+      return el("div", { class: "field " + (cls || "") }, [el("label", { for: e.id }, [label]), e]);
+    };
+    card.appendChild(el("h2", { class: "rhead" }, [el("span", { class: "step" }, [`ルート${"ABCD"[ri]}`]), el("span", { class: "ttl" }, [r.name || ""]),
+      state.routes.length > 2 ? el("button", { type: "button", class: "ghost small", style: "margin-left:auto", onclick: () => { state.routes.splice(ri, 1); renderRoutes(); update(); } }, ["このルートを削除"]) : null]));
+    card.appendChild(el("div", { class: "subcard-head" }, [inp("name", "ルート名"), inp("short_name", "短い名前(グラフ用)"), inp("badge", "バッジ1文字", "tiny", { maxlength: "1" }), inp("color", "色", "tiny")]));
+    card.appendChild(el("div", { class: "subcard-head" }, [iconField(r, `r${ri}-icon`, update)]));
+    const segBox = el("div", { id: `segs-${ri}` });
+    card.appendChild(segBox);
+    // 運賃の入れ方
+    const modeBox = el("div", { class: "mode-switch", role: "radiogroup", "aria-label": "運賃の入れ方" });
+    [["station", "駅ごとに運賃を入れる"], ["table", "距離と運賃表から計算"]].forEach(([v, label]) => {
+      const rb = el("input", { type: "radio", name: `mode-${ri}`, value: v, checked: (r.fare_mode || "station") === v });
+      rb.addEventListener("change", () => { r.fare_mode = v; if (v === "table") ensureTables(r); renderRoutes(); update(); });
+      modeBox.appendChild(el("label", {}, [rb, label]));
+    });
+    card.appendChild(el("div", { class: "field" }, [el("label", {}, ["運賃の入れ方"]), modeBox]));
+    let tablesBox = null;
+    if (isTable(r)) {
+      tablesBox = el("div", { class: "fare-tables" });
+      card.appendChild(el("p", { class: "hint" }, ["各社の距離運賃表を1行に「何kmまで 運賃」で入れます(例: 3 150)。JR東日本の幹線運賃(2026年3月改定後)は「運賃表を呼び出す」から入れられ、ルート名に「JR」が入っていれば最初から入ります(運賃の種類に「きっぷ」と書くときっぷ運賃)。Webの運賃表の「1〜3km 150円」のような行を貼り付けても、各行の最後の2つの数字を使います。乗り継ぐ場合は会社を追加し、駅の表の「会社」で乗り換え駅に次の会社を選ぶと、会社ごとの運賃を足します(乗継割引は考えません)。"]));
+      card.appendChild(tablesBox);
+      const roundCb = el("input", { type: "checkbox", id: `r${ri}-round`, checked: !r.no_round });
+      roundCb.addEventListener("change", () => { r.no_round = !roundCb.checked; renderTbl(); update(); });
+      card.appendChild(el("div", { class: "btn-row" }, [
+        el("button", { type: "button", class: "ghost small", onclick: () => { r.tables.push({ name: `会社${r.tables.length + 1}`, text: "" }); renderRoutes(); update(); } }, ["+ 乗り継ぐ会社を追加"]),
+        el("label", { class: "status", style: "display:flex;gap:6px;align-items:center" }, [roundCb, "1km未満の端数は切り上げて表に当てる(JRなど)"]),
+      ]));
+    }
+    const tblWrap = el("div", { class: "table-wrap" });
+    card.appendChild(el("p", { class: "hint" }, [isTable(r)
+      ? "距離(km)には始発駅からの営業キロを入れてください(空欄なら灰色の数字=線路データからの目安で計算します)。運賃欄の灰色の数字が表から計算した運賃で、数字を入れるとその値を優先します(加算運賃などの例外用)。表から計算するときは全駅が動画のグラフに入り、「表示」にチェックした駅は地図に駅名と運賃が出ます。経路に含めたくない途中駅は右端の ✕ で外せます。"
+      : "運賃は数字だけ(例: 262)。距離(km)は営業キロなどを入れたいときだけ入力します(空欄なら灰色の数字=駅データの距離を使い、入れた駅の間は自動で補います)。運賃を空欄にした駅は動画に出ません。「表示」にチェックした駅はナレーション台本にも入ります。経路に含めたくない途中駅は右端の ✕ で外せます。"]));
+    card.appendChild(tblWrap);
+    box.appendChild(card);
+    const renderTbl = () => {
+      tblWrap.innerHTML = "";
+      const { st, calc } = routeData(r);
+      const multi = calc && r.tables.length > 1;
+      const tbl = el("table", { class: "st" });
+      tbl.appendChild(el("thead", {}, [el("tr", {}, [el("th", {}, ["駅"]), el("th", { title: "始発駅からの距離。空欄なら駅データの距離" }, [calc ? "営業キロ" : "距離(km)"]),
+        multi ? el("th", { title: "この駅から先を別の会社の表で計算します(乗り換え駅で選ぶ)" }, ["会社"]) : null, el("th", {}, ["運賃(円)"]), el("th", {}, ["表示"]), el("th", {}, ["外す"])])]));
+      const tb = el("tbody");
+      st.forEach((s, i) => {
+        const rw = rrow(r, s.name);
+        const last = i === st.length - 1;
+        const ph = calc && i > 0 ? (calc[i].over ? `${calc[i].fare}?` : String(calc[i].fare)) : "—";
+        const f = el("input", { type: "text", id: `r${ri}-fare-${i}`, class: "fare num" + (calc ? " calc" : ""), inputmode: "numeric", value: i === 0 ? "0" : (rw[fk(r)] ?? ""), disabled: i === 0, placeholder: ph,
+          title: calc ? "灰色は距離運賃表から計算した運賃。数字を入れるとその値を優先します" : "" });
+        f.addEventListener("input", () => { rw[fk(r)] = f.value.trim(); f.classList.toggle("bad", Number.isNaN(fareNum(rw[fk(r)]))); update(); });
+        f.addEventListener("change", () => { if (calc) renderTbl(); });
+        let co = null;
+        if (multi) {
+          if (i === 0) co = el("span", { class: "status" }, [r.tables[0].name]);
+          else if (!last) {
+            co = el("select", { class: "co", "aria-label": `${s.name}から先の会社` }, [el("option", { value: "" }, ["—"]), ...r.tables.slice(1).concat(r.tables.slice(0, 1)).map(t => el("option", { value: t.name, selected: rw.company === t.name }, [`ここから${t.name}`]))]);
+            co.addEventListener("change", () => { rw.company = co.value; renderTbl(); update(); });
+          }
+        }
+        const kmIn = el("input", { type: "text", id: `r${ri}-km-${i}`, class: "fare num", inputmode: "decimal", value: i === 0 ? "0" : (rw.km ?? ""), disabled: i === 0,
+          placeholder: s.dkm !== undefined ? s.dkm.toFixed(1) : s.km.toFixed(1), title: "空欄なら駅データの距離(灰色の数字)を使います" });
+        kmIn.addEventListener("change", () => { rw.km = kmIn.value.trim(); kmIn.classList.toggle("bad", Number.isNaN(fareNum(rw.km))); renderTbl(); update(); });
+        const pop = el("input", { type: "checkbox", id: `r${ri}-pop-${i}`, checked: !!rw.popup, disabled: i === 0, "aria-label": `${s.name}を表示` });
+        pop.addEventListener("change", () => { rw.popup = pop.checked; update(); });
+        tb.appendChild(el("tr", { class: last ? "term" : "" }, [el("td", { class: "name" }, [s.name]), el("td", {}, [kmIn]), multi ? el("td", {}, [co]) : null, el("td", {}, [f]), el("td", {}, [pop]),
+          el("td", {}, [i === 0 || last ? "" : removeStationButton(r, s.name, () => { renderTbl(); update(); })])]));
+      });
+      tbl.appendChild(tb); tblWrap.appendChild(tbl);
+      tblWrap.after(remBox);
+      remBox.innerHTML = "";
+      remBox.appendChild(removedBar(r, buildStationList(r.segments), () => { renderTbl(); update(); }));
+    };
+    const remBox = el("div");
+    if (tablesBox) {
+      r.tables.forEach((t, ti) => {
+        const st = el("span", { class: "status" });
+        const showSt = () => { const p = parseTable(t.text); setStatus(st, p.rows.length ? `${p.rows.length}行 · 〜${p.rows[p.rows.length - 1][0]}km ¥${p.rows[p.rows.length - 1][1].toLocaleString()}` + (p.bad.length ? ` · 読めない行${p.bad.length}` : "") : "未入力", p.bad.length || !p.rows.length ? "err" : "ok"); };
+        const nameIn = el("input", { type: "text", id: `r${ri}-tn-${ti}`, value: t.name });
+        nameIn.addEventListener("change", () => {
+          const old = t.name; t.name = nameIn.value.trim() || old;
+          Object.values(r.rows).forEach(rw => { if (rw.company === old) rw.company = t.name; });
+          renderRoutes(); update();
+        });
+        const ta = el("textarea", { id: `r${ri}-tt-${ti}`, placeholder: "3 150\n6 190\n10 210\n…", spellcheck: "false" });
+        ta.value = t.text || "";
+        ta.addEventListener("input", () => { t.text = ta.value; t.preset = ""; pick.value = ""; showSt(); renderTbl(); update(); });
+        const pick = el("select", { id: `r${ri}-tp-${ti}`, "aria-label": "運賃表を呼び出す" }, [el("option", { value: "" }, ["運賃表を呼び出す…"]),
+          ...Object.entries(FARE_PRESETS).map(([k, v]) => el("option", { value: k, selected: t.preset === k }, [v.label]))]);
+        pick.addEventListener("change", () => {
+          if (!pick.value) return;
+          const old = t.name; applyPreset(t, pick.value);
+          Object.values(r.rows).forEach(rw => { if (rw.company === old) rw.company = t.name; });
+          renderRoutes(); update();
+        });
+        showSt();
+        tablesBox.appendChild(el("div", { class: "subcard" }, [
+          el("div", { class: "subcard-head" }, [el("div", { class: "field" }, [el("label", { for: nameIn.id }, [ti === 0 ? "会社名(始発駅から)" : "会社名(乗り継ぎ)"]), nameIn]),
+            r.tables.length > 1 ? el("button", { type: "button", class: "ghost small", onclick: () => { r.tables.splice(ti, 1); renderRoutes(); update(); } }, ["削除"]) : null]),
+          pick, el("div", { class: "field" }, [el("label", { for: ta.id }, ["距離運賃表(何kmまで 運賃)"]), ta]), st,
+          t.preset && FARE_PRESETS[t.preset] ? el("p", { class: "hint" }, [FARE_PRESETS[t.preset].note || ""]) : null,
+        ]));
+      });
+    }
+    renderSegmentEditor(segBox, r.segments, () => { renderTbl(); update(); });
+    renderTbl();
+  });
+  document.getElementById("add-route").disabled = state.routes.length >= 4;
+}
+function renderHeads() { document.querySelectorAll(".route-card .rhead").forEach((h, i) => { h.querySelector(".ttl").textContent = state.routes[i].name; }); }
+
+function renderPreview(datas) {
+  const tiles = document.getElementById("tiles"); tiles.innerHTML = "";
+  const svg = document.getElementById("chart"); svg.innerHTML = "";
+  const finals = datas.map(d => { const p = d.pts[d.pts.length - 1]; const st = d.st[d.st.length - 1]; return p && st && p.name === st.name ? p : null; });
+  const valid = finals.filter(Boolean).map(p => p.fare);
+  const min = valid.length ? Math.min(...valid) : null;
+  state.routes.forEach((r, ri) => {
+    const p = finals[ri], km = datas[ri].st.length ? datas[ri].st[datas[ri].st.length - 1].dkm : 0;
+    tiles.appendChild(el("div", { class: "stat" + (p && p.fare === min && new Set(valid).size > 1 ? " win" : "") }, [
+      el("span", { class: "k" }, [el("span", { class: "swatch", style: `background:${r.color}` }), r.short_name || r.name]),
+      el("span", { class: "v" }, [p ? `¥${p.fare.toLocaleString()}` : "—", p && km ? el("small", {}, [` ${(p.fare / km).toFixed(1)}円/km`]) : null]),
+    ]));
+  });
+  const all = datas.flatMap(d => d.pts);
+  if (all.length < 2) return;
+  const pct = isPct();
+  const maxK = pct ? 104 : Math.max(...datas.map(d => d.st.length ? d.st[d.st.length - 1].dkm : 0)) * 1.04 || 1;
+  const maxF = Math.max(...all.map(p => p.fare), ...datas.flatMap(d => (d.steps || []).map(x => x[2]))) * 1.1 || 1;
+  const L = 56, R = 505, T = 24, B = 286;
+  const X = k => L + (R - L) * k / maxK, Y = f => B - (B - T) * f / maxF;
+  const nice = (span) => { const raw = span / 5, mag = 10 ** Math.floor(Math.log10(raw)); return [1, 2, 2.5, 5, 10].map(m => m * mag).find(v => v >= raw); };
+  const ks = pct ? 25 : nice(maxK), fs = nice(maxF);
+  for (let k = 0; k <= maxK; k += ks) { svg.appendChild(svgEl("line", { x1: X(k), x2: X(k), y1: T, y2: B, class: "grid" })); svg.appendChild(svgEl("text", { x: X(k), y: B + 18, "text-anchor": "middle", "font-size": 11, class: "mono-t" }, pct ? `${k}%` : `${k}km`)); }
+  for (let f = 0; f <= maxF; f += fs) { svg.appendChild(svgEl("line", { x1: L, x2: R, y1: Y(f), y2: Y(f), class: "grid" })); svg.appendChild(svgEl("text", { x: L - 6, y: Y(f) + 4, "text-anchor": "end", "font-size": 11, class: "mono-t" }, `¥${f}`)); }
+  svg.appendChild(svgEl("line", { x1: L, x2: R, y1: B, y2: B, class: "axis" }));
+  compareKms().forEach(k => {
+    if (k > maxK) return;
+    svg.appendChild(svgEl("line", { x1: X(k), x2: X(k), y1: T, y2: B, stroke: "#d9a400", "stroke-width": 2, "stroke-dasharray": "5 4" }));
+    svg.appendChild(svgEl("text", { x: X(k), y: T - 8, "text-anchor": "middle", "font-size": 11, fill: "#b58900", "font-weight": 700 }, pct ? `${k}%` : `約${k}km`));
+  });
+  datas.forEach((d, ri) => {
+    if (!d.pts.length) return;
+    const tot = d.st.length ? d.st[d.st.length - 1].dkm : 1;
+    const XX = k => X(pct ? k / Math.max(tot, 1e-6) * 100 : k);
+    let path = `M${XX(0)},${Y(d.pts[0].fare)}`, prev = d.pts[0];
+    if (d.steps) {
+      // 表モード: 距離の境目で上がる(駅の途中でも)。終点に別の運賃(特定運賃など)を入れたら最後に合わせる
+      d.steps.forEach(([a, b, f]) => { path += ` L${XX(a).toFixed(1)},${Y(f).toFixed(1)} L${XX(b).toFixed(1)},${Y(f).toFixed(1)}`; });
+      const lp = d.pts[d.pts.length - 1]; path += ` L${XX(lp.km).toFixed(1)},${Y(lp.fare).toFixed(1)}`;
+      prev = null;
+    }
+    // 動画と同じく「次の運賃駅までの運賃」の高さで区間を描く(出発直後から初乗り運賃)
+    if (prev) d.pts.slice(1).forEach(p => { path += ` L${XX(prev.km).toFixed(1)},${Y(p.fare).toFixed(1)} L${XX(p.km).toFixed(1)},${Y(p.fare).toFixed(1)}`; prev = p; });
+    svg.appendChild(svgEl("path", { d: path, fill: "none", stroke: state.routes[ri].color, "stroke-width": 3, "stroke-linejoin": "round" }));
+    d.pts.slice(1).forEach(p => svg.appendChild(svgEl("circle", { cx: XX(p.km), cy: Y(p.fare), r: 3.5, fill: state.routes[ri].color })));
+    const lp = d.pts[d.pts.length - 1];
+    svg.appendChild(svgEl("text", { x: Math.min(XX(lp.km) - 4, R - 4), y: Y(lp.fare) - 8, "text-anchor": "end", "font-size": 12, "font-weight": 700, fill: state.routes[ri].color }, `${state.routes[ri].short_name || state.routes[ri].name} ¥${lp.fare}`));
+  });
+}
+
+let jsonTa;
+function update() {
+  const { config, problems, datas } = buildConfig();
+  jsonTa.value = JSON.stringify(config, null, 2);
+  renderProblems(document.getElementById("problems"), problems);
+  renderPreview(datas);
+  draftSave(LS_KEY, state);
+}
+function bind(id, key) { const e = document.getElementById(id); e.value = state[key] ?? ""; e.oninput = () => { state[key] = e.value; update(); }; e.onchange = e.oninput; }
+function renderAll() {
+  [["f-title1", "title_line1"], ["f-title2", "title_line2"], ["f-slug", "slug"], ["f-label", "fare_label"]].forEach(([i, k]) => bind(i, k));
+  const ax = document.getElementById("f-axis"), km = document.getElementById("f-km"), kl = document.getElementById("f-km-label");
+  const syncMarks = () => { kl.textContent = isPct() ? "グラフに引く目印%(カンマ区切り。例: 50)" : "グラフに引く距離の目印km(カンマ区切り)"; km.placeholder = isPct() ? "50" : "10,20,30"; km.value = state[markKey()] ?? ""; };
+  ax.value = isPct() ? "percent" : "km";
+  ax.onchange = () => { state.chart_x = ax.value; syncMarks(); update(); };
+  km.oninput = () => { state[markKey()] = km.value; update(); };
+  syncMarks();
+  renderRoutes(); update();
+}
+document.getElementById("add-route").onclick = () => {
+  if (state.routes.length >= 4) return;
+  const i = state.routes.length;
+  const first = buildStationList(state.routes[0].segments);
+  const line = state.routes[0].segments[0].line;
+  state.routes.push({ key: "route_" + Math.random().toString(36).slice(2, 7), name: `ルート${"ABCD"[i]}`, short_name: "", badge: "", color: PALETTE[i % 4],
+    segments: [{ line, preset: 0, from: first[0]?.name, to: first[first.length - 1]?.name }], rows: {} });
+  renderRoutes(); update();
+};
+function importConfig(c) {
+  if (c.video_type !== "fare") throw new Error("video_type が fare のJSONではありません");
+  const segsAll = c._builder?.segments || [];
+  state = { slug: c.slug, title_line1: c.title_line1 || "", title_line2: c.title_line2 || "", fare_label: c.fare_label || "", compare_km: (c.compare_km || []).join(","), compare_pct: (c.compare_pct || []).join(","), chart_x: c.chart_x === "km" ? "km" : "percent",
+    routes: c.routes.map((r, i) => {
+      const rows = {}; r.stations.forEach(s => { const fv = s.fare === undefined ? "" : String(s.fare); rows[s.name] = { ...((r.fare_tables || r.fare_table) ? { fare: "", ofare: fv } : { fare: fv }), popup: !!s.popup, km: s.km === undefined ? "" : String(s.km), company: s.company || "" }; });
+      const segs = segsAll[i] || [{ line: r.stations[0].line, preset: 0, from: r.stations[0].name, to: r.stations[r.stations.length - 1].name }];
+      const tabRows = t => (t || []).map(x => Array.isArray(x) ? `${x[0]} ${x[1]}` : `${x.km} ${x.fare}`).join("\n");
+      const tables = r.fare_tables ? r.fare_tables.map((t, ti) => ({ name: t.name || FARE_PRESETS[t.preset]?.name || `会社${ti + 1}`, preset: t.preset || "", text: t.table ? tabRows(t.table) : presetText(t.preset) }))
+        : r.fare_table ? [{ name: r.company || r.short_name || r.name || "会社1", text: tabRows(r.fare_table) }] : null;
+      return { key: r.key || `route_${i}`, name: r.name, short_name: r.short_name || "", badge: r.badge || "", icon_path: r.icon_path || "", color: rgbToHex(r.color || [120, 120, 120]), segments: segs, rows, removed: removedFrom(segs, r.stations),
+        ...(tables ? { fare_mode: "table", tables, no_round: r.km_round === "none" } : {}) };
+    }) };
+  renderAll();
+}
+jsonTa = renderOutput(document.getElementById("out"), () => `${state.slug || "fare"}.json`, () => jsonTa.value, importConfig);
+document.getElementById("out").appendChild(el("p", { class: "hint" }, ["最初に入っている運賃は動作確認用のサンプル値です。実際の運賃は各社の運賃検索で確認して書き換えてください。"]));
+document.getElementById("out").appendChild(el("div", { class: "btn-row" }, [el("button", { type: "button", class: "ghost small", onclick: () => { draftClear(LS_KEY); state = structuredClone(SAMPLE); renderAll(); } }, ["サンプル(新宿→藤沢)に戻す"])]));
+renderAll();
+</script>

@@ -1,0 +1,100 @@
+{
+  "video_type": "carousel",
+  "slug": "carousel_shinagawa_yokohama",
+  "title_line1": "品川 → 横浜",
+  "title_line2": "東海道線・横須賀線・京急 どれが最強?",
+  "kicker": "品川→横浜 くらべ",
+  "start_name": "品川",
+  "end_label": "横浜",
+  "handle": "@geogram_jp",
+  "as_of": "2026年11月時点",
+  "fare_label": "IC運賃(大人・片道)",
+  "time_label": "日中・いちばん速い種別",
+  "per_hour_label": "日中(12時台)・1時間あたり・特急料金の要る列車を除く",
+  "time_config": "configs/shinagawa_yokohama.json",
+  "routes": [
+    {
+      "base": "configs/shinagawa_yokohama.json#route_a",
+      "name": "JR東海道線",
+      "short_name": "東海道線",
+      "color": [
+        245,
+        130,
+        30
+      ],
+      "fare": {
+        "ic": 341,
+        "ticket": 350
+      },
+      "time_min": 17,
+      "time_note": "普通(品川の次は川崎)",
+      "per_hour": 6,
+      "per_hour_note": "熱海・小田原・平塚行",
+      "origin": "few",
+      "origin_label": "早朝のみ",
+      "origin_note": "品川始発は早朝の数本だけ(4:35・5:10・6:03発など)"
+    },
+    {
+      "base": "configs/shinagawa_yokohama.json#route_b",
+      "name": "JR横須賀線",
+      "short_name": "横須賀線",
+      "color": [
+        40,
+        110,
+        220
+      ],
+      "fare": {
+        "ic": 341,
+        "ticket": 350
+      },
+      "time_min": 22,
+      "time_note": "普通(西大井・武蔵小杉・新川崎経由)",
+      "per_hour": 4,
+      "per_hour_note": "逗子・久里浜行",
+      "origin": "few",
+      "origin_label": "早朝のみ",
+      "origin_note": "品川始発は早朝の2本(4:30・5:03発)だけ"
+    },
+    {
+      "base": "configs/overtake_keikyu_shinagawa_yokohama.json",
+      "name": "京急本線",
+      "short_name": "京急",
+      "color": [
+        220,
+        30,
+        60
+      ],
+      "fare": {
+        "ic": 313,
+        "ticket": 320
+      },
+      "time_min": 17,
+      "time_note": "快特(特急は22分)",
+      "per_hour": 12,
+      "per_hour_note": "快特3・特急3・普通6",
+      "origin": "many",
+      "origin_label": "普通は全部始発",
+      "origin_note": "普通はすべて品川始発。ただし横浜まで約1時間かかる"
+    }
+  ],
+  "verdict": [
+    "安さと本数なら 京急",
+    "JRなら東海道線が速くて本数も多い"
+  ],
+  "hashtags": [
+    "#路線くらべ",
+    "#京急",
+    "#東海道線",
+    "#横須賀線",
+    "#品川",
+    "#横浜",
+    "#鉄道",
+    "#Geogram_JP"
+  ],
+  "_sources": [
+    "運賃: 乗りものニュース 2026/3/4 https://trafficnews.jp/post/636598 / 駅探 https://ekitan.com/transit/fare/sf-2236/st-3260",
+    "所要時間・本数・始発: NAVITIME 品川→横浜 発着時刻表(東海道線・京急は2026/11/3=祝日ダイヤ、横須賀線は2026/10/26=平日ダイヤ)",
+    "平日ダイヤでの本数は公式時刻表で要確認"
+  ],
+  "origin_callout_sub": "ただし普通なので横浜まで約1時間"
+}

@@ -1,0 +1,77 @@
+{
+  "video_type": "carousel",
+  "slug": "carousel_shinjuku_fujisawa",
+  "title_line1": "新宿 → 藤沢",
+  "title_line2": "小田急 vs JR、使うならどっち?",
+  "kicker": "新宿→藤沢 くらべ",
+  "as_of": "2026年11月時点・平日",
+  "handle": "@geogram_jp",
+  "fare_label": "IC運賃(大人・片道)",
+  "time_label": "日中の直通列車(乗り換えなし)",
+  "per_hour_label": "日中(10〜16時台)・1時間あたり・藤沢まで直通",
+  "time_config": "configs/shinjuku_fujisawa.json",
+  "fare_config": "configs/fare_shinjuku_fujisawa.json",
+  "routes": [
+    {
+      "base": "configs/shinjuku_fujisawa.json#route_a",
+      "name": "小田急線",
+      "short_name": "小田急",
+      "color": [
+        0,
+        110,
+        235
+      ],
+      "fare": {
+        "ic": 607,
+        "ticket": 610
+      },
+      "time_min": 56,
+      "time_note": "快速急行(相模大野から江ノ島線へ直通)",
+      "per_hour": 3,
+      "per_hour_note": "快速急行 藤沢行",
+      "origin": "all",
+      "origin_note": "小田急の新宿駅は終点。全列車が新宿始発なので並べば座りやすい"
+    },
+    {
+      "base": "configs/shinjuku_fujisawa.json#route_b",
+      "name": "JR湘南新宿ライン",
+      "short_name": "JR",
+      "color": [
+        232,
+        70,
+        40
+      ],
+      "fare": {
+        "ic": 1034,
+        "ticket": 1040
+      },
+      "time_min": 50,
+      "time_note": "快速(特別快速ならさらに速い)",
+      "per_hour": 2,
+      "per_hour_note": "特別快速・快速(小田原・平塚方面)",
+      "origin": "none",
+      "origin_label": "基本なし",
+      "origin_note": "宇都宮線・高崎線からの直通で、新宿は途中駅。座れるかは運しだい"
+    }
+  ],
+  "verdict": [
+    "安さ・本数・座りやすさなら 小田急",
+    "とにかく早く着きたいなら JR"
+  ],
+  "hashtags": [
+    "#路線くらべ",
+    "#小田急",
+    "#湘南新宿ライン",
+    "#新宿",
+    "#藤沢",
+    "#鉄道",
+    "#地図",
+    "#Geogram_JP"
+  ],
+  "_sources": [
+    "運賃: 乗りものニュース 2026/3/4 https://trafficnews.jp/post/636598/2 / 駅探 https://ekitan.com/transit/fare/sf-2334/st-2950",
+    "所要時間: 駅探 新宿→藤沢(12:30発 JR快速50分・小田急快速急行56分)",
+    "本数: NAVITIME 新宿駅 小田急線 快速急行 / 湘南新宿ライン 時刻表(2026/11/2)",
+    "始発: JR湘南新宿ラインの新宿始発の有無は公式時刻表で要確認"
+  ]
+}
