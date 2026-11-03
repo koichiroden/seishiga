@@ -1,0 +1,145 @@
+{
+  "video_type": "fare",
+  "slug": "fare_shinjuku_fujisawa",
+  "title_line1": "新宿 → 藤沢",
+  "title_line2": "運賃が安いのはどっち!?",
+  "start_name": "新宿",
+  "end_label": "藤沢",
+  "fare_label": "IC運賃",
+  "compare_km": [
+    10,
+    20,
+    30
+  ],
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "小田急線",
+      "short_name": "小田急",
+      "color": [
+        0,
+        110,
+        235
+      ],
+      "badge": "急",
+      "stations": [
+        {
+          "line": "小田急小田原線",
+          "name": "新宿",
+          "fare": 0
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "下北沢",
+          "fare": 168
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "成城学園前",
+          "fare": 199
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "登戸",
+          "fare": 262,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "新百合ヶ丘",
+          "fare": 314,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "町田",
+          "fare": 377,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "相模大野"
+        },
+        {
+          "line": "小田急江ノ島線",
+          "name": "中央林間",
+          "fare": 440
+        },
+        {
+          "line": "小田急江ノ島線",
+          "name": "大和",
+          "fare": 482,
+          "popup": true
+        },
+        {
+          "line": "小田急江ノ島線",
+          "name": "湘南台"
+        },
+        {
+          "line": "小田急江ノ島線",
+          "name": "藤沢",
+          "fare": 545,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "JR湘南新宿ライン",
+      "short_name": "JR",
+      "color": [
+        232,
+        70,
+        40
+      ],
+      "badge": "快",
+      "stations": [
+        {
+          "line": "湘南新宿ライン",
+          "name": "新宿",
+          "fare": 0
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "渋谷",
+          "fare": 178
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大崎",
+          "fare": 208
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "武蔵小杉",
+          "fare": 318,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "横浜",
+          "fare": 571,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "戸塚",
+          "fare": 814,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大船",
+          "fare": 990
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "藤沢",
+          "fare": 990,
+          "popup": true
+        }
+      ]
+    }
+  ],
+  "_note": "運賃はサンプル値です。実際の運賃は各社の運賃検索で調べた値に書き換えてください。"
+}

@@ -1,0 +1,54 @@
+{
+  "video_type": "rush",
+  "slug": "rush_tokaido_yokosuka",
+  "title_line1": "東京 → 大船",
+  "title_line2": "朝ラッシュで遅くなるのはどっち!?",
+  "start_name": "東京",
+  "end_label": "大船",
+  "video_duration_sec": 32,
+  "lines": [
+    {
+      "name": "東海道線",
+      "color": [245, 130, 30],
+      "stations": [
+        {"line": "東海道本線", "name": "東京", "popup": true},
+        {"line": "東海道本線", "name": "新橋"},
+        {"line": "東海道本線", "name": "品川", "popup": true},
+        {"line": "東海道本線", "name": "川崎"},
+        {"line": "東海道本線", "name": "横浜", "popup": true},
+        {"line": "東海道本線", "name": "戸塚"},
+        {"line": "東海道本線", "name": "大船", "popup": true}
+      ],
+      "runs": [
+        {"key": "morning", "label": "朝ラッシュ", "badge": "朝", "train_type": "普通",
+         "times": {"東京": "07:30", "品川": "07:39", "横浜": "08:00", "大船": "08:17"}},
+        {"key": "daytime", "label": "日中", "badge": "昼", "train_type": "普通",
+         "times": {"東京": "12:00", "品川": "12:08", "横浜": "12:25", "大船": "12:40"}}
+      ]
+    },
+    {
+      "name": "横須賀線",
+      "color": [40, 110, 220],
+      "stations": [
+        {"line": "横須賀線総武快速線", "name": "東京", "popup": true},
+        {"line": "横須賀線総武快速線", "name": "新橋"},
+        {"line": "横須賀線総武快速線", "name": "品川", "popup": true},
+        {"line": "横須賀線総武快速線", "name": "西大井"},
+        {"line": "横須賀線総武快速線", "name": "武蔵小杉"},
+        {"line": "横須賀線総武快速線", "name": "新川崎"},
+        {"line": "横須賀線総武快速線", "name": "横浜", "popup": true},
+        {"line": "横須賀線総武快速線", "name": "保土ヶ谷"},
+        {"line": "横須賀線総武快速線", "name": "東戸塚"},
+        {"line": "横須賀線総武快速線", "name": "戸塚"},
+        {"line": "横須賀線総武快速線", "name": "大船", "popup": true}
+      ],
+      "runs": [
+        {"key": "morning", "label": "朝ラッシュ", "badge": "朝", "train_type": "普通",
+         "times": {"東京": "07:30", "品川": "07:41", "横浜": "08:09", "大船": "08:30"}},
+        {"key": "daytime", "label": "日中", "badge": "昼", "train_type": "普通",
+         "times": {"東京": "12:00", "品川": "12:09", "横浜": "12:30", "大船": "12:47"}}
+      ]
+    }
+  ],
+  "_note": "時刻はサンプル値です。実際の時刻表で調べた値に書き換えてください。"
+}

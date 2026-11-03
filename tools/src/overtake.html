@@ -1,0 +1,302 @@
+<title>普通列車 抜かれ回数ビルダー</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/*SHARED_CSS*/
+table.st th.pcol { text-align: center; }
+table.st td.loc { background: var(--accent-soft); }
+.ot-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.ot-list li { display: flex; gap: 8px; align-items: center; font-size: 14px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; flex-wrap: wrap; }
+.ot-list .when { font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--muted); margin-left: auto; }
+</style>
+
+<header class="top">
+  <p class="eyebrow">GEOGRAM_JP · VIDEO CONFIG · video_type: overtake</p>
+  <h1>この普通列車、終点までに何本に抜かれる?</h1>
+  <p class="lead">普通列車の各駅の到着・発車時刻と、後ろから来る快速・特急などの時刻を入れると、普通列車が駅で止まり、優等列車に追い抜かれていく様子を地図とダイヤグラムで見せる動画のconfigを作ります。車両アイコンの隣には種別1文字(普・快・特など)が出ます。</p>
+</header>
+
+<div class="layout">
+  <div class="col">
+    <section class="panel">
+      <h2><span class="step">1</span>動画のタイトル</h2>
+      <div class="field-grid">
+        <div class="field"><label for="f-title1">タイトル1行目</label><input type="text" id="f-title1"></div>
+        <div class="field"><label for="f-title2">タイトル2行目</label><input type="text" id="f-title2"></div>
+        <div class="field"><label for="f-slug">ファイル名(slug・英数字)</label><input type="text" id="f-slug" class="mono"></div>
+        <div class="field"><label for="f-dur">動画の長さ(秒)</label><input type="number" id="f-dur" min="15" max="120"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2><span class="step">2</span>普通列車が走る区間</h2>
+      <div id="segs"></div>
+    </section>
+
+    <section class="panel">
+      <h2><span class="step">3</span>列車</h2>
+      <p class="hint">いちばん上が主役の普通列車。その下に、後ろから来て追い抜く列車を必要な本数だけ追加します(1本ずつ。同じ種別が何本あってもOK)。</p>
+      <div class="card-list" id="trains"></div>
+      <div class="btn-row"><button type="button" class="ghost small" id="add-passer">+ 追い抜く列車を追加</button></div>
+    </section>
+
+    <section class="panel">
+      <h2><span class="step">4</span>時刻を入れる</h2>
+      <p class="hint">普通列車: 「発」だけ入れれば到着はその<span id="dwell-label">30</span>秒前とみなします。待避で長く止まる駅は「着」と「発」の両方を入れてください。<br>追い抜く列車: 「10:05」=通過(または始発・終着)、「10:12/10:13」=停車(着/発)。時刻の無い駅は距離に比例して補完します。<br>普通列車が止まらない駅(通過する駅)は右端の ✕ で外してください。外した駅は表の下から戻せます。</p>
+      <div class="field-grid"><div class="field"><label for="f-dwell">普通列車の標準停車時間(秒)</label><input type="number" id="f-dwell" min="0" max="300"></div></div>
+      <div class="table-wrap"><table class="st" id="tbl"></table></div>
+    </section>
+  </div>
+
+  <div class="col sticky">
+    <section class="panel">
+      <h2>プレビュー</h2>
+      <div class="stats" id="stats"></div>
+      <svg class="chart" id="chart" viewBox="0 0 520 380" role="img" aria-label="ダイヤグラム"></svg>
+      <p class="hint">ダイヤグラム(横=時刻、縦=駅)。線が交わった黄色い点が「抜かれた」ところです。動画の下半分にも同じ図がリアルタイムで描かれます。</p>
+      <ul class="ot-list" id="ot-list"></ul>
+      <div id="problems"></div>
+    </section>
+    <section class="panel" id="out"><h2>config JSON</h2></section>
+  </div>
+</div>
+
+<script id="station-data" type="application/json">/*STATION_DATA*/</script>
+<script>
+/*SHARED_JS*/
+</script>
+<script>
+const LS_KEY = "geogram-overtake-builder-v1";
+const PASSER_COLORS = ["#e62828", "#ff8c1e", "#28aa5a", "#9660f0", "#f050aa"];
+const SAMPLE = /*SAMPLE_STATE*/;
+let state = draftLoad(LS_KEY) || structuredClone(SAMPLE);
+
+function stations() { return filterRemoved(buildStationList(state.segments), state.removed); }
+function row(name) { const r = state.rows[name] || (state.rows[name] = { popup: false, arr: "", dep: "", p: [] }); while (r.p.length < state.passers.length) r.p.push(""); return r; }
+function splitStop(v) { const s = String(v || "").trim(); if (!s) return null; const p = s.split(/[\/~〜\-]/).map(x => x.trim()).filter(Boolean); return p.length >= 2 ? { arr: p[0], dep: p[p.length - 1] } : p[0]; }
+
+// ---- config 生成 ----
+function localTimes(st) {
+  const t = {};
+  st.forEach((s, i) => {
+    const r = row(s.name), arr = normTime(r.arr), dep = normTime(r.dep);
+    if (i === 0) { if (dep || arr) t[s.name] = dep || arr; }
+    else if (i === st.length - 1) { if (arr || dep) t[s.name] = arr || dep; }
+    else if (arr && dep && arr !== dep) t[s.name] = { arr, dep };
+    else if (dep || arr) t[s.name] = dep || arr;
+  });
+  return t;
+}
+function passerTimes(st, pi) {
+  const t = {};
+  st.forEach(s => {
+    const v = splitStop(row(s.name).p[pi]);
+    if (!v) return;
+    t[s.name] = typeof v === "string" ? normTime(v) || v : { arr: normTime(v.arr) || v.arr, dep: normTime(v.dep) || v.dep };
+  });
+  return t;
+}
+function buildConfig() {
+  const st = stations();
+  const problems = [];
+  if (!slugOk(state.slug)) problems.push("ファイル名(slug)は英数字・ハイフン・アンダースコアで入れてください。");
+  if (st.length < 2) problems.push("区間を選んでください。");
+  const lt = localTimes(st);
+  if (st.length >= 2) {
+    if (!lt[st[0].name]) problems.push(`普通列車: 始発駅 ${st[0].name} の発車時刻を入れてください。`);
+    if (!lt[st[st.length - 1].name]) problems.push(`普通列車: 終着駅 ${st[st.length - 1].name} の到着時刻を入れてください。`);
+  }
+  const bad = [];
+  st.forEach(s => { const r = row(s.name); [r.arr, r.dep, ...r.p].forEach(v => { const x = splitStop(v); if (!x) return; [].concat(typeof x === "string" ? [x] : [x.arr, x.dep]).forEach(y => { if (normTime(y) === null) bad.push(`${s.name}「${y}」`); }); }); });
+  if (bad.length) problems.push("読めない時刻があります: " + bad.slice(0, 5).join("、"));
+  state.passers.forEach((p, pi) => { if (Object.keys(passerTimes(st, pi)).length < 2) problems.push(`${p.name || "列車"}${pi + 1}: 時刻を2駅以上入れてください。`); });
+  const config = {
+    video_type: "overtake", slug: state.slug, title_line1: state.title_line1, title_line2: state.title_line2,
+    start_name: st[0]?.name, end_label: st[st.length - 1]?.name, video_duration_sec: Number(state.video_duration_sec) || 40,
+    stations: st.map(s => ({ line: s.line, name: s.name, ...(row(s.name).popup ? { popup: true } : {}) })),
+    local: { name: state.local.name, badge: (state.local.badge || state.local.name || "普").slice(0, 1), color: hexToRgb(state.local.color), ...(state.local.icon_path ? { icon_path: state.local.icon_path } : {}), default_dwell_sec: Number(state.default_dwell_sec) || 0, times: lt },
+    passers: state.passers.map((p, pi) => ({ name: p.name, badge: (p.badge || p.name || "?").slice(0, 1), color: hexToRgb(p.color), ...(p.icon_path ? { icon_path: p.icon_path } : {}), times: passerTimes(st, pi) })),
+    _builder: { segments: state.segments },
+  };
+  return { config, problems, st };
+}
+
+// ---- 走行シミュレーション(Python版 overtake_video.py と同じ考え方) ----
+function trap(f, ei, eo, a = 0.25) { const ai = ei ? a : 0, ao = eo ? a : 0, tot = 1 - ai / 2 - ao / 2; let s; if (ai && f < ai) s = f * f / (2 * ai); else if (f <= 1 - ao) s = ai / 2 + (f - ai); else { const g = 1 - f; s = tot - g * g / (2 * ao); } return s / tot; }
+function makeTrain(times, st, isLocal, dwellMin) {
+  const idx = st.map((s, i) => times[s.name] !== undefined ? i : -1).filter(i => i >= 0);
+  if (idx.length < 2) return null;
+  const first = idx[0], last = isLocal ? st.length - 1 : idx[idx.length - 1];
+  const kf = [];
+  for (const i of idx) {
+    const v = times[st[i].name]; let arr, dep, stop;
+    if (typeof v === "object") { arr = toMin(v.arr); dep = toMin(v.dep); stop = true; }
+    else { const t = toMin(v); if (isLocal && i !== first && i !== last) { arr = t - dwellMin; dep = t; stop = true; } else { arr = dep = t; stop = isLocal || i === first || i === last; } }
+    if (arr === null || dep === null) return null;
+    if (i === first) kf.push({ t: dep, km: st[i].km, stop: true, i });
+    else if (i === last) kf.push({ t: arr, km: st[i].km, stop: true, i });
+    else if (stop) { kf.push({ t: arr, km: st[i].km, stop: true, i }); kf.push({ t: dep, km: st[i].km, stop: true, i }); }
+    else kf.push({ t: arr, km: st[i].km, stop: false, i });
+  }
+  const ts = monotonic(kf.map(k => k.t)); kf.forEach((k, j) => k.t = ts[j]);
+  for (let j = 1; j < kf.length; j++) if (kf[j].t < kf[j - 1].t) return { error: `${st[kf[j - 1].i].name}→${st[kf[j].i].name} で時刻が逆転しています` };
+  const km = t => {
+    if (t <= kf[0].t) return kf[0].km; if (t >= kf[kf.length - 1].t) return kf[kf.length - 1].km;
+    for (let j = 0; j < kf.length - 1; j++) { const a = kf[j], b = kf[j + 1]; if (a.t <= t && t <= b.t) { if (b.t === a.t || a.km === b.km) return t < b.t ? a.km : b.km; return a.km + (b.km - a.km) * trap((t - a.t) / (b.t - a.t), a.stop, b.stop); } }
+    return kf[kf.length - 1].km;
+  };
+  const stoppedAt = t => { for (let j = 0; j < kf.length - 1; j++) { const a = kf[j], b = kf[j + 1]; if (a.i === b.i && a.t <= t && t <= b.t) return { i: a.i, dw: b.t - a.t }; } return null; };
+  return { kf, km, stoppedAt, t0: kf[0].t, t1: kf[kf.length - 1].t };
+}
+function findOvertakes(L, P) {
+  const ev = [];
+  P.forEach((p, pi) => {
+    if (!p) return;
+    const t0 = Math.max(p.t0, L.t0), t1 = Math.min(p.t1, L.t1); if (t1 <= t0) return;
+    const step = 0.02; let prev = p.km(t0) - L.km(t0);
+    for (let t = t0 + step; t <= t1 + 1e-9; t += step) {
+      const cur = p.km(t) - L.km(t);
+      if (prev <= 0 && cur > 0) { const tc = t - step * (cur / (cur - prev)); ev.push({ t: tc, pi, km: L.km(tc), stop: L.stoppedAt(tc) }); }
+      prev = cur;
+    }
+  });
+  return ev.sort((a, b) => a.t - b.t);
+}
+
+// ---- UI ----
+function trainCard(obj, label, onDel, idx) {
+  const mk = (key, lab, cls, attrs) => {
+    const e = el("input", { type: key === "color" ? "color" : "text", id: `tr${idx}-${key}`, value: obj[key] || "", ...(attrs || {}) });
+    e.addEventListener("input", () => { obj[key] = e.value; renderTable(); update(); });
+    return el("div", { class: "field " + (cls || "") }, [el("label", { for: e.id }, [lab]), e]);
+  };
+  return el("div", { class: "subcard" }, [el("div", { class: "subcard-head" }, [
+    mk("name", label), mk("badge", "種別1文字", "tiny", { maxlength: "1" }), mk("color", "色", "tiny"),
+    onDel ? el("button", { type: "button", class: "ghost small", onclick: onDel }, ["削除"]) : null,
+  ]), el("div", { class: "subcard-head" }, [iconField(obj, `tr${idx}-icon`, update)])]);
+}
+function renderTrains() {
+  const box = document.getElementById("trains"); box.innerHTML = "";
+  box.appendChild(trainCard(state.local, "主役の普通列車(種別名)", null, "L"));
+  state.passers.forEach((p, pi) => box.appendChild(trainCard(p, `追い抜く列車 ${pi + 1}(種別名)`, () => {
+    state.passers.splice(pi, 1); Object.values(state.rows).forEach(r => r.p.splice(pi, 1)); renderTrains(); renderTable(); update();
+  }, pi)));
+}
+function renderTable() {
+  const tbl = document.getElementById("tbl"); tbl.innerHTML = "";
+  const st = stations();
+  const dot = (o) => el("span", { class: "badge-dot", style: `background:${o.color}` }, [(o.badge || o.name || "?").slice(0, 1)]);
+  tbl.appendChild(el("thead", {}, [el("tr", {}, [
+    el("th", {}, ["駅"]), el("th", {}, ["km"]), el("th", {}, ["表示"]),
+    el("th", {}, [dot(state.local), `${state.local.name} 着`]), el("th", {}, [`${state.local.name} 発`]),
+    ...state.passers.map((p, pi) => el("th", { class: "pcol" }, [dot(p), `${p.name || "列車"}${pi + 1}`])),
+    el("th", {}, ["外す"]),
+  ])]));
+  const tb = el("tbody");
+  st.forEach((s, i) => {
+    const r = row(s.name); const first = i === 0, last = i === st.length - 1;
+    const pop = el("input", { type: "checkbox", id: `pop-${i}`, checked: r.popup || first || last, disabled: first || last, "aria-label": `${s.name}を表示` });
+    pop.addEventListener("change", () => { r.popup = pop.checked; update(); renderPreviewOnly(); });
+    tb.appendChild(el("tr", { class: first || last ? "term" : "" }, [
+      el("td", { class: "name" }, [s.name]), el("td", { class: "km num" }, [s.km.toFixed(1)]), el("td", {}, [pop]),
+      el("td", { class: "loc" }, [first ? "—" : timeInput(`arr-${i}`, r.arr, v => { r.arr = v; update(); })]),
+      el("td", { class: "loc" }, [last ? "—" : timeInput(`dep-${i}`, r.dep, v => { r.dep = v; update(); })]),
+      ...state.passers.map((p, pi) => { const e = el("input", { type: "text", id: `p-${i}-${pi}`, class: "wide", value: r.p[pi] || "", placeholder: "--:--", autocomplete: "off" });
+        e.addEventListener("change", () => { r.p[pi] = e.value.trim(); update(); }); return el("td", {}, [e]); }),
+      el("td", {}, [first || last ? "" : removeStationButton(state, s.name, () => { renderTable(); update(); })]),
+    ]));
+  });
+  tbl.appendChild(tb);
+  let rem = document.getElementById("removed-box");
+  if (!rem) { rem = el("div", { id: "removed-box" }); tbl.closest(".table-wrap").after(rem); }
+  rem.innerHTML = "";
+  rem.appendChild(removedBar(state, buildStationList(state.segments), () => { renderTable(); update(); }));
+}
+
+function renderPreview(cfg, st, problems) {
+  const svg = document.getElementById("chart"); svg.innerHTML = "";
+  const stats = document.getElementById("stats"); stats.innerHTML = "";
+  const list = document.getElementById("ot-list"); list.innerHTML = "";
+  if (st.length < 2) return;
+  const dwell = (Number(state.default_dwell_sec) || 0) / 60;
+  const L = makeTrain(cfg.local.times, st, true, dwell);
+  if (!L || L.error) { if (L?.error) problems.push("普通列車: " + L.error); svg.appendChild(svgEl("text", { x: 260, y: 190, "text-anchor": "middle", "font-size": 14 }, "普通列車の始発・終着の時刻を入れるとダイヤグラムが出ます")); return; }
+  const P = cfg.passers.map((p, pi) => { const t = makeTrain(p.times, st, false, 0); if (t?.error) { problems.push(`${p.name}${pi + 1}: ${t.error}`); return null; } return t; });
+  const ev = findOvertakes(L, P);
+  const stat = (k, v, sub) => stats.appendChild(el("div", { class: "stat" }, [el("span", { class: "k" }, [k]), el("span", { class: "v" }, [v, sub ? el("small", {}, [" " + sub]) : null])]));
+  stat("抜かれた回数", `${ev.length}回`);
+  stat(`${cfg.local.name}の所要`, `${Math.round(L.t1 - L.t0)}分`, `${fmtMin(L.t0)}→${fmtMin(L.t1)}`);
+  const full = P.filter(p => p && p.kf[0].i === 0 && p.kf[p.kf.length - 1].i === st.length - 1);
+  if (full.length) { const b = full.reduce((a, c) => (c.t1 - c.t0 < a.t1 - a.t0 ? c : a)); stat("最速の列車", `${Math.round(b.t1 - b.t0)}分`, cfg.passers[P.indexOf(b)].name); }
+  ev.forEach((e, n) => {
+    const p = cfg.passers[e.pi];
+    const where = e.stop ? `${st[e.stop.i].name}で${e.stop.dw >= 1 ? "待避中" : "停車中"}` : "走行中";
+    list.appendChild(el("li", {}, [el("span", { class: "badge-dot", style: `background:${rgbToHex(p.color)}` }, [p.badge]), `${n + 1}本目 ${p.name}`, el("span", {}, [where]), el("span", { class: "when" }, [fmtMin(e.t)])]));
+  });
+  // ダイヤグラム
+  const Lx = 74, Rx = 508, T = 14, B = 350;
+  const t0 = L.t0, t1 = L.t1, k0 = st[0].km, k1 = st[st.length - 1].km;
+  const X = t => Lx + (Rx - Lx) * (t - t0) / (t1 - t0), Y = k => T + (B - T) * (k - k0) / (k1 - k0);
+  st.forEach((s, i) => {
+    const major = row(s.name).popup || i === 0 || i === st.length - 1;
+    svg.appendChild(svgEl("line", { x1: Lx, x2: Rx, y1: Y(s.km), y2: Y(s.km), class: "grid", "stroke-width": major ? 1.2 : 0.5 }));
+    if (major) svg.appendChild(svgEl("text", { x: Lx - 6, y: Y(s.km) + 4, "text-anchor": "end", "font-size": 11 }, s.name));
+  });
+  const span = t1 - t0, step = span > 90 ? 20 : span > 45 ? 10 : 5;
+  for (let t = Math.ceil(t0 / step) * step; t < t1; t += step) svg.appendChild(svgEl("text", { x: X(t), y: B + 20, "text-anchor": "middle", "font-size": 11, class: "mono-t" }, fmtMin(t)));
+  svg.appendChild(svgEl("rect", { x: Lx, y: T, width: Rx - Lx, height: B - T, fill: "none", class: "axis" }));
+  const line = (tr, color, w) => {
+    const a = Math.max(tr.t0, t0), b = Math.min(tr.t1, t1); if (b <= a) return;
+    const n = Math.max(2, Math.ceil((b - a) / 0.2)); let d = "";
+    for (let j = 0; j <= n; j++) { const t = a + (b - a) * j / n; d += `${j ? "L" : "M"}${X(t).toFixed(1)},${Y(tr.km(t)).toFixed(1)}`; }
+    svg.appendChild(svgEl("path", { d, fill: "none", stroke: color, "stroke-width": w, "stroke-linejoin": "round" }));
+  };
+  P.forEach((p, pi) => p && line(p, rgbToHex(cfg.passers[pi].color), 2));
+  line(L, state.local.color, 3.5);
+  ev.forEach(e => svg.appendChild(svgEl("circle", { cx: X(e.t), cy: Y(e.km), r: 5, fill: "#f2c200", stroke: "#000", "stroke-width": 1 })));
+}
+
+let jsonTa;
+function update() {
+  const { config, problems, st } = buildConfig();
+  renderPreview(config, st, problems);
+  jsonTa.value = JSON.stringify(config, null, 2);
+  renderProblems(document.getElementById("problems"), problems);
+  document.getElementById("dwell-label").textContent = state.default_dwell_sec || 0;
+  draftSave(LS_KEY, state);
+}
+function renderPreviewOnly() { /* update() が全部やるので何もしない */ }
+function bind(id, key) { const e = document.getElementById(id); e.value = state[key] ?? ""; e.oninput = () => { state[key] = e.value; update(); }; }
+function renderAll() {
+  [["f-title1", "title_line1"], ["f-title2", "title_line2"], ["f-slug", "slug"], ["f-dur", "video_duration_sec"], ["f-dwell", "default_dwell_sec"]].forEach(([i, k]) => bind(i, k));
+  renderSegmentEditor(document.getElementById("segs"), state.segments, () => { renderTable(); update(); });
+  renderTrains(); renderTable(); update();
+}
+document.getElementById("add-passer").onclick = () => {
+  const n = state.passers.length;
+  state.passers.push({ name: "快速", badge: "快", color: PASSER_COLORS[n % PASSER_COLORS.length] });
+  renderTrains(); renderTable(); update();
+};
+function importConfig(c) {
+  if (c.video_type !== "overtake") throw new Error("video_type が overtake のJSONではありません");
+  const rows = {};
+  const fmtP = v => v === undefined ? "" : typeof v === "object" ? (Array.isArray(v) ? v.join("/") : `${v.arr}/${v.dep}`) : String(v);
+  c.stations.forEach((s, i) => {
+    const v = c.local.times?.[s.name];
+    let arr = "", dep = "";
+    if (v && typeof v === "object") { arr = Array.isArray(v) ? v[0] : v.arr; dep = Array.isArray(v) ? v[v.length - 1] : v.dep; }
+    else if (v) { if (i === c.stations.length - 1) arr = v; else dep = v; }
+    rows[s.name] = { popup: !!s.popup, arr, dep, p: (c.passers || []).map(p => fmtP(p.times?.[s.name])) };
+  });
+  state = { slug: c.slug, title_line1: c.title_line1 || "", title_line2: c.title_line2 || "", video_duration_sec: c.video_duration_sec || 40,
+    default_dwell_sec: c.local.default_dwell_sec ?? 30,
+    segments: c._builder?.segments || [{ line: c.stations[0].line, preset: 0, from: c.stations[0].name, to: c.stations[c.stations.length - 1].name }],
+    removed: removedFrom(c._builder?.segments || [{ line: c.stations[0].line, preset: 0, from: c.stations[0].name, to: c.stations[c.stations.length - 1].name }], c.stations),
+    local: { name: c.local.name || "普通", badge: c.local.badge || "普", icon_path: c.local.icon_path || "", color: rgbToHex(c.local.color || [90, 200, 255]) },
+    passers: (c.passers || []).map(p => ({ name: p.name, badge: p.badge || p.name[0], icon_path: p.icon_path || "", color: rgbToHex(p.color || [230, 40, 40]) })), rows };
+  renderAll();
+}
+jsonTa = renderOutput(document.getElementById("out"), () => `${state.slug || "overtake"}.json`, () => jsonTa.value, importConfig);
+document.getElementById("out").appendChild(el("p", { class: "hint" }, ["最初に入っている時刻は動作確認用に作った架空のサンプルダイヤです。実際の時刻表で調べた値に書き換えてください。"]));
+document.getElementById("out").appendChild(el("div", { class: "btn-row" }, [el("button", { type: "button", class: "ghost small", onclick: () => { draftClear(LS_KEY); state = structuredClone(SAMPLE); renderAll(); } }, ["サンプル(京急 品川→横浜)に戻す"])]));
+renderAll();
+</script>
