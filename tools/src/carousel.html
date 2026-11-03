@@ -16,7 +16,7 @@
 
 /* プレビュー(実際の画像と同じ配色のミニ版) */
 .slides { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
-.slide { aspect-ratio: 1080 / 1350; border-radius: 10px; overflow: hidden; padding: 6% 6% 5%; display: flex; flex-direction: column; gap: 3%;
+.slide { aspect-ratio: 1080 / 1920; border-radius: 10px; overflow: hidden; padding: 6% 6% 5%; display: flex; flex-direction: column; gap: 3%;
   background: linear-gradient(#0a0f22, #03050e); color: #fff; font-family: var(--f-body); position: relative; container-type: inline-size; }
 .slide .ttl { font-weight: 900; font-size: 9cqw; line-height: 1.1; }
 .slide .sub { font-size: 3.2cqw; color: #c8d0e4; }
@@ -44,7 +44,7 @@
 <header class="top">
   <p class="eyebrow">GEOGRAM_JP · SNS CAROUSEL CONFIG · video_type: carousel</p>
   <h1>路線くらべカルーセル投稿(運賃・所要時間・本数・始発)</h1>
-  <p class="lead">動画用に作ったconfig(<span class="mono">configs/*.json</span>)を「元config」で指定して駅の並びと地図を使い回し、ルートごとの色・本数アイコン(PNG)・運賃・所要時間・本数・始発を入れると、1080×1350の画像6枚+投稿文を作るconfigができます。</p>
+  <p class="lead">動画用に作ったconfig(<span class="mono">configs/*.json</span>)を「元config」で指定して駅の並びと地図を使い回し、ルートごとの色・本数アイコン(PNG)・運賃・所要時間・本数・始発を入れると、画像6枚+投稿文を作るconfigができます。生成した画像は tools/fit_9x16.py で1080×1920(9:16)に変換します。</p>
 </header>
 
 <div class="layout">
@@ -419,7 +419,7 @@ function importConfig(c) {
   renderAll();
 }
 jsonTa = renderOutput(document.getElementById("out"), () => `${state.slug || "carousel"}.json`, () => jsonTa.value, importConfig);
-document.getElementById("out").appendChild(el("p", { class: "hint" }, ["生成: ", el("span", { class: "mono" }, ["python3 -m race_video.cli configs/<slug>.json"]), " → output/<slug>/ に画像6枚と caption.txt。"]));
+document.getElementById("out").appendChild(el("p", { class: "hint" }, ["生成: ", el("span", { class: "mono" }, ["python3 -m race_video.cli configs/<slug>.json"]), " → output/<slug>/ に画像6枚と caption.txt。続けて ", el("span", { class: "mono" }, ["python3 tools/fit_9x16.py output/<slug> output/<slug>_9x16"]), " で1080×1920に変換します。"]));
 document.getElementById("out").appendChild(el("div", { class: "btn-row" }, [el("button", { type: "button", class: "ghost small", onclick: () => { draftClear(LS_KEY); state = structuredClone(SAMPLE); renderAll(); } }, ["サンプル(新宿→藤沢)に戻す"])]));
 // 動画生成サーバーから開いたときは、configs/ の一覧を「元config」の候補に出し、assets/ のPNGをプレビューに使う
 function fillBaseList() {
