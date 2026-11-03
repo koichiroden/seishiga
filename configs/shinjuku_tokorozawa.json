@@ -1,0 +1,296 @@
+{
+  "slug": "shinjuku_tokorozawa",
+  "title_line1": "新宿 → 所沢",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿",
+  "end_label": "所沢",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "西武新宿線",
+      "short_name": "新宿線",
+      "color": [
+        254,
+        251,
+        65
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "西武新宿線",
+          "name": "西武新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "高田馬場",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "下落合",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "中井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "新井薬師前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "沼袋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "野方",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "都立家政",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "鷺ノ宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "下井草",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "井荻",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "上井草",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "上石神井",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "武蔵関",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "東伏見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "西武柳沢",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "田無",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "花小金井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "小平",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "久米川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武新宿線",
+          "name": "東村山",
+          "t_min": 33,
+          "popup": true
+        },
+        {
+          "line": "西武新宿線",
+          "name": "所沢",
+          "t_min": 37,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "副都心・西武池袋線",
+      "short_name": "池袋線",
+      "color": [
+        209,
+        157,
+        1
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "副都心線",
+          "name": "新宿三丁目",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "東新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "西早稲田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "雑司が谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "池袋",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "要町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "千川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "小竹向原",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "西武有楽町線",
+          "name": "新桜台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武有楽町線",
+          "name": "練馬",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "西武池袋線",
+          "name": "中村橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "富士見台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "練馬高野台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "石神井公園",
+          "t_min": 20,
+          "popup": true
+        },
+        {
+          "line": "西武池袋線",
+          "name": "大泉学園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "保谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "ひばりヶ丘",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "西武池袋線",
+          "name": "東久留米",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "清瀬",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "秋津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "西武池袋線",
+          "name": "所沢",
+          "t_min": 33,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

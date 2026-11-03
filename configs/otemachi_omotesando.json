@@ -1,0 +1,128 @@
+{
+  "slug": "otemachi_omotesando",
+  "title_line1": "大手町→表参道",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "大手町",
+  "end_label": "表参道",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "千代田線",
+      "short_name": "千代田線",
+      "color": [
+        78,
+        122,
+        39
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "千代田線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "二重橋前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "日比谷",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "霞ヶ関",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "国会議事堂前",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "赤坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "乃木坂",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "表参道",
+          "t_min": 13,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "半蔵門線",
+      "short_name": "半蔵門線",
+      "color": [
+        177,
+        140,
+        254
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "半蔵門線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "神保町",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "九段下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "半蔵門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "永田町",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "青山一丁目",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "表参道",
+          "t_min": 13,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

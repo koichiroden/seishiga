@@ -1,0 +1,242 @@
+{
+  "slug": "tokyo_ogikubo",
+  "title_line1": "東京→荻窪",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "東京",
+  "end_label": "荻窪",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央線快速",
+      "short_name": "中央線",
+      "color": [
+        242,
+        202,
+        2
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央線快速",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "神田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "御茶ノ水",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "水道橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "飯田橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "四ツ谷",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "信濃町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "千駄ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "新宿",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "中野",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "高円寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "阿佐ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "荻窪",
+          "t_min": 23,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "丸の内線",
+      "short_name": "丸の内線",
+      "color": [
+        255,
+        0,
+        13
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "丸ノ内線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "霞ヶ関",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "国会議事堂前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "赤坂見附",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "四ツ谷",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "四谷三丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "新宿御苑前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "新宿三丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "新宿",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "西新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "中野坂上",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "新中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "東高円寺",
+          "t_min": 28,
+          "popup": true
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "新高円寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "南阿佐ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "丸ノ内線",
+          "name": "荻窪",
+          "t_min": 33,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

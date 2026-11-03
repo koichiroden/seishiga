@@ -1,0 +1,332 @@
+{
+  "slug": "Musashi_Shinkiba",
+  "title_line1": "新木場→武蔵浦和",
+  "title_line2": "どれだけ差がつく!? 電車最速バトル",
+  "start_name": "新木場",
+  "end_label": "武蔵浦和",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "埼京線・りんかい線",
+      "short_name": "埼京線",
+      "color": [
+        118,
+        187,
+        64
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "りんかい線",
+          "name": "新木場",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "東雲",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "国際展示場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "東京テレポート",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "天王洲アイル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "品川シーサイド",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "大井町",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "大崎",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "五反田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 32,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "新大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "高田馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目白",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "池袋",
+          "t_min": 39,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "板橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "十条",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "赤羽",
+          "t_min": 47,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "北赤羽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "浮間舟渡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "北戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "武蔵浦和",
+          "t_min": 57,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "武蔵野・京葉線",
+      "short_name": "武蔵野線",
+      "color": [
+        232,
+        70,
+        40
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "船橋法典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "市川大野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東松戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新八柱",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新松戸",
+          "t_min": 35,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南流山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "三郷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新三郷",
+          "t_min": 42,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川美南",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "越谷レイクタウン",
+          "t_min": 49,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東川口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東浦和",
+          "t_min": 60,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "武蔵浦和",
+          "t_min": 66,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

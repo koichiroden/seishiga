@@ -1,0 +1,242 @@
+{
+  "slug": "Tokyo_Omiya",
+  "title_line1": "東京 → 大宮",
+  "title_line2": "どれだけ差がつく!? 電車最速バトル",
+  "start_name": "東京",
+  "end_label": "大宮",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "東北新幹線",
+      "short_name": "新幹線",
+      "color": [
+        118,
+        187,
+        64
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "東北新幹線(東京~宇都宮)",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東北新幹線(東京~宇都宮)",
+          "name": "上野",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "東北新幹線(東京~宇都宮)",
+          "name": "大宮",
+          "t_min": 24,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "上野東京ライン",
+      "short_name": "UTL",
+      "color": [
+        232,
+        70,
+        40
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "上野",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "尾久",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "赤羽",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "浦和",
+          "t_min": 24,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "さいたま新都心",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "大宮",
+          "t_min": 33,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_erkxmf",
+      "name": "京浜東北線",
+      "short_name": "京浜",
+      "color": [
+        1,
+        199,
+        252
+      ],
+      "stations": [
+        {
+          "line": "京浜東北線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "神田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "秋葉原",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "上野",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "鶯谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "日暮里",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "西日暮里",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "田端",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "上中里",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "王子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "東十条",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "赤羽",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "川口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "西川口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "蕨",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "南浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "浦和",
+          "t_min": 36,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "北浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "さいたま新都心",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "大宮",
+          "t_min": 46,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

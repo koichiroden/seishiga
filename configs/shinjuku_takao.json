@@ -1,0 +1,398 @@
+{
+  "slug": "shinjuku_takao",
+  "title_line1": "新宿→高尾",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿",
+  "end_label": "高尾",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央線",
+      "short_name": "中央線",
+      "color": [
+        242,
+        190,
+        2
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央線快速",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "中野",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "高円寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "阿佐ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "荻窪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "西荻窪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "吉祥寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "三鷹",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "武蔵境",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東小金井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "武蔵小金井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "国分寺",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "西国分寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "国立",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "立川",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "日野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "豊田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "八王子",
+          "t_min": 36,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "西八王子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "高尾",
+          "t_min": 43,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "京王線",
+      "short_name": "京王線",
+      "color": [
+        247,
+        24,
+        206
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "京王線",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "初台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "幡ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "笹塚",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "代田橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "明大前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "下高井戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "桜上水",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "上北沢",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "八幡山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "芦花公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "千歳烏山",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "仙川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "つつじヶ丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "柴崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "国領",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "布田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "調布",
+          "t_min": 17,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "西調布",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "飛田給",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "武蔵野台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "多磨霊園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "東府中",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "府中",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "分倍河原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "中河原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "聖蹟桜ヶ丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "百草園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "高幡不動",
+          "t_min": 34,
+          "popup": true
+        },
+        {
+          "line": "京王線",
+          "name": "南平",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "平山城址公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "長沼",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王線",
+          "name": "北野",
+          "t_min": 40,
+          "popup": true
+        },
+        {
+          "line": "京王高尾線",
+          "name": "京王片倉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王高尾線",
+          "name": "山田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王高尾線",
+          "name": "めじろ台",
+          "t_min": 46,
+          "popup": true
+        },
+        {
+          "line": "京王高尾線",
+          "name": "狭間",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京王高尾線",
+          "name": "高尾",
+          "t_min": 51,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

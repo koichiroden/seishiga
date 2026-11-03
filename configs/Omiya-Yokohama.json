@@ -1,0 +1,170 @@
+{
+  "slug": "Omiya-Yokohama",
+  "title_line1": "大宮 → 横浜",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "大宮",
+  "end_label": "横浜",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "湘南新宿ライン",
+      "short_name": "湘南新宿",
+      "color": [
+        181,
+        26,
+        0
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "湘南新宿ライン",
+          "name": "大宮",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "赤羽",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "池袋",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新宿",
+          "t_min": 31,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "渋谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大崎",
+          "t_min": 43,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "武蔵小杉",
+          "t_min": 51,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新川崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "横浜",
+          "t_min": 62,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "上野東京ライン",
+      "short_name": "上野東京",
+      "color": [
+        255,
+        64,
+        21
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "大宮",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "さいたま新都心",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "赤羽",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "尾久",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "上野",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "東京",
+          "t_min": 34,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "新橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "品川",
+          "t_min": 42,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "川崎",
+          "t_min": 52,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "横浜",
+          "t_min": 61,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

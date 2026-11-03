@@ -1,0 +1,320 @@
+{
+  "slug": "nakano_nisihuna",
+  "title_line1": "中野→西船橋",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "中野",
+  "end_label": "西船橋",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央総武緩行線",
+      "short_name": "総武線",
+      "color": [
+        251,
+        216,
+        40
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央総武線各停",
+          "name": "中野",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "東中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "新宿",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "千駄ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "信濃町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "四ツ谷",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "飯田橋",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "水道橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "御茶ノ水",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "秋葉原",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "浅草橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "両国",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "錦糸町",
+          "t_min": 32,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "亀戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "平井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "新小岩",
+          "t_min": 39,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "小岩",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "市川",
+          "t_min": 45,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "本八幡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "下総中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "西船橋",
+          "t_min": 53,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東西線",
+      "short_name": "東西線",
+      "color": [
+        24,
+        150,
+        247
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東西線",
+          "name": "中野",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "落合",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "高田馬場",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "早稲田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "神楽坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "飯田橋",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "九段下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "竹橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "大手町",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "日本橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "茅場町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "門前仲町",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "木場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "東陽町",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "南砂町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "西葛西",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "葛西",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "浦安",
+          "t_min": 37,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "南行徳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "行徳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "妙典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "原木中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "西船橋",
+          "t_min": 45,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "slug": "shinkiba_asaka",
+  "title_line1": "新木場→北朝霞・朝霞台",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新木場",
+  "end_label": "北朝霞・朝霞台",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "武蔵野線",
+      "short_name": "武蔵野線",
+      "color": [
+        245,
+        145,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "船橋法典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "市川大野",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東松戸",
+          "t_min": 35,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新八柱",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新松戸",
+          "t_min": 35,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南流山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "三郷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新三郷",
+          "t_min": 42,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川美南",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "越谷レイクタウン",
+          "t_min": 49,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東川口",
+          "t_min": 56,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南浦和",
+          "t_min": 64,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "武蔵浦和",
+          "t_min": 66,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "北朝霞",
+          "t_min": 73,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "有楽町線・東武東上線",
+      "short_name": "有楽町線",
+      "color": [
+        207,
+        247,
+        2
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "有楽町線",
+          "name": "新木場",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "辰巳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "豊洲",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "月島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "新富町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "銀座一丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "有楽町",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "桜田門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "永田町",
+          "t_min": 17,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "麹町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "飯田橋",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "江戸川橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "護国寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "東池袋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "池袋",
+          "t_min": 32,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "要町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "千川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "小竹向原",
+          "t_min": 40,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "氷川台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "平和台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "地下鉄赤塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "地下鉄成増",
+          "t_min": 53,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "和光市",
+          "t_min": 56,
+          "popup": true
+        },
+        {
+          "line": "東武東上線",
+          "name": "朝霞",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "朝霞台",
+          "t_min": 63,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

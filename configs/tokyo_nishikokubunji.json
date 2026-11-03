@@ -1,0 +1,380 @@
+{
+  "slug": "tokyo_nishikokubunji",
+  "title_line1": "東京→西国分寺",
+  "title_line2": "圧倒的な差!? 電車最速バトル",
+  "start_name": "東京",
+  "end_label": "西国分寺",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央線快速",
+      "short_name": "中央線快速",
+      "color": [
+        245,
+        145,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央線快速",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "神田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "御茶ノ水",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "水道橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "飯田橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "四ツ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "信濃町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "千駄ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "新宿",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "中野",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "高円寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "阿佐ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "荻窪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "西荻窪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "吉祥寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "三鷹",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "武蔵境",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東小金井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "武蔵小金井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "国分寺",
+          "t_min": 43,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "西国分寺",
+          "t_min": 50,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "武蔵野線",
+      "short_name": "武蔵野線",
+      "color": [
+        247,
+        187,
+        24
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "八丁堀",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "越中島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "潮見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": 28,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "船橋法典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "市川大野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東松戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新八柱",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新松戸",
+          "t_min": 45,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南流山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "三郷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新三郷",
+          "t_min": 52,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川美南",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "越谷レイクタウン",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南越谷",
+          "t_min": 62,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東川口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南浦和",
+          "t_min": 74,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "武蔵浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "北朝霞",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新座",
+          "t_min": 86,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東所沢",
+          "t_min": 91,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新秋津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新小平",
+          "t_min": 98,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西国分寺",
+          "t_min": 102,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "slug": "shinjuku_fujisawa",
+  "title_line1": "新宿 → 藤沢",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿",
+  "end_label": "藤沢",
+  "compress_sec_per_min": 0.5,
+  "intro_sec": 2.0,
+  "outro_hold_sec": 4.0,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "小田急線",
+      "short_name": "小田急線",
+      "color": [0, 110, 235],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {"line": "小田急小田原線", "name": "新宿", "t_min": 0, "popup": true},
+        {"line": "小田急小田原線", "name": "代々木上原", "t_min": 4, "popup": false},
+        {"line": "小田急小田原線", "name": "下北沢", "t_min": 7, "popup": false},
+        {"line": "小田急小田原線", "name": "登戸", "t_min": 18, "popup": true},
+        {"line": "小田急小田原線", "name": "新百合ヶ丘", "t_min": 24, "popup": true},
+        {"line": "小田急小田原線", "name": "町田", "t_min": 33, "popup": true},
+        {"line": "小田急小田原線", "name": "相模大野", "t_min": 35, "popup": true,
+          "direct_through": true, "transfer_note": "小田原線から江ノ島線へ直通"},
+        {"line": "小田急江ノ島線", "name": "中央林間", "t_min": 41, "popup": false},
+        {"line": "小田急江ノ島線", "name": "大和", "t_min": 45, "popup": true},
+        {"line": "小田急江ノ島線", "name": "湘南台", "t_min": 53, "popup": false},
+        {"line": "小田急江ノ島線", "name": "藤沢", "t_min": 58, "popup": true}
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "JR湘南新宿ライン",
+      "short_name": "JR湘南新宿L",
+      "color": [232, 70, 40],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {"line": "湘南新宿ライン", "name": "新宿", "t_min": 0, "popup": true},
+        {"line": "湘南新宿ライン", "name": "渋谷", "t_min": 4, "popup": true},
+        {"line": "湘南新宿ライン", "name": "恵比寿", "t_min": 6, "popup": false},
+        {"line": "湘南新宿ライン", "name": "大崎", "t_min": 10, "popup": false},
+        {"line": "湘南新宿ライン", "name": "武蔵小杉", "t_min": 18, "popup": true},
+        {"line": "湘南新宿ライン", "name": "横浜", "t_min": 28, "popup": true},
+        {"line": "湘南新宿ライン", "name": "東戸塚", "t_min": 35, "popup": false},
+        {"line": "湘南新宿ライン", "name": "戸塚", "t_min": 38, "popup": true,
+          "transfer": true, "transfer_note": "同一ホームで乗換。"},
+        {"line": "湘南新宿ライン", "name": "大船", "t_min": 45, "popup": false},
+        {"line": "湘南新宿ライン", "name": "藤沢", "t_min": 62, "popup": true}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "slug": "Omiya_Takasaki",
+  "title_line1": "大宮→高崎",
+  "title_line2": "どれだけ差がつく!? 電車最速バトル",
+  "start_name": "大宮",
+  "end_label": "高崎",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "上越新幹線たにがわ",
+      "short_name": "新幹線",
+      "color": [
+        118,
+        187,
+        64
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "北陸新幹線(東京~高崎)",
+          "name": "大宮",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "北陸新幹線(東京~高崎)",
+          "name": "熊谷",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "北陸新幹線(東京~高崎)",
+          "name": "本庄早稲田",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "北陸新幹線(東京~高崎)",
+          "name": "高崎",
+          "t_min": 31,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "特急草津・四万",
+      "short_name": "特急",
+      "color": [
+        232,
+        70,
+        40
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "高崎線",
+          "name": "大宮",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "高崎線",
+          "name": "宮原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "上尾",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "北上尾",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "桶川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "北本",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "鴻巣",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "北鴻巣",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "吹上",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "行田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "熊谷",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "高崎線",
+          "name": "籠原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "深谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "岡部",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "本庄",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "神保原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "新町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "倉賀野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "高崎線",
+          "name": "高崎",
+          "t_min": 52,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

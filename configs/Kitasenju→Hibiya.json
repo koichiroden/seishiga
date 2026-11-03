@@ -1,0 +1,188 @@
+{
+  "slug": "Kitasenju→Hibiya",
+  "title_line1": "北千住 → 日比谷",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "北千住",
+  "end_label": "日比谷",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "日比谷線",
+      "short_name": "日比谷線",
+      "color": [
+        133,
+        133,
+        133
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "日比谷線",
+          "name": "北千住",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "南千住",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "三ノ輪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "入谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "上野",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "仲御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "秋葉原",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "小伝馬町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "人形町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "茅場町",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "八丁堀",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "築地",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "東銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "日比谷",
+          "t_min": 27,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "千代田線",
+      "short_name": "千代田線",
+      "color": [
+        78,
+        122,
+        39
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "千代田線",
+          "name": "北千住",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "町屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "西日暮里",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "千駄木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "根津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "湯島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "新御茶ノ水",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "大手町",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "二重橋前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "日比谷",
+          "t_min": 19,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,668 @@
+{
+  "slug": "tokyo_narita",
+  "title_line1": "都心→成田空港",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "東京・上野",
+  "end_label": "成田空港",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "京成線特急",
+      "short_name": "京成",
+      "color": [
+        242,
+        2,
+        14
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京成本線",
+          "name": "京成上野",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "日暮里",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "新三河島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "町屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "千住大橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成関屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "堀切菖蒲園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "お花茶屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "青砥",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "京成高砂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成小岩",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "江戸川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "国府台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "市川真間",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "菅野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成八幡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "鬼越",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "東中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成西船",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "海神",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成船橋",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "大神宮下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "船橋競馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "谷津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成津田沼",
+          "t_min": 35,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "京成大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "実籾",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "八千代台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成大和田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "勝田台",
+          "t_min": 44,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "志津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "ユーカリが丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成臼井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成佐倉",
+          "t_min": 57,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "大佐倉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成酒々井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "宗吾参道",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "公津の杜",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "京成成田",
+          "t_min": 67,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "空港第2ビル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成本線",
+          "name": "成田空港",
+          "t_min": 76,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "京成線アクセス特急",
+      "short_name": "アクセス特急",
+      "color": [
+        255,
+        149,
+        0
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "浅草線",
+          "name": "日本橋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "人形町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "東日本橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "浅草橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "蔵前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "浅草",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "本所吾妻橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "押上",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "京成押上線",
+          "name": "京成曳舟",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成押上線",
+          "name": "八広",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成押上線",
+          "name": "四ツ木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成押上線",
+          "name": "京成立石",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京成押上線",
+          "name": "青砥",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "京成本線",
+          "name": "京成高砂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "新柴又",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "矢切",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "北国分",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "秋山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "東松戸",
+          "t_min": 29,
+          "popup": true
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "松飛台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "大町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "新鎌ヶ谷",
+          "t_min": 34,
+          "popup": true
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "西白井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "白井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "小室",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "千葉ニュータウン中央",
+          "t_min": 41,
+          "popup": true
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "印西牧の原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "印旛日本医大",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "成田湯川",
+          "t_min": 54,
+          "popup": true
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "空港第2ビル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田スカイアクセス線",
+          "name": "成田空港",
+          "t_min": 78,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_w3vlke",
+      "name": "JRエアポート成田",
+      "short_name": "エアポート成田",
+      "color": [
+        203,
+        242,
+        7
+      ],
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新日本橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "馬喰町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "錦糸町",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "亀戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "平井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新小岩",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "小岩",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "市川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "本八幡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "下総中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "西船橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "船橋",
+          "t_min": 24,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東船橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "津田沼",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "幕張本郷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "幕張",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新検見川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "稲毛",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "西千葉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "千葉",
+          "t_min": 40,
+          "popup": true
+        },
+        {
+          "line": "総武本線",
+          "name": "東千葉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "総武本線",
+          "name": "都賀",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "総武本線",
+          "name": "四街道",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "総武本線",
+          "name": "物井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "総武本線",
+          "name": "佐倉",
+          "t_min": 61,
+          "popup": true
+        },
+        {
+          "line": "成田線",
+          "name": "酒々井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田線",
+          "name": "成田",
+          "t_min": 75,
+          "popup": true
+        },
+        {
+          "line": "成田線",
+          "name": "空港第2ビル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "成田線",
+          "name": "成田空港",
+          "t_min": 88,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

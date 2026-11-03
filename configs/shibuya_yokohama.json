@@ -1,0 +1,200 @@
+{
+  "slug": "shibuya_yokohama",
+  "title_line1": "渋谷横浜",
+  "title_line2": "どっちが早い!?鉄道最速バトル",
+  "start_name": "渋谷",
+  "end_label": "横浜",
+  "video_duration_sec": 30,
+  "intro_sec": 5,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "JR湘南新宿ライン特快",
+      "short_name": "JR（特快）",
+      "color": [
+        247,
+        132,
+        38
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "湘南新宿ライン",
+          "name": "渋谷",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大崎",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "武蔵小杉",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新川崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "横浜",
+          "t_min": 24,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東横線特急",
+      "short_name": "東横線",
+      "color": [
+        242,
+        2,
+        26
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東急東横線",
+          "name": "渋谷",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "代官山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "中目黒",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "祐天寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "学芸大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "都立大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "自由が丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "田園調布",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "多摩川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "新丸子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "武蔵小杉",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "元住吉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "日吉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "綱島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "大倉山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "菊名",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "妙蓮寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "白楽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "東白楽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "反町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "横浜",
+          "t_min": 28,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

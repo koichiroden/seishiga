@@ -1,0 +1,212 @@
+{
+  "slug": "tokyo_shinmatsudo",
+  "title_line1": "東京・大手町→新松戸",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "東京",
+  "end_label": "新松戸",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "武蔵野線",
+      "short_name": "武蔵野線",
+      "color": [
+        245,
+        145,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "八丁堀",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "越中島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "潮見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": 28,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "船橋法典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "市川大野",
+          "t_min": 36,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東松戸",
+          "t_min": 45,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新八柱",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新松戸",
+          "t_min": 45,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "千代田線・常磐線",
+      "short_name": "千代田線",
+      "color": [
+        1,
+        178,
+        69
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "千代田線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "新御茶ノ水",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "湯島",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "根津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "千駄木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "西日暮里",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "町屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "北千住",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "綾瀬",
+          "t_min": 20,
+          "popup": true
+        },
+        {
+          "line": "常磐線",
+          "name": "亀有",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "常磐線",
+          "name": "金町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "常磐線",
+          "name": "松戸",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "常磐線",
+          "name": "北松戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "常磐線",
+          "name": "馬橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "常磐線",
+          "name": "新松戸",
+          "t_min": 33,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

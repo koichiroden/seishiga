@@ -1,0 +1,164 @@
+{
+  "slug": "Asakusa_Shinbashi",
+  "title_line1": "新橋→浅草",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新橋",
+  "end_label": "浅草",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "都営浅草線",
+      "short_name": "浅草線",
+      "color": [
+        226,
+        146,
+        254
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "浅草線",
+          "name": "新橋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "東銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "宝町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "日本橋",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "人形町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "東日本橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "浅草橋",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "蔵前",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "浅草",
+          "t_min": 14,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東京メトロ銀座線",
+      "short_name": "銀座線",
+      "color": [
+        255,
+        134,
+        72
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "銀座線",
+          "name": "新橋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "銀座",
+          "t_min": 1,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "京橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "日本橋",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "三越前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "神田",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "末広町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "上野広小路",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "上野",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "稲荷町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "田原町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "浅草",
+          "t_min": 20,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

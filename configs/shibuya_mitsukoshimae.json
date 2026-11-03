@@ -1,0 +1,164 @@
+{
+  "slug": "shibuya_mitsukoshimae",
+  "title_line1": "渋谷→三越前",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "渋谷",
+  "end_label": "三越前",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "銀座線",
+      "short_name": "銀座線",
+      "color": [
+        251,
+        184,
+        40
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "銀座線",
+          "name": "渋谷",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "表参道",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "外苑前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "青山一丁目",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "赤坂見附",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "溜池山王",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "虎ノ門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "新橋",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "京橋",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "銀座線",
+          "name": "日本橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "銀座線",
+          "name": "三越前",
+          "t_min": 22,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "半蔵門線",
+      "short_name": "半蔵門線",
+      "color": [
+        176,
+        24,
+        247
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "半蔵門線",
+          "name": "渋谷",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "表参道",
+          "t_min": 1,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "青山一丁目",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "永田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "半蔵門",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "九段下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "神保町",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "大手町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "三越前",
+          "t_min": 17,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "slug": "yokohama_ofuna",
+  "title_line1": "横浜→大船",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "横浜",
+  "end_label": "大船",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "根岸線",
+      "short_name": "根岸線",
+      "color": [
+        2,
+        202,
+        242
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "根岸線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "桜木町",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "関内",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "石川町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "根岸線",
+          "name": "山手",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "根岸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "根岸線",
+          "name": "磯子",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "新杉田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "根岸線",
+          "name": "洋光台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "根岸線",
+          "name": "港南台",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "根岸線",
+          "name": "本郷台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "根岸線",
+          "name": "大船",
+          "t_min": 30,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東海道線",
+      "short_name": "東海道線",
+      "color": [
+        255,
+        200,
+        0
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "戸塚",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "大船",
+          "t_min": 15,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_smbpmk",
+      "name": "横須賀線",
+      "short_name": "横須賀線",
+      "color": [
+        31,
+        80,
+        158
+      ],
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "保土ヶ谷",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東戸塚",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "戸塚",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "大船",
+          "t_min": 17,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

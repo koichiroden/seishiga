@@ -1,0 +1,260 @@
+{
+  "slug": "yokohama_shonandai",
+  "title_line1": "横浜→湘南台",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "横浜",
+  "end_label": "湘南台",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "ブルーライン",
+      "short_name": "ブルーライン",
+      "color": [
+        2,
+        106,
+        242
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "高島町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "桜木町",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "関内",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "伊勢佐木長者町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "阪東橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "吉野町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "蒔田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "弘明寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "上大岡",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "港南中央",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "上永谷",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "下永谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "舞岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "戸塚",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "踊場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "中田",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "立場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "下飯田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "湘南台",
+          "t_min": 35,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "相鉄線",
+      "short_name": "相鉄",
+      "color": [
+        255,
+        17,
+        0
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "相鉄本線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "平沼橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "西横浜",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "天王町",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "星川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "和田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "上星川",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "西谷",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "鶴ヶ峰",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "二俣川",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "南万騎が原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "緑園都市",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "弥生台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "いずみ野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "いずみ中央",
+          "t_min": 36,
+          "popup": true
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "ゆめが丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄いずみ野線",
+          "name": "湘南台",
+          "t_min": 42,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

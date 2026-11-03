@@ -1,0 +1,206 @@
+{
+  "slug": "tokyo_musako",
+  "title_line1": "東京・大手町→武蔵小杉",
+  "title_line2": "どれだけ差がつく!?鉄道最速バトル",
+  "start_name": "東京・大手町",
+  "end_label": "武蔵小杉",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "横須賀線",
+      "short_name": "横須賀線",
+      "color": [
+        101,
+        38,
+        247
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "有楽町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新橋",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "浜松町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "高輪ゲートウェイ",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "品川",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "西大井",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "武蔵小杉",
+          "t_min": 18,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "三田線・目黒線（急行）",
+      "short_name": "三田線",
+      "color": [
+        53,
+        192,
+        190
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "三田線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "三田線",
+          "name": "日比谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "内幸町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "御成門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "芝公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "三田",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "三田線",
+          "name": "白金高輪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "白金台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "三田線",
+          "name": "目黒",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "東急目黒線",
+          "name": "不動前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "武蔵小山",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "東急目黒線",
+          "name": "西小山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "洗足",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "大岡山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "奥沢",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "田園調布",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "東急目黒線",
+          "name": "多摩川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "新丸子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急目黒線",
+          "name": "武蔵小杉",
+          "t_min": 30,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

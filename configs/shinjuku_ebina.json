@@ -1,0 +1,362 @@
+{
+  "slug": "shinjuku_ebina",
+  "title_line1": "新宿→海老名",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿",
+  "end_label": "海老名",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "埼京線・相鉄直通",
+      "short_name": "埼京線",
+      "color": [
+        12,
+        167,
+        1
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "五反田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "大崎",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "西大井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "武蔵小杉",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "羽沢横浜国大",
+          "t_min": 38,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "西谷",
+          "t_min": 42,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "鶴ヶ峰",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "二俣川",
+          "t_min": 50,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "希望ヶ丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "三ツ境",
+          "t_min": 55,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "瀬谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "大和",
+          "t_min": 60,
+          "popup": true
+        },
+        {
+          "line": "相鉄本線",
+          "name": "相模大塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "さがみ野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "かしわ台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄本線",
+          "name": "海老名",
+          "t_min": 71,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "小田急線",
+      "short_name": "小田急",
+      "color": [
+        60,
+        82,
+        251
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "小田急小田原線",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "南新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "参宮橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "代々木八幡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "代々木上原",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "東北沢",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "下北沢",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "世田谷代田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "梅ヶ丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "豪徳寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "経堂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "千歳船橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "祖師ヶ谷大蔵",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "成城学園前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "喜多見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "狛江",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "和泉多摩川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "登戸",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "向ヶ丘遊園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "生田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "読売ランド前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "百合ヶ丘",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "新百合ヶ丘",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "柿生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "鶴川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "玉川学園前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "町田",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "相模大野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "小田急相模原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "相武台前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "座間",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "小田急小田原線",
+          "name": "海老名",
+          "t_min": 43,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

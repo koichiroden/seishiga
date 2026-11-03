@@ -1,0 +1,170 @@
+{
+  "slug": "yokohama_totsuka",
+  "title_line1": "横浜→戸塚",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "横浜",
+  "end_label": "戸塚",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "ブルーライン快速",
+      "short_name": "ブルーライン",
+      "color": [
+        2,
+        10,
+        242
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "高島町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "桜木町",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "関内",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "伊勢佐木長者町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "阪東橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "吉野町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "蒔田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "弘明寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "上大岡",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "港南中央",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "上永谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "下永谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横浜市営地下鉄ブルーライン",
+          "name": "戸塚",
+          "t_min": 23,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東海道線",
+      "short_name": "東海道線",
+      "color": [
+        255,
+        200,
+        0
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "戸塚",
+          "t_min": 10,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_smbpmk",
+      "name": "横須賀線",
+      "short_name": "横須賀線",
+      "color": [
+        31,
+        80,
+        158
+      ],
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "保土ヶ谷",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東戸塚",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "戸塚",
+          "t_min": 11,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

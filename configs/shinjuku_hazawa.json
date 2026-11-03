@@ -1,0 +1,218 @@
+{
+  "slug": "shinjuku_hazawa",
+  "title_line1": "新宿 → 羽沢横浜国大",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿",
+  "end_label": "羽沢横浜国大",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "埼京・相鉄直通線",
+      "short_name": "埼京線",
+      "color": [
+        102,
+        157,
+        52
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "五反田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "大崎",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "西大井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "武蔵小杉",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "羽沢横浜国大",
+          "t_min": 38,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "副都心・東横線",
+      "short_name": "東横線",
+      "color": [
+        255,
+        171,
+        1
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "副都心線",
+          "name": "新宿三丁目",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "北参道",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "明治神宮前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "渋谷",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "代官山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "中目黒",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "祐天寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "学芸大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "都立大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "自由が丘",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "田園調布",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "多摩川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "新丸子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "武蔵小杉",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "元住吉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "日吉",
+          "t_min": 29,
+          "popup": true
+        },
+        {
+          "line": "東急新横浜線",
+          "name": "新綱島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急新横浜線",
+          "name": "新横浜",
+          "t_min": 36,
+          "popup": true
+        },
+        {
+          "line": "相鉄新横浜線",
+          "name": "羽沢横浜国大",
+          "t_min": 41,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

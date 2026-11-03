@@ -1,0 +1,302 @@
+{
+  "slug": "shinjuku_sryogoku",
+  "title_line1": "新宿→両国",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "新宿・都庁前",
+  "end_label": "両国",
+  "video_duration_sec": 30,
+  "intro_sec": 5,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央総武線各駅",
+      "short_name": "総武線",
+      "color": [
+        212,
+        247,
+        38
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央総武線各停",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "千駄ヶ谷",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "信濃町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "四ツ谷",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "飯田橋",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "水道橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "御茶ノ水",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "秋葉原",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "浅草橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央総武線各停",
+          "name": "両国",
+          "t_min": 22,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "大江戸線（飯田橋経由）",
+      "short_name": "飯田橋経由",
+      "color": [
+        13,
+        248,
+        83
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "都庁前",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "新宿西口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "東新宿",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "若松河田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "牛込柳町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "牛込神楽坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "飯田橋",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "春日",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "本郷三丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "上野御徒町",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "新御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "蔵前",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "両国",
+          "t_min": 25,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_z8nfkb",
+      "name": "大江戸線（六本木経由）",
+      "short_name": "六本木経由",
+      "color": [
+        201,
+        18,
+        237
+      ],
+      "stations": [
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "都庁前",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "代々木",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "国立競技場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "青山一丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "六本木",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "麻布十番",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "赤羽橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "大門",
+          "t_min": 18,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "汐留",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "築地市場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "勝どき",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "月島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "門前仲町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "清澄白河",
+          "t_min": 32,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "森下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "両国",
+          "t_min": 36,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,416 @@
+{
+  "slug": "yokohama_shinbashi",
+  "title_line1": "横浜→新橋",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "横浜",
+  "end_label": "新橋",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "京急・都営直通",
+      "short_name": "京急",
+      "color": [
+        242,
+        2,
+        86
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京急本線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "神奈川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急東神奈川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "神奈川新町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "子安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急新子安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "生麦",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "花月総持寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急鶴見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "鶴見市場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "八丁畷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急川崎",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "六郷土手",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "雑色",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急蒲田",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "梅屋敷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "大森町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "平和島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "大森海岸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "立会川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "鮫洲",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "青物横丁",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "新馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "北品川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "品川",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "泉岳寺",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "三田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "大門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "新橋",
+          "t_min": 32,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "横須賀・総武快速線",
+      "short_name": "JR",
+      "color": [
+        0,
+        17,
+        255
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東神奈川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新子安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "鶴見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新川崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "武蔵小杉",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "西大井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "品川",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "高輪ゲートウェイ",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "浜松町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新橋",
+          "t_min": 26,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_rs66q2",
+      "name": "東海道線",
+      "short_name": "東海道線",
+      "color": [
+        245,
+        98,
+        0
+      ],
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "川崎",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "品川",
+          "t_min": 17,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "新橋",
+          "t_min": 23,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_j7bpgo",
+      "name": "京浜東北線",
+      "short_name": "京浜東北線",
+      "color": [
+        95,
+        216,
+        247
+      ],
+      "stations": [
+        {
+          "line": "京浜東北線",
+          "name": "横浜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "東神奈川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "新子安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "鶴見",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "川崎",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "蒲田",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "大森",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "大井町",
+          "t_min": 25,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "品川",
+          "t_min": 28,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "高輪ゲートウェイ",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "浜松町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "新橋",
+          "t_min": 37,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

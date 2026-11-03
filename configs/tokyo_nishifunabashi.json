@@ -1,0 +1,182 @@
+{
+  "slug": "tokyo_nishifunabashi",
+  "title_line1": "東京・大手町→西船橋",
+  "title_line2": "圧倒的な差!? 電車最速バトル",
+  "start_name": "東京",
+  "end_label": "西船橋",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "武蔵野線",
+      "short_name": "武蔵野線",
+      "color": [
+        245,
+        145,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "八丁堀",
+          "t_min": 2,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "越中島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "潮見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 10,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": 28,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東西線",
+      "short_name": "東西線",
+      "color": [
+        24,
+        131,
+        247
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東西線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "日本橋",
+          "t_min": 1,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "茅場町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "門前仲町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "木場",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "東陽町",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "南砂町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "西葛西",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "葛西",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "浦安",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "南行徳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "行徳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "妙典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "原木中山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "西船橋",
+          "t_min": 24,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

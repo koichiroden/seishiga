@@ -1,0 +1,176 @@
+{
+  "slug": "otemachi_nakano",
+  "title_line1": "東京・大手町→中野",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "東京・大手町",
+  "end_label": "中野",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "中央線",
+      "short_name": "中央線",
+      "color": [
+        251,
+        142,
+        40
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "中央線快速",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "神田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "御茶ノ水",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "水道橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "飯田橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "四ツ谷",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "信濃町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "千駄ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "新宿",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "中央線快速",
+          "name": "大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "東中野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "中央線快速",
+          "name": "中野",
+          "t_min": 19,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東西線",
+      "short_name": "東西線",
+      "color": [
+        24,
+        150,
+        247
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東西線",
+          "name": "大手町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "竹橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "九段下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "飯田橋",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "神楽坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "早稲田",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "高田馬場",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "東西線",
+          "name": "落合",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東西線",
+          "name": "中野",
+          "t_min": 20,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}
