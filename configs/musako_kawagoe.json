@@ -1,0 +1,452 @@
+{
+  "slug": "musako_kawagoe",
+  "title_line1": "川越→武蔵小杉",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "川越",
+  "end_label": "武蔵小杉",
+  "video_duration_sec": 30,
+  "intro_sec": 5,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "東上線・副都心線・東急",
+      "short_name": "東武（快速急行）",
+      "color": [
+        212,
+        247,
+        38
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "東武東上線",
+          "name": "川越",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東武東上線",
+          "name": "新河岸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "上福岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "ふじみ野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "鶴瀬",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "みずほ台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "柳瀬川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "志木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "朝霞台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "朝霞",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武東上線",
+          "name": "和光市",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "地下鉄成増",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "地下鉄赤塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "平和台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "氷川台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "小竹向原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "千川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "要町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "池袋",
+          "t_min": 34,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "雑司が谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "西早稲田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "東新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "新宿三丁目",
+          "t_min": 41,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "北参道",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "明治神宮前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "渋谷",
+          "t_min": 47,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "代官山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "中目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "祐天寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "学芸大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "都立大学",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "自由が丘",
+          "t_min": 56,
+          "popup": true
+        },
+        {
+          "line": "東急東横線",
+          "name": "田園調布",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "多摩川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "新丸子",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東急東横線",
+          "name": "武蔵小杉",
+          "t_min": 61,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "JR川越・埼京線",
+      "short_name": "JR（快速）",
+      "color": [
+        5,
+        189,
+        51
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "川越線",
+          "name": "川越",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "川越線",
+          "name": "南古谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "川越線",
+          "name": "指扇",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "川越線",
+          "name": "西大宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "川越線",
+          "name": "日進",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "川越線",
+          "name": "大宮",
+          "t_min": 24,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "北与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "与野本町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "南与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "中浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "武蔵浦和",
+          "t_min": 37,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "北戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "浮間舟渡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "北赤羽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "赤羽",
+          "t_min": 48,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "十条",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "板橋",
+          "t_min": 54,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "池袋",
+          "t_min": 57,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "目白",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "高田馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 64,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 70,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "五反田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "大崎",
+          "t_min": 77,
+          "popup": true
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "西大井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "相鉄・JR直通線",
+          "name": "武蔵小杉",
+          "t_min": 87,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

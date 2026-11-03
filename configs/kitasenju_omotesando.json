@@ -1,0 +1,242 @@
+{
+  "slug": "kitasenju_omotesando",
+  "title_line1": "北千住→表参道",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "北千住",
+  "end_label": "表参道",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "半蔵門線",
+      "short_name": "半蔵門線",
+      "color": [
+        214,
+        2,
+        242
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "東武伊勢崎線",
+          "name": "北千住",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "牛田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "堀切",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "鐘ヶ淵",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "東向島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "曳舟",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "押上",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "錦糸町",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "住吉",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "清澄白河",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "水天宮前",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "三越前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "大手町",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "神保町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "九段下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "半蔵門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "永田町",
+          "t_min": 35,
+          "popup": true
+        },
+        {
+          "line": "半蔵門線",
+          "name": "青山一丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "半蔵門線",
+          "name": "表参道",
+          "t_min": 40,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "千代田線",
+      "short_name": "千代田線",
+      "color": [
+        4,
+        169,
+        46
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "千代田線",
+          "name": "北千住",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "町屋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "西日暮里",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "千駄木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "根津",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "湯島",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "新御茶ノ水",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "大手町",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "二重橋前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "日比谷",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "霞ヶ関",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "国会議事堂前",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "千代田線",
+          "name": "赤坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "乃木坂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "千代田線",
+          "name": "表参道",
+          "t_min": 29,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

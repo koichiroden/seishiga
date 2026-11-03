@@ -1,0 +1,194 @@
+{
+  "slug": "exp_tokyo_ofuna",
+  "title_line1": "東京→大船",
+  "title_line2": "特急対決!鉄道最速バトル",
+  "start_name": "東京",
+  "end_label": "大船",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "成田EXP",
+      "short_name": "成田EXP",
+      "color": [
+        247,
+        38,
+        59
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "有楽町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "浜松町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "田町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "高輪ゲートウェイ",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "品川",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "西大井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "武蔵小杉",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新川崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "鶴見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "新子安",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東神奈川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "横浜",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "保土ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "東戸塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "戸塚",
+          "t_min": 38,
+          "popup": true
+        },
+        {
+          "line": "横須賀線総武快速線",
+          "name": "大船",
+          "t_min": 45,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "踊り子",
+      "short_name": "踊り子",
+      "color": [
+        242,
+        154,
+        2
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東海道本線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東海道本線",
+          "name": "新橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東海道本線",
+          "name": "品川",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "東海道本線",
+          "name": "川崎",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "東海道本線",
+          "name": "横浜",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "東海道本線",
+          "name": "戸塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東海道本線",
+          "name": "大船",
+          "t_min": 36,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

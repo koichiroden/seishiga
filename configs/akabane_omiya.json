@@ -1,0 +1,206 @@
+{
+  "slug": "akabane_omiya",
+  "title_line1": "赤羽→大宮",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "赤羽",
+  "end_label": "大宮",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "埼京線",
+      "short_name": "埼京線",
+      "color": [
+        18,
+        204,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "埼京線",
+          "name": "赤羽",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "北赤羽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "浮間舟渡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田公園",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "北戸田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "武蔵浦和",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "中浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "南与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "与野本町",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "北与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "大宮",
+          "t_min": 21,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "京浜東北線",
+      "short_name": "京浜東北線",
+      "color": [
+        0,
+        251,
+        255
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "京浜東北線",
+          "name": "赤羽",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "川口",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "西川口",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "蕨",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "南浦和",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "浦和",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "北浦和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "与野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京浜東北線",
+          "name": "さいたま新都心",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "京浜東北線",
+          "name": "大宮",
+          "t_min": 24,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_1iw14w",
+      "name": "上野東京ライン",
+      "short_name": "上野東京ライン",
+      "color": [
+        255,
+        149,
+        0
+      ],
+      "stations": [
+        {
+          "line": "上野東京ライン",
+          "name": "赤羽",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "浦和",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "さいたま新都心",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "上野東京ライン",
+          "name": "大宮",
+          "t_min": 15,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

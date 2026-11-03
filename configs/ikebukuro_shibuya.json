@@ -1,0 +1,194 @@
+{
+  "slug": "ikebukuro_shibuya",
+  "title_line1": "池袋→渋谷",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "池袋",
+  "end_label": "渋谷",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "山手線",
+      "short_name": "山手線",
+      "color": [
+        2,
+        242,
+        74
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "山手線",
+          "name": "池袋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "山手線",
+          "name": "目白",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "山手線",
+          "name": "高田馬場",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "山手線",
+          "name": "新大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "山手線",
+          "name": "新宿",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "山手線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "山手線",
+          "name": "原宿",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "山手線",
+          "name": "渋谷",
+          "t_min": 15,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "埼京線",
+      "short_name": "埼京線",
+      "color": [
+        10,
+        199,
+        23
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "埼京線",
+          "name": "池袋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "目白",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "高田馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 9,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_0c3x6h",
+      "name": "副都心線",
+      "short_name": "副都心線",
+      "color": [
+        214,
+        127,
+        5
+      ],
+      "stations": [
+        {
+          "line": "副都心線",
+          "name": "池袋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "雑司が谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "西早稲田",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "東新宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "新宿三丁目",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "北参道",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "副都心線",
+          "name": "明治神宮前",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "副都心線",
+          "name": "渋谷",
+          "t_min": 16,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

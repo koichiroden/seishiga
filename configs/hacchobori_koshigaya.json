@@ -1,0 +1,296 @@
+{
+  "slug": "hacchobori_koshigaya",
+  "title_line1": "八丁堀→南越谷・新越谷",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "八丁堀",
+  "end_label": "南越谷・新越谷",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "武蔵野線",
+      "short_name": "武蔵野線",
+      "color": [
+        245,
+        145,
+        5
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "京葉線",
+          "name": "東京",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "八丁堀",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "越中島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "潮見",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "新木場",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "葛西臨海公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京葉線",
+          "name": "舞浜",
+          "t_min": 14,
+          "popup": true
+        },
+        {
+          "line": "京葉線",
+          "name": "新浦安",
+          "t_min": 17,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "西船橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "船橋法典",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "市川大野",
+          "t_min": 34,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "東松戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新八柱",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新松戸",
+          "t_min": 43,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南流山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "三郷",
+          "t_min": 48,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "新三郷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川美南",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "吉川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "武蔵野線",
+          "name": "越谷レイクタウン",
+          "t_min": 57,
+          "popup": true
+        },
+        {
+          "line": "武蔵野線",
+          "name": "南越谷",
+          "t_min": 60,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "日比谷線",
+      "short_name": "日比谷線",
+      "color": [
+        197,
+        197,
+        196
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "日比谷線",
+          "name": "八丁堀",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "茅場町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "人形町",
+          "t_min": 4,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "小伝馬町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "秋葉原",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "仲御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "上野",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "入谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "三ノ輪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "南千住",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "北千住",
+          "t_min": 20,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "小菅",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "五反野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "梅島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "西新井",
+          "t_min": 28,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "竹ノ塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "谷塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "草加",
+          "t_min": 37,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "獨協大学前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "蒲生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新越谷",
+          "t_min": 47,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

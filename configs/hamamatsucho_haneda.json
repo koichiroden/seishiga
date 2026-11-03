@@ -1,0 +1,218 @@
+{
+  "slug": "hamamatsucho_haneda",
+  "title_line1": "浜松町・大門→羽田空港",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "浜松町・大門",
+  "end_label": "羽田空港",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "都営・京急線",
+      "short_name": "都営・京急",
+      "color": [
+        242,
+        2,
+        86
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "浅草線",
+          "name": "大門",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "浅草線",
+          "name": "三田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "浅草線",
+          "name": "泉岳寺",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "品川",
+          "t_min": 8,
+          "popup": true
+        },
+        {
+          "line": "京急本線",
+          "name": "北品川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "新馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "青物横丁",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "鮫洲",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "立会川",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "大森海岸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "平和島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "大森町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "梅屋敷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急本線",
+          "name": "京急蒲田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急空港線",
+          "name": "糀谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急空港線",
+          "name": "大鳥居",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急空港線",
+          "name": "穴守稲荷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急空港線",
+          "name": "天空橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "京急空港線",
+          "name": "羽田空港第3ターミナル",
+          "t_min": 21,
+          "popup": true
+        },
+        {
+          "line": "京急空港線",
+          "name": "羽田空港第1・第2ターミナル",
+          "t_min": 24,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "東京モノレール",
+      "short_name": "東京モノレール",
+      "color": [
+        255,
+        17,
+        0
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東京モノレール",
+          "name": "浜松町",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東京モノレール",
+          "name": "天王洲アイル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "大井競馬場前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "流通センター",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "昭和島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "整備場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "天空橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "新整備場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東京モノレール",
+          "name": "羽田空港第1ターミナル",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "東京モノレール",
+          "name": "羽田空港第2ターミナル",
+          "t_min": 18,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

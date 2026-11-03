@@ -1,0 +1,380 @@
+{
+  "slug": "kuki_ebisu",
+  "title_line1": "久喜→恵比寿",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "久喜",
+  "end_label": "恵比寿",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "湘南新宿ライン",
+      "short_name": "湘南新宿ライン",
+      "color": [
+        242,
+        50,
+        2
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "湘南新宿ライン",
+          "name": "久喜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新白岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "白岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "蓮田",
+          "t_min": 7,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "東大宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "土呂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大宮",
+          "t_min": 17,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "浦和",
+          "t_min": 22,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "赤羽",
+          "t_min": 30,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "池袋",
+          "t_min": 42,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新宿",
+          "t_min": 48,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "渋谷",
+          "t_min": 54,
+          "popup": true
+        },
+        {
+          "line": "山手線",
+          "name": "恵比寿",
+          "t_min": 56,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "THライナー",
+      "short_name": "THライナー",
+      "color": [
+        188,
+        184,
+        188
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東武伊勢崎線",
+          "name": "久喜",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "和戸",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "東武動物公園",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "姫宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北春日部",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "春日部",
+          "t_min": 13,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "一ノ割",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "武里",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "せんげん台",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "大袋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新越谷",
+          "t_min": 26,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "蒲生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "獨協大学前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "草加",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "谷塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "竹ノ塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "西新井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "梅島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "五反野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "小菅",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北千住",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "南千住",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "三ノ輪",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "入谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "上野",
+          "t_min": 55,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "仲御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "秋葉原",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "小伝馬町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "人形町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "茅場町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "八丁堀",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "築地",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "東銀座",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "銀座",
+          "t_min": 75,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "日比谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "霞ヶ関",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "虎ノ門ヒルズ",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "神谷町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "六本木",
+          "t_min": 86,
+          "popup": true
+        },
+        {
+          "line": "日比谷線",
+          "name": "広尾",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "日比谷線",
+          "name": "恵比寿",
+          "t_min": 92,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

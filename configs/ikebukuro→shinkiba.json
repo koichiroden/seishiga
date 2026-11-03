@@ -1,0 +1,248 @@
+{
+  "slug": "ikebukuro→shinkiba",
+  "title_line1": "池袋→新木場",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "池袋",
+  "end_label": "新木場",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 4,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "埼京線",
+      "short_name": "埼京線",
+      "color": [
+        12,
+        167,
+        1
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "埼京線",
+          "name": "池袋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "目白",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "高田馬場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新大久保",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "新宿",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "代々木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "原宿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "渋谷",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "埼京線",
+          "name": "恵比寿",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "目黒",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "五反田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "埼京線",
+          "name": "大崎",
+          "t_min": 16,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "大井町",
+          "t_min": 20,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "品川シーサイド",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "天王洲アイル",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "東京テレポート",
+          "t_min": 29,
+          "popup": true
+        },
+        {
+          "line": "りんかい線",
+          "name": "国際展示場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "東雲",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "りんかい線",
+          "name": "新木場",
+          "t_min": 37,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "有楽町線",
+      "short_name": "有楽町線",
+      "color": [
+        219,
+        251,
+        60
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "有楽町線",
+          "name": "池袋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "東池袋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "護国寺",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "江戸川橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "飯田橋",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "市ヶ谷",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "麹町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "永田町",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "桜田門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "有楽町",
+          "t_min": 19,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "銀座一丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "新富町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "月島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "豊洲",
+          "t_min": 27,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "辰巳",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "新木場",
+          "t_min": 32,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,566 @@
+{
+  "slug": "exp_tokyo_nikko",
+  "title_line1": "都心→日光",
+  "title_line2": "特急対決!鉄道最速バトル",
+  "start_name": "新宿・浅草",
+  "end_label": "東武日光",
+  "video_duration_sec": 30,
+  "intro_sec": 2,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "スペーシア（新宿発）",
+      "short_name": "スペーシア新宿発",
+      "color": [
+        247,
+        38,
+        59
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "湘南新宿ライン",
+          "name": "新宿",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "池袋",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "赤羽",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "浦和",
+          "t_min": 23,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "大宮",
+          "t_min": 29,
+          "popup": true
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "土呂",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "東大宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "蓮田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "白岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "新白岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "久喜",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "東鷲宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "湘南新宿ライン",
+          "name": "栗橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新古河",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "柳生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "板倉東洋大前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "藤岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "静和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新大平下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "栃木",
+          "t_min": 76,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "新栃木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "合戦場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "家中",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "東武金崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "楡木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "樅山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新鹿沼",
+          "t_min": 92,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "北鹿沼",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "板荷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "下小代",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "明神",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "下今市",
+          "t_min": 108,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "上今市",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "東武日光",
+          "t_min": 117,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "けごん（浅草発）",
+      "short_name": "けごん浅草発",
+      "color": [
+        242,
+        142,
+        2
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "東武伊勢崎線",
+          "name": "浅草",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "とうきょうスカイツリー",
+          "t_min": 3,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "曳舟",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "東向島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "鐘ヶ淵",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "堀切",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "牛田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北千住",
+          "t_min": 11,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "小菅",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "五反野",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "梅島",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "西新井",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "竹ノ塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "谷塚",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "草加",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "獨協大学前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新田",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "蒲生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "新越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北越谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "大袋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "せんげん台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "武里",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "一ノ割",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "春日部",
+          "t_min": 32,
+          "popup": true
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "北春日部",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "姫宮",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武伊勢崎線",
+          "name": "東武動物公園",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "杉戸高野台",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "幸手",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "南栗橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "栗橋",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新古河",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "柳生",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "板倉東洋大前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "藤岡",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "静和",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新大平下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "栃木",
+          "t_min": 68,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "新栃木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "合戦場",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "家中",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "東武金崎",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "楡木",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "樅山",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "新鹿沼",
+          "t_min": 83,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "北鹿沼",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "板荷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "下小代",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "明神",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "下今市",
+          "t_min": 100,
+          "popup": true
+        },
+        {
+          "line": "東武日光線",
+          "name": "上今市",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "東武日光線",
+          "name": "東武日光",
+          "t_min": 107,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}

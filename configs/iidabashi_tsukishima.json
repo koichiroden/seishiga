@@ -1,0 +1,158 @@
+{
+  "slug": "iidabashi_tsukishima",
+  "title_line1": "飯田橋→月島",
+  "title_line2": "どっちが早い!? 電車最速バトル",
+  "start_name": "飯田橋",
+  "end_label": "月島",
+  "video_duration_sec": 30,
+  "intro_sec": 5,
+  "outro_hold_sec": 2,
+  "routes": [
+    {
+      "key": "route_a",
+      "name": "有楽町線",
+      "short_name": "有楽町線",
+      "color": [
+        212,
+        247,
+        38
+      ],
+      "icon_path": "assets/odakyu_icon.png",
+      "stations": [
+        {
+          "line": "有楽町線",
+          "name": "飯田橋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "市ヶ谷",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "麹町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "永田町",
+          "t_min": 5,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "桜田門",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "有楽町",
+          "t_min": 9,
+          "popup": true
+        },
+        {
+          "line": "有楽町線",
+          "name": "銀座一丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "新富町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "有楽町線",
+          "name": "月島",
+          "t_min": 14,
+          "popup": true
+        }
+      ]
+    },
+    {
+      "key": "route_b",
+      "name": "大江戸線",
+      "short_name": "大江戸線",
+      "color": [
+        248,
+        13,
+        228
+      ],
+      "icon_path": "assets/jr_icon.png",
+      "stations": [
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "飯田橋",
+          "t_min": 0,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "春日",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "本郷三丁目",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "上野御徒町",
+          "t_min": 6,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "新御徒町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "蔵前",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~飯田橋~両国)",
+          "name": "両国",
+          "t_min": 12,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "森下",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "清澄白河",
+          "t_min": 15,
+          "popup": true
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "門前仲町",
+          "t_min": null,
+          "popup": false
+        },
+        {
+          "line": "大江戸線(都庁前~六本木~両国)",
+          "name": "月島",
+          "t_min": 20,
+          "popup": true
+        }
+      ]
+    }
+  ]
+}
