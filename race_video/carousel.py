@@ -397,11 +397,22 @@ def names(rs):
 
 # ---------------------------------------------------------------- 各スライド
 
+# 表紙の文字を置く安全な範囲。
+# Instagram で正方形(1:1)に切り抜かれて投稿され、さらにプロフィール一覧で 3:4 に切られても
+# 欠けないように、上下左右 135px(+余白)の内側に収める。
+# 切れる位置(135px)からさらに50px前後の余白をとり、枠いっぱいに詰まって見えないようにする。
+COVER_SX = 185            # 左右
+COVER_TOP = 185           # 上
+COVER_BOTTOM = H - 185    # 下(1165)
+MAP_TOP, MAP_BOTTOM = 500, 1030
+
+
 def slide_cover(config, routes, paths, geojson_path):
     img = new_canvas().convert("RGBA")
+    SX = COVER_SX
 
     # 地図
-    box = (PAD, 470, W - PAD, 1080)
+    box = (SX, MAP_TOP, W - SX, MAP_BOTTOM)
     focus = []
     for p in paths:
         focus.extend(p["polyline"])
@@ -428,12 +439,12 @@ def slide_cover(config, routes, paths, geojson_path):
     # 上下を背景色でフェードさせて、文字が地図に埋もれないようにする
     fade = Image.new("RGBA", img.size, (0, 0, 0, 0))
     fdd = ImageDraw.Draw(fade)
-    for k in range(120):
-        a = int(255 * (1 - k / 120) ** 1.6)
-        fdd.line([(0, 470 + k), (W, 470 + k)], fill=BG_TOP + (a,))
-        fdd.line([(0, 1080 - k), (W, 1080 - k)], fill=BG_BOTTOM + (a,))
-    fdd.rectangle((0, 0, W, 470), fill=BG_TOP + (255,))
-    fdd.rectangle((0, 1080, W, H), fill=BG_BOTTOM + (255,))
+    for k in range(110):
+        a = int(255 * (1 - k / 110) ** 1.6)
+        fdd.line([(0, MAP_TOP - 30 + k), (W, MAP_TOP - 30 + k)], fill=BG_TOP + (a,))
+        fdd.line([(0, MAP_BOTTOM + 30 - k), (W, MAP_BOTTOM + 30 - k)], fill=BG_BOTTOM + (a,))
+    fdd.rectangle((0, 0, W, MAP_TOP - 30), fill=BG_TOP + (255,))
+    fdd.rectangle((0, MAP_BOTTOM + 30, W, H), fill=BG_BOTTOM + (255,))
     img.alpha_composite(fade)
     img = img.convert("RGB")
     d = ImageDraw.Draw(img, "RGBA")
@@ -447,39 +458,48 @@ def slide_cover(config, routes, paths, geojson_path):
     for (x, y), label in (((x0, y0), config.get("start_name", s0["name"])),
                           ((x1, y1), config.get("end_label", paths[0]["stations"][-1]["name"]))):
         d.ellipse((x - 14, y - 14, x + 14, y + 14), fill=INK + (255,), outline=GOLD + (255,), width=5)
-        f = font(40, "black")
+        f = font(38, "black")
         tw = text_w(d, label, f)
-        lx = min(max(x, PAD + tw / 2 + 20), W - PAD - tw / 2 - 20)
-        ly = y - 52 if y > 560 else y + 52
+        lx = min(max(x, SX + tw / 2 + 20), W - SX - tw / 2 - 20)
+        ly = y - 50 if y > MAP_TOP + 90 else y + 50
         rrect(d, (lx - tw / 2 - 18, ly - 30, lx + tw / 2 + 18, ly + 30), 14, fill=(5, 8, 18, 220))
         d.text((lx, ly), label, font=f, fill=INK, anchor="mm")
 
     # タイトル
-    d.text((PAD, 75), config.get("cover_kicker", "4項目でガチ比較"), font=font(32, "black"), fill=GOLD, anchor="lm")
+    tw_max = W - 2 * SX
+    d.text((SX, COVER_TOP + 14), config.get("cover_kicker", "4つの項目で比較"), font=font(26, "black"), fill=GOLD, anchor="lm")
     t1 = config.get("title_line1", "")
-    d.text((PAD, 205), t1, font=fit_font(d, t1, W - 2 * PAD, 128), fill=INK, anchor="lm")
+    d.text((SX, 282), t1, font=fit_font(d, t1, tw_max * 0.92, 96), fill=INK, anchor="lm")
     t2 = config.get("title_line2", "")
-    d.text((PAD, 320), t2, font=fit_font(d, t2, W - 2 * PAD, 52), fill=INK, anchor="lm")
-    # 比べる項目のチップ
-    x = PAD
+    d.text((SX, 368), t2, font=fit_font(d, t2, tw_max * 0.92, 38), fill=INK2, anchor="lm")
+    # 比べる項目のチップ(幅に入りきらなければ文字を小さく)
+    fs = 24
+    while fs > 18:
+        f = font(fs, "bold")
+        total = sum(text_w(d, METRIC_TITLE[m], f) + fs * 1.3 for m in METRICS) + 14 * (len(METRICS) - 1)
+        if total <= tw_max:
+            break
+        fs -= 2
+    x = SX
+    cy = 428
     for m in METRICS:
         lab = METRIC_TITLE[m]
-        f = font(30, "bold")
         tw = text_w(d, lab, f)
-        rrect(d, (x, 380, x + tw + 40, 432), 26, outline=GOLD + (255,), width=3)
-        d.text((x + 20 + tw / 2, 406), lab, font=f, fill=GOLD, anchor="mm")
-        x += tw + 56
+        pad = fs * 0.65
+        rrect(d, (x, cy - fs * 0.85, x + tw + 2 * pad, cy + fs * 0.85), fs, outline=GOLD + (255,), width=3)
+        d.text((x + pad + tw / 2, cy), lab, font=f, fill=GOLD, anchor="mm")
+        x += tw + 2 * pad + 14
 
     # 凡例(路線名)
-    y = 1130
-    col_w = (W - 2 * PAD) / min(len(routes), 3)
+    n_col = min(len(routes), 3)
+    col_w = tw_max / n_col
     for i, r in enumerate(routes):
-        route_tag(d, PAD + col_w * (i % 3), y + 60 * (i // 3), r, size=34, max_w=col_w - 20)
+        route_tag(d, SX + col_w * (i % 3), 1076 + 44 * (i // 3), r, size=24 if n_col == 3 else 28, max_w=col_w - 16)
 
+    fy = COVER_BOTTOM - 14
     handle = config.get("handle", "@geogram_jp")
-    d.line([(PAD, H - 96), (W - PAD, H - 96)], fill=CARD_LINE + (255,), width=2)
-    d.text((PAD, H - 58), handle, font=font(26, "bold"), fill=INK2, anchor="lm")
-    d.text((W - PAD, H - 58), "スワイプして比較 →", font=font(28, "black"), fill=GOLD, anchor="rm")
+    d.text((SX, fy), handle, font=font(22, "bold"), fill=MUTED, anchor="lm")
+    d.text((W - SX, fy), "スワイプして比較 →", font=font(24, "black"), fill=GOLD, anchor="rm")
     return img
 
 
@@ -766,6 +786,10 @@ def slide_summary(config, routes):
 # ---------------------------------------------------------------- キャプション
 
 def build_caption(config, routes):
+    """投稿文。既定は結果を書かない(画像をスワイプしてもらうため)。
+    "caption_style": "result" にすると各項目の数値と結論まで書く。"""
+    if config.get("caption_style", "teaser") != "result":
+        return build_teaser_caption(config, routes)
     t1 = config.get("title_line1", "")
     lines = [f"【{t1}】{config.get('title_line2', '')}", ""]
     for m in METRICS:
@@ -785,6 +809,21 @@ def build_caption(config, routes):
     if v:
         lines += ["", "→ " + (v if isinstance(v, str) else " / ".join(v))]
     lines += ["", "あなたはどっち派？コメントで教えてください",
+              f"※{config.get('as_of', '')} {config.get('caption_note', '運賃はIC・大人片道、本数は日中の直通列車')}".strip()]
+    tags = config.get("hashtags") or ["#路線くらべ", "#鉄道", "#電車", "#地図", "#乗り換え", "#Geogram_JP"]
+    lines += ["", " ".join(tags)]
+    return "\n".join(lines) + "\n"
+
+
+def build_teaser_caption(config, routes):
+    start = config.get("start_name") or config.get("title_line1", "").split("→")[0].strip()
+    end = config.get("end_label") or config.get("title_line1", "").split("→")[-1].strip()
+    names_ = "と".join(r["name"] for r in routes)
+    lines = [f"{start}から{end}まで、{names_}。",
+             "使うならどれがよいか、4つの項目で比べました。", ""]
+    lines += [f"・{x}" for x in ("運賃", "所要時間", "日中の本数", "始発の有無(座りやすさ)")]
+    lines += ["", "項目ごとに勝ち負けが分かれました。結果は画像をスワイプしてご覧ください。",
+              "普段どれを使っているか、コメントで教えてください。", "",
               f"※{config.get('as_of', '')} {config.get('caption_note', '運賃はIC・大人片道、本数は日中の直通列車')}".strip()]
     tags = config.get("hashtags") or ["#路線くらべ", "#鉄道", "#電車", "#地図", "#乗り換え", "#Geogram_JP"]
     lines += ["", " ".join(tags)]
@@ -833,7 +872,7 @@ def render_carousel(config, geojson_path, station_db, out_dir="output", fast_pre
             chrome(img, config, page, total, config.get("kicker", config.get("title_line1", "")))
         else:
             d = ImageDraw.Draw(img)
-            d.text((W - PAD, 75), f"{page}/{total}", font=font(28, "bold"), fill=MUTED, anchor="rm")
+            d.text((W - COVER_SX, COVER_TOP + 14), f"{page}/{total}", font=font(22, "bold"), fill=MUTED, anchor="rm")
         path = out / f"{page:02d}_{name}.png"
         img.convert("RGB").save(path, optimize=True)
         written.append(path)

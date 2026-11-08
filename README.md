@@ -363,6 +363,7 @@ python3 -m race_video.cli configs/carousel_shinagawa_yokohama.json
   ルート(名前・色・アイコン・駅の並び)を作り直し、運賃・所要時間の欄に参照値が出る(空欄のままならその値を使う)。
   選べるconfigは `python3 tools/build_builders.py` を実行した時点の `configs/` の中身(サーバーから開いたときは最新)。
   それ以外のJSONは「JSONファイルを選んで追加」で読み込める。サーバーから開くと「保存して画像を生成」で画像6枚+caption.txt を zip でダウンロードできる。
+- `caption.txt` は既定で結果を書かない(スワイプしてもらうため)。数値と結論まで書きたいときは `"caption_style": "result"`。
 - `slides` で並びや枚数を変えられる(例 `["cover", "fare", "time", "summary"]`)。
 - 数値は `_sources` に出典をメモしておくと、あとで更新するときに便利です(画像には出ません)。
 
